@@ -17,6 +17,13 @@
 		7C51CD1B2B8DB07A00E39CB0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7C51CD1A2B8DB07A00E39CB0 /* Realm */; };
 		7C51CD1D2B8DB07A00E39CB0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7C51CD1C2B8DB07A00E39CB0 /* RealmSwift */; };
 		7C51CD282B8DB13E00E39CB0 /* CoinSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD272B8DB13E00E39CB0 /* CoinSearchViewController.swift */; };
+		7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD292B8DB1E400E39CB0 /* Observable.swift */; };
+		7C51CD2F2B8DB28000E39CB0 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD2E2B8DB28000E39CB0 /* UIView+.swift */; };
+		7C51CD312B8DB29700E39CB0 /* Then+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD302B8DB29700E39CB0 /* Then+.swift */; };
+		7C51CD332B8DB2A700E39CB0 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD322B8DB2A700E39CB0 /* BaseView.swift */; };
+		7C51CD352B8DB2B400E39CB0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD342B8DB2B400E39CB0 /* BaseViewController.swift */; };
+		7C51CD372B8DB2C400E39CB0 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD362B8DB2C400E39CB0 /* BaseTableViewCell.swift */; };
+		7C51CD392B8DB2D400E39CB0 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD382B8DB2D400E39CB0 /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +34,13 @@
 		7C51CD082B8DB01E00E39CB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C51CD0A2B8DB01E00E39CB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C51CD272B8DB13E00E39CB0 /* CoinSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSearchViewController.swift; sourceTree = "<group>"; };
+		7C51CD292B8DB1E400E39CB0 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		7C51CD2E2B8DB28000E39CB0 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		7C51CD302B8DB29700E39CB0 /* Then+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Then+.swift"; sourceTree = "<group>"; };
+		7C51CD322B8DB2A700E39CB0 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		7C51CD342B8DB2B400E39CB0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		7C51CD362B8DB2C400E39CB0 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		7C51CD382B8DB2D400E39CB0 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +83,7 @@
 				7C51CD252B8DB0D900E39CB0 /* Service */,
 				7C51CD242B8DB0D300E39CB0 /* Repository */,
 				7C51CD262B8DB0E500E39CB0 /* Presentation */,
+				7C51CD2B2B8DB1E800E39CB0 /* Utility */,
 				7C51CD222B8DB0C900E39CB0 /* Base */,
 				7C51CD212B8DB0C300E39CB0 /* Extension */,
 				7C51CD202B8DB0BB00E39CB0 /* Protocols */,
@@ -106,6 +121,8 @@
 		7C51CD212B8DB0C300E39CB0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				7C51CD2E2B8DB28000E39CB0 /* UIView+.swift */,
+				7C51CD302B8DB29700E39CB0 /* Then+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -113,6 +130,10 @@
 		7C51CD222B8DB0C900E39CB0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				7C51CD322B8DB2A700E39CB0 /* BaseView.swift */,
+				7C51CD342B8DB2B400E39CB0 /* BaseViewController.swift */,
+				7C51CD362B8DB2C400E39CB0 /* BaseTableViewCell.swift */,
+				7C51CD382B8DB2D400E39CB0 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -144,6 +165,14 @@
 				7C51CD272B8DB13E00E39CB0 /* CoinSearchViewController.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7C51CD2B2B8DB1E800E39CB0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7C51CD292B8DB1E400E39CB0 /* Observable.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,9 +258,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */,
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD282B8DB13E00E39CB0 /* CoinSearchViewController.swift in Sources */,
 				7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */,
+				7C51CD372B8DB2C400E39CB0 /* BaseTableViewCell.swift in Sources */,
+				7C51CD392B8DB2D400E39CB0 /* BaseCollectionViewCell.swift in Sources */,
+				7C51CD332B8DB2A700E39CB0 /* BaseView.swift in Sources */,
+				7C51CD352B8DB2B400E39CB0 /* BaseViewController.swift in Sources */,
+				7C51CD312B8DB29700E39CB0 /* Then+.swift in Sources */,
+				7C51CD2F2B8DB28000E39CB0 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
