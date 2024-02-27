@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Charts
+
 final class ChartViewController: BaseViewController {
     
     override func configureHierarchy() {
@@ -18,6 +20,7 @@ final class ChartViewController: BaseViewController {
     }
     
     override func configureView() {
-        view.backgroundColor = .green
+        super.configureView()
+        navigationItem.title = "Solana"
     }
 }

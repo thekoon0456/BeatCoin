@@ -29,6 +29,8 @@
 		7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD4C2B8DB4A200E39CB0 /* FavoriteViewController.swift */; };
 		7C51CD4F2B8DB4D200E39CB0 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD4E2B8DB4D200E39CB0 /* ChartViewController.swift */; };
 		7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD512B8DB58600E39CB0 /* CoinConst.swift */; };
+		7C51CD552B8DBBEA00E39CB0 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 7C51CD542B8DBBEA00E39CB0 /* DGCharts */; };
+		7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,7 @@
 		7C51CD4C2B8DB4A200E39CB0 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		7C51CD4E2B8DB4D200E39CB0 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7C51CD512B8DB58600E39CB0 /* CoinConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinConst.swift; sourceTree = "<group>"; };
+		7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,7 @@
 				7C51CD122B8DB05200E39CB0 /* Alamofire in Frameworks */,
 				7C51CD1B2B8DB07A00E39CB0 /* Realm in Frameworks */,
 				7C51CD1D2B8DB07A00E39CB0 /* RealmSwift in Frameworks */,
+				7C51CD552B8DBBEA00E39CB0 /* DGCharts in Frameworks */,
 				7C51CD152B8DB05E00E39CB0 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +138,7 @@
 			children = (
 				7C51CD2E2B8DB28000E39CB0 /* UIView+.swift */,
 				7C51CD302B8DB29700E39CB0 /* Then+.swift */,
+				7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 				7C51CD172B8DB06700E39CB0 /* Kingfisher */,
 				7C51CD1A2B8DB07A00E39CB0 /* Realm */,
 				7C51CD1C2B8DB07A00E39CB0 /* RealmSwift */,
+				7C51CD542B8DBBEA00E39CB0 /* DGCharts */,
 			);
 			productName = CryptoCoin;
 			productReference = 7C51CCF92B8DB01D00E39CB0 /* CryptoCoin.app */;
@@ -358,6 +364,7 @@
 				7C51CD132B8DB05E00E39CB0 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				7C51CD162B8DB06700E39CB0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7C51CD192B8DB07A00E39CB0 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				7C51CD532B8DBBEA00E39CB0 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 7C51CCFA2B8DB01D00E39CB0 /* Products */;
 			projectDirPath = "";
@@ -390,6 +397,7 @@
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD492B8DB3CB00E39CB0 /* TabBarViewController.swift in Sources */,
 				7C51CD282B8DB13E00E39CB0 /* CoinSearchViewController.swift in Sources */,
+				7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */,
 				7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */,
 				7C51CD4B2B8DB47F00E39CB0 /* TrendingViewController.swift in Sources */,
 				7C51CD372B8DB2C400E39CB0 /* BaseTableViewCell.swift in Sources */,
@@ -658,6 +666,14 @@
 				kind = branch;
 			};
 		};
+		7C51CD532B8DBBEA00E39CB0 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -685,6 +701,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7C51CD192B8DB07A00E39CB0 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		7C51CD542B8DBBEA00E39CB0 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C51CD532B8DBBEA00E39CB0 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

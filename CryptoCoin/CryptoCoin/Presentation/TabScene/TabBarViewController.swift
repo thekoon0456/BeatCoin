@@ -12,7 +12,7 @@ class TabBarViewController: UITabBarController {
     let trendingVC = TrendingViewController()
     let searchVC = CoinSearchViewController()
     let favoriteVC = FavoriteViewController()
-    let personVC = UIViewController()
+    let personVC = ChartViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,7 @@ class TabBarViewController: UITabBarController {
         let iconArr = CCDesign.TabIcon.allCases
 
         for i in 0..<navVcArr.count {
+            navVcArr[i].navigationBar.prefersLargeTitles = true
             navVcArr[i].tabBarItem = UITabBarItem(title: nil,
                                                   image: UIImage(named: iconArr[i].inactive),
                                                   selectedImage: UIImage(named: iconArr[i].name))

@@ -18,6 +18,7 @@ final class CoinSearchViewController: BaseViewController {
     }
     
     override func configureView() {
-        view.backgroundColor = .blue
+        super.configureView()
+        navigationItem.title = CCConst.NaviTitle.search.name
     }
 }

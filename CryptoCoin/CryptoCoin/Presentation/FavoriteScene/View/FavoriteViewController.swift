@@ -19,6 +19,7 @@ final class FavoriteViewController: BaseViewController {
     }
     
     override func configureView() {
-        view.backgroundColor = .yellow
+        super.configureView()
+        navigationItem.title = CCConst.NaviTitle.favorite.name
     }
 }

@@ -19,6 +19,7 @@ final class TrendingViewController: BaseViewController {
     }
     
     override func configureView() {
-        view.backgroundColor = .red
+        super.configureView()
+        navigationItem.title = CCConst.NaviTitle.trending.name
     }
 }
