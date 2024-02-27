@@ -14,9 +14,6 @@ final class ChartViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        APIService.shared.callRequest(api: .coin(ids: ["bitcoin"]), type: CoinDTO.self) { result in
-//            print(result)
-//        }
     }
     
     override func configureHierarchy() {

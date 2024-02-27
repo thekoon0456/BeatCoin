@@ -12,10 +12,10 @@ final class CoinSearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repo = SearchRepository()
-        repo.fetchTrending(name: "bitcoin") { searchCoin in
-            print(searchCoin)
-        }
+//        let repo = SearchRepository()
+//        repo.fetch(name: "bitcoin") { searchCoin in
+//            print(searchCoin)
+//        }
     }
     
     override func configureHierarchy() {

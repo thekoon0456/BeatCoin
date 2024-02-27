@@ -7,9 +7,7 @@
 
 import Foundation
 
-import Foundation
-
-// MARK: - CoinDTOElement
+// MARK: - CoinDTO
 struct CoinDTO: Decodable {
     let id, symbol, name: String
     let image: String
@@ -17,16 +15,15 @@ struct CoinDTO: Decodable {
     let totalVolume, high24H, low24H, priceChange24H: Int
     let priceChangePercentage24H: Double
     let marketCapChange24H: Int
-    let marketCapChangePercentage24H: Double
-    let circulatingSupply, totalSupply, maxSupply, ath: Int
+    let marketCapChangePercentage24H, circulatingSupply, totalSupply, maxSupply: Double
+    let ath: Int
     let athChangePercentage: Double
     let athDate: String
     let atl: Int
     let atlChangePercentage: Double
     let atlDate: String
-    let roi: String?
     let lastUpdated: String
-    let sparklineIn7D: SparklineIn7D
+    let sparklineIn7D: SparklineIn7D?
 
     enum CodingKeys: String, CodingKey {
         case id, symbol, name, image
@@ -50,7 +47,6 @@ struct CoinDTO: Decodable {
         case atl
         case atlChangePercentage = "atl_change_percentage"
         case atlDate = "atl_date"
-        case roi
         case lastUpdated = "last_updated"
         case sparklineIn7D = "sparkline_in_7d"
     }
@@ -60,4 +56,3 @@ struct CoinDTO: Decodable {
 struct SparklineIn7D: Decodable {
     let price: [Double]
 }
-

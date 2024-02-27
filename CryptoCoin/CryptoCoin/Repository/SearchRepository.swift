@@ -9,7 +9,7 @@ import Foundation
 
 final class SearchRepository {
     
-    func fetchTrending(name: String ,completionHandler: @escaping (([SearchCoinEntity]) -> Void)) {
+    func fetch(name: String ,completionHandler: @escaping (([SearchCoinEntity]) -> Void)) {
         APIService.shared.callRequest(api: .searchCoin(query: name),
                                       type: SearchDTO.self) { data in
             let searchEntitys = data.coins.map {

@@ -25,7 +25,7 @@ enum Router {
         case .searchCoin:
             URL(string: baseURL + "/search")!
         case .coin:
-            URL(string: baseURL + "/coins/markets")!
+            URL(string: baseURL + "/coins/markets?")!
         }
     }
     
@@ -42,7 +42,7 @@ enum Router {
         case .coin(let ids):
             [
                 "vs_currency": "krw",
-                "ids": ids,
+                "ids": ids.joined(separator: ", "),
                 "sparkline": true
             ]
         }

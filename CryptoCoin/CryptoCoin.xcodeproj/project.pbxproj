@@ -184,6 +184,7 @@
 			children = (
 				7C51CD592B8DC01A00E39CB0 /* DTO */,
 				7C51CD722B8DE2FE00E39CB0 /* Entity */,
+				7C51CD822B8DEBCD00E39CB0 /* RealmModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,6 +366,13 @@
 				7C51CD782B8DE32100E39CB0 /* CoinEntity.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		7C51CD822B8DEBCD00E39CB0 /* RealmModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RealmModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

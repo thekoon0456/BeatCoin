@@ -12,9 +12,10 @@ final class FavoriteViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        APIService.shared.callRequest(api: .trending, type: Trending.self) { result in
-//            print(result)
-//        }
+        let repo = CoinRepository()
+        repo.fetch(ids: "bitcoin", "wrapped-bitcoin") { coins in
+            print(coins)
+        }
     }
     
     

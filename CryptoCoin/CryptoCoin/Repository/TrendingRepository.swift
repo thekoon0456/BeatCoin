@@ -9,7 +9,7 @@ import Foundation
 
 final class TrendingRepository {
     
-    func fetchTrending(completionHandler: @escaping ((TrendingEntity) -> Void)) {
+    func fetch(completionHandler: @escaping ((TrendingEntity) -> Void)) {
         APIService.shared.callRequest(api: .trending,
                                       type: TrendingDTO.self) { data in
             let coins = data.coins.map {
