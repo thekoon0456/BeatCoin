@@ -16,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
         
-        let vc = CoinSearchViewController()
-        window?.rootViewController = vc
+        let tabVc = TabBarViewController()
+        window?.rootViewController = tabVc
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }
@@ -30,4 +30,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) { }
 }
-
