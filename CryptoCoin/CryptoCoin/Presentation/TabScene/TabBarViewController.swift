@@ -17,10 +17,10 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureView()
+        configureTab()
     }
     
-    private func configureView() {
+    private func configureTab() {
         let vcArr = [trendingVC, searchVC, favoriteVC, personVC]
         let navVcArr = vcArr.map { UINavigationController(rootViewController: $0) }
         let iconArr = CCDesign.TabIcon.allCases

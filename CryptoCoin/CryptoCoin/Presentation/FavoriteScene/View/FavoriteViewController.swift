@@ -8,14 +8,11 @@
 import UIKit
 
 final class FavoriteViewController: BaseViewController {
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let repo = CoinRepository()
-//        repo.fetch(router: .coin(ids: ["bitcoin", "wrapped-bitcoin"])) { entity in
-//            print(entity)
-//        }
     }
     
     

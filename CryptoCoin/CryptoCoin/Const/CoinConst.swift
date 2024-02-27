@@ -44,25 +44,25 @@ enum CCDesign {
         var color: UIColor {
             switch self {
             case .tintColor:
-                UIColor(hexCode: "914CF5")
+                UIColor(hex: "914CF5")
             case .highPrice:
-                UIColor(hexCode: "F04452")
+                UIColor(hex: "F04452")
             case .highPriceBC:
-                UIColor(hexCode: "FFFAED")
+                UIColor(hex: "FFFAED")
             case .lowPrice:
-                UIColor(hexCode: "3282F8")
+                UIColor(hex: "3282F8")
             case .lowPriceBC:
-                UIColor(hexCode: "E5F0FF")
+                UIColor(hex: "E5F0FF")
             case .black:
-                UIColor(hexCode: "000000")
+                UIColor(hex: "000000")
             case .gray:
-                UIColor(hexCode: "828282")
+                UIColor(hex: "828282")
             case .label:
-                UIColor(hexCode: "343D4C")
+                UIColor(hex: "343D4C")
             case .lightGray:
-                UIColor(hexCode: "F3F4F6")
+                UIColor(hex: "F3F4F6")
             case .white:
-                UIColor(hexCode: "FFFFFF")
+                UIColor(hex: "FFFFFF")
             }
         }
     }
