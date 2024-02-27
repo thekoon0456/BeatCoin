@@ -11,12 +11,15 @@ import Alamofire
 
 final class APIService {
     
-    let shared = APIService()
+    static let shared = APIService()
     
     private init() { }
     
-    func callRequest<T: Decodable>(url: String, type: T.Type = T.self, completionHandler: @escaping ((T) -> Void)) {
-        AF.request(url)
+    func callRequest<T: Decodable>(api: Router, type: T.Type = T.self, completionHandler: @escaping ((T) -> Void)) {
+        AF
+            .request(api.endPoint,
+                     method: api.method,
+                     parameters: api.parameter)
             .validate(statusCode: 200...299)
             .responseDecodable(of: T.self) { response in
                 switch response.result {

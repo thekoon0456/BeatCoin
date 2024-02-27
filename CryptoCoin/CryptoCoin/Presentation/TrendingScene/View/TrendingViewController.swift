@@ -9,6 +9,14 @@ import UIKit
 
 final class TrendingViewController: BaseViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        APIService.shared.callRequest(api: .trending, type: TrendingDTO.self) { result in
+//            print(result)
+//        }
+    }
+    
     
     override func configureHierarchy() {
         

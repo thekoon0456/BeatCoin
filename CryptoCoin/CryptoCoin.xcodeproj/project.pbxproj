@@ -31,11 +31,11 @@
 		7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD512B8DB58600E39CB0 /* CoinConst.swift */; };
 		7C51CD552B8DBBEA00E39CB0 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 7C51CD542B8DBBEA00E39CB0 /* DGCharts */; };
 		7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */; };
-		7C51CD612B8DC05600E39CB0 /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD602B8DC05600E39CB0 /* Trending.swift */; };
+		7C51CD612B8DC05600E39CB0 /* TrendingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD602B8DC05600E39CB0 /* TrendingDTO.swift */; };
 		7C51CD682B8DC08600E39CB0 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD672B8DC08600E39CB0 /* APIService.swift */; };
 		7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6A2B8DC0BE00E39CB0 /* Router.swift */; };
-		7C51CD6F2B8DC7F900E39CB0 /* SearchCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6E2B8DC7F900E39CB0 /* SearchCoin.swift */; };
-		7C51CD712B8DC84100E39CB0 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD702B8DC84100E39CB0 /* Coin.swift */; };
+		7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6E2B8DC7F900E39CB0 /* SearchDTO.swift */; };
+		7C51CD712B8DC84100E39CB0 /* CoinDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,11 +59,11 @@
 		7C51CD4E2B8DB4D200E39CB0 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7C51CD512B8DB58600E39CB0 /* CoinConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinConst.swift; sourceTree = "<group>"; };
 		7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		7C51CD602B8DC05600E39CB0 /* Trending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trending.swift; sourceTree = "<group>"; };
+		7C51CD602B8DC05600E39CB0 /* TrendingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingDTO.swift; sourceTree = "<group>"; };
 		7C51CD672B8DC08600E39CB0 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		7C51CD6A2B8DC0BE00E39CB0 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		7C51CD6E2B8DC7F900E39CB0 /* SearchCoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoin.swift; sourceTree = "<group>"; };
-		7C51CD702B8DC84100E39CB0 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		7C51CD6E2B8DC7F900E39CB0 /* SearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDTO.swift; sourceTree = "<group>"; };
+		7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +167,7 @@
 		7C51CD232B8DB0CD00E39CB0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7C51CD592B8DC01A00E39CB0 /* Entity */,
+				7C51CD592B8DC01A00E39CB0 /* DTO */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,14 +319,14 @@
 			path = Const;
 			sourceTree = "<group>";
 		};
-		7C51CD592B8DC01A00E39CB0 /* Entity */ = {
+		7C51CD592B8DC01A00E39CB0 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				7C51CD602B8DC05600E39CB0 /* Trending.swift */,
-				7C51CD6E2B8DC7F900E39CB0 /* SearchCoin.swift */,
-				7C51CD702B8DC84100E39CB0 /* Coin.swift */,
+				7C51CD602B8DC05600E39CB0 /* TrendingDTO.swift */,
+				7C51CD6E2B8DC7F900E39CB0 /* SearchDTO.swift */,
+				7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */,
 			);
-			path = Entity;
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		7C51CD662B8DC07500E39CB0 /* NetworkService */ = {
@@ -438,12 +438,12 @@
 				7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */,
 				7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */,
 				7C51CD312B8DB29700E39CB0 /* Then+.swift in Sources */,
-				7C51CD6F2B8DC7F900E39CB0 /* SearchCoin.swift in Sources */,
+				7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */,
 				7C51CD682B8DC08600E39CB0 /* APIService.swift in Sources */,
 				7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */,
 				7C51CD2F2B8DB28000E39CB0 /* UIView+.swift in Sources */,
-				7C51CD712B8DC84100E39CB0 /* Coin.swift in Sources */,
-				7C51CD612B8DC05600E39CB0 /* Trending.swift in Sources */,
+				7C51CD712B8DC84100E39CB0 /* CoinDTO.swift in Sources */,
+				7C51CD612B8DC05600E39CB0 /* TrendingDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,14 @@ import UIKit
 
 final class FavoriteViewController: BaseViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        APIService.shared.callRequest(api: .trending, type: Trending.self) { result in
+//            print(result)
+//        }
+    }
+    
     
     override func configureHierarchy() {
         

@@ -22,8 +22,8 @@ enum Router {
         switch self {
         case .trending:
             URL(string: baseURL + "/search/trending")!
-        case .searchCoin(let query):
-            URL(string: baseURL + "/search/\(query)")!
+        case .searchCoin:
+            URL(string: baseURL + "/search")!
         case .coin:
             URL(string: baseURL + "/coins/markets")!
         }
