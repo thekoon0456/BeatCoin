@@ -45,6 +45,8 @@
 		7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */; };
 		7C51CD842B8DF22400E39CB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD832B8DF22400E39CB0 /* Repository.swift */; };
 		7C51CD862B8DF22900E39CB0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD852B8DF22900E39CB0 /* ViewModel.swift */; };
+		7C51CD882B8DF7F900E39CB0 /* UserFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD872B8DF7F900E39CB0 /* UserFavorite.swift */; };
+		7C51CD8A2B8DF84800E39CB0 /* UserFavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD892B8DF84800E39CB0 /* UserFavoriteRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepository.swift; sourceTree = "<group>"; };
 		7C51CD832B8DF22400E39CB0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		7C51CD852B8DF22900E39CB0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		7C51CD872B8DF7F900E39CB0 /* UserFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavorite.swift; sourceTree = "<group>"; };
+		7C51CD892B8DF84800E39CB0 /* UserFavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */,
-				7C51CD832B8DF22400E39CB0 /* Repository.swift */,
 				7C51CD852B8DF22900E39CB0 /* ViewModel.swift */,
+				7C51CD832B8DF22400E39CB0 /* Repository.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -201,6 +205,7 @@
 				7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */,
 				7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */,
 				7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */,
+				7C51CD892B8DF84800E39CB0 /* UserFavoriteRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 		7C51CD822B8DEBCD00E39CB0 /* RealmModel */ = {
 			isa = PBXGroup;
 			children = (
+				7C51CD872B8DF7F900E39CB0 /* UserFavorite.swift */,
 			);
 			path = RealmModel;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				7C51CD7B2B8DE3B700E39CB0 /* Entity.swift in Sources */,
 				7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */,
 				7C51CD4F2B8DB4D200E39CB0 /* ChartViewController.swift in Sources */,
+				7C51CD882B8DF7F900E39CB0 /* UserFavorite.swift in Sources */,
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD492B8DB3CB00E39CB0 /* TabBarViewController.swift in Sources */,
 				7C51CD7F2B8DE5B000E39CB0 /* SearchRepository.swift in Sources */,
@@ -487,6 +494,7 @@
 				7C51CD352B8DB2B400E39CB0 /* BaseViewController.swift in Sources */,
 				7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */,
 				7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */,
+				7C51CD8A2B8DF84800E39CB0 /* UserFavoriteRepository.swift in Sources */,
 				7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */,
 				7C51CD312B8DB29700E39CB0 /* Then+.swift in Sources */,
 				7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */,
