@@ -12,10 +12,10 @@ final class FavoriteViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repo = CoinRepository()
-        repo.fetch(ids: "bitcoin", "wrapped-bitcoin") { coins in
-            print(coins)
-        }
+//        let repo = CoinRepository()
+//        repo.fetch(router: .coin(ids: ["bitcoin", "wrapped-bitcoin"])) { entity in
+//            print(entity)
+//        }
     }
     
     

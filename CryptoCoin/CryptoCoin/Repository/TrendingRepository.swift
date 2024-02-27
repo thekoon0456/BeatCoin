@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class TrendingRepository {
-    
-    func fetch(completionHandler: @escaping ((TrendingEntity) -> Void)) {
-        APIService.shared.callRequest(api: .trending,
+final class TrendingRepository: Repository {
+
+    func fetch(router: Router, completionHandler: @escaping ((TrendingEntity) -> Void)) {
+        APIService.shared.callRequest(api: router,
                                       type: TrendingDTO.self) { data in
             let coins = data.coins.map {
                 TrendingCoin(id: $0.item.id,

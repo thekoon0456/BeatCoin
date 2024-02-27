@@ -43,6 +43,8 @@
 		7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */; };
 		7C51CD7F2B8DE5B000E39CB0 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */; };
 		7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */; };
+		7C51CD842B8DF22400E39CB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD832B8DF22400E39CB0 /* Repository.swift */; };
+		7C51CD862B8DF22900E39CB0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD852B8DF22900E39CB0 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingRepository.swift; sourceTree = "<group>"; };
 		7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepository.swift; sourceTree = "<group>"; };
+		7C51CD832B8DF22400E39CB0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		7C51CD852B8DF22900E39CB0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */,
+				7C51CD832B8DF22400E39CB0 /* Repository.swift */,
+				7C51CD852B8DF22900E39CB0 /* ViewModel.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -467,8 +473,10 @@
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD492B8DB3CB00E39CB0 /* TabBarViewController.swift in Sources */,
 				7C51CD7F2B8DE5B000E39CB0 /* SearchRepository.swift in Sources */,
+				7C51CD842B8DF22400E39CB0 /* Repository.swift in Sources */,
 				7C51CD282B8DB13E00E39CB0 /* CoinSearchViewController.swift in Sources */,
 				7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */,
+				7C51CD862B8DF22900E39CB0 /* ViewModel.swift in Sources */,
 				7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */,
 				7C51CD4B2B8DB47F00E39CB0 /* TrendingViewController.swift in Sources */,
 				7C51CD792B8DE32100E39CB0 /* CoinEntity.swift in Sources */,

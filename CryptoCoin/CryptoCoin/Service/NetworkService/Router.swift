@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 enum Router {
+
     case trending
     case searchCoin(query: String)
     case coin(ids: [String])

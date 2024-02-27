@@ -13,7 +13,7 @@ final class CoinSearchViewController: BaseViewController {
         super.viewDidLoad()
         
 //        let repo = SearchRepository()
-//        repo.fetch(name: "bitcoin") { searchCoin in
+//        repo.fetch(router: .searchCoin(query: "bitcoin") { searchCoin in
 //            print(searchCoin)
 //        }
     }

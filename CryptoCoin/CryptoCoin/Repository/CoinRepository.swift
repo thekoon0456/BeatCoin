@@ -7,12 +7,11 @@
 
 import Foundation
 
-final class CoinRepository {
+final class CoinRepository: Repository {
     
-    func fetch(ids: String..., completionHandler: @escaping (([CoinEntity]) -> Void)) {
-        APIService.shared.callRequest(api: .coin(ids: ids),
+    func fetch(router: Router, completionHandler: @escaping (([CoinEntity]) -> Void)) {
+        APIService.shared.callRequest(api: router,
                                       type: [CoinDTO].self) { data in
-            
             let coinEntitys = data.map {
                 CoinEntity(id: $0.id,
                            name: $0.name,

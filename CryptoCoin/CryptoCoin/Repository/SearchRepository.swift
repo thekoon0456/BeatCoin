@@ -9,8 +9,8 @@ import Foundation
 
 final class SearchRepository {
     
-    func fetch(name: String ,completionHandler: @escaping (([SearchCoinEntity]) -> Void)) {
-        APIService.shared.callRequest(api: .searchCoin(query: name),
+    func fetch(router: Router, completionHandler: @escaping (([SearchCoinEntity]) -> Void)) {
+        APIService.shared.callRequest(api: router,
                                       type: SearchDTO.self) { data in
             let searchEntitys = data.coins.map {
                 SearchCoinEntity(id: $0.id,
