@@ -15,6 +15,11 @@ final class TrendingViewController: BaseViewController {
 //        APIService.shared.callRequest(api: .trending, type: TrendingDTO.self) { result in
 //            print(result)
 //        }
+        
+        let repo = TrendingRepository()
+        repo.fetchTrending { entity in
+            print(entity)
+        }
     }
     
     

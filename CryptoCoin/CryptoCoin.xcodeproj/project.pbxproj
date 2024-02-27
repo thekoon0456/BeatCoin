@@ -36,6 +36,13 @@
 		7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6A2B8DC0BE00E39CB0 /* Router.swift */; };
 		7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6E2B8DC7F900E39CB0 /* SearchDTO.swift */; };
 		7C51CD712B8DC84100E39CB0 /* CoinDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */; };
+		7C51CD752B8DE31100E39CB0 /* TrendingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD742B8DE31100E39CB0 /* TrendingEntity.swift */; };
+		7C51CD772B8DE31800E39CB0 /* SearchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD762B8DE31800E39CB0 /* SearchEntity.swift */; };
+		7C51CD792B8DE32100E39CB0 /* CoinEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD782B8DE32100E39CB0 /* CoinEntity.swift */; };
+		7C51CD7B2B8DE3B700E39CB0 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */; };
+		7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */; };
+		7C51CD7F2B8DE5B000E39CB0 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */; };
+		7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +71,13 @@
 		7C51CD6A2B8DC0BE00E39CB0 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7C51CD6E2B8DC7F900E39CB0 /* SearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDTO.swift; sourceTree = "<group>"; };
 		7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDTO.swift; sourceTree = "<group>"; };
+		7C51CD742B8DE31100E39CB0 /* TrendingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingEntity.swift; sourceTree = "<group>"; };
+		7C51CD762B8DE31800E39CB0 /* SearchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntity.swift; sourceTree = "<group>"; };
+		7C51CD782B8DE32100E39CB0 /* CoinEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinEntity.swift; sourceTree = "<group>"; };
+		7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingRepository.swift; sourceTree = "<group>"; };
+		7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +153,7 @@
 		7C51CD202B8DB0BB00E39CB0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -168,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD592B8DC01A00E39CB0 /* DTO */,
+				7C51CD722B8DE2FE00E39CB0 /* Entity */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +191,9 @@
 		7C51CD242B8DB0D300E39CB0 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */,
+				7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */,
+				7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -338,6 +357,16 @@
 			path = NetworkService;
 			sourceTree = "<group>";
 		};
+		7C51CD722B8DE2FE00E39CB0 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				7C51CD742B8DE31100E39CB0 /* TrendingEntity.swift */,
+				7C51CD762B8DE31800E39CB0 /* SearchEntity.swift */,
+				7C51CD782B8DE32100E39CB0 /* CoinEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -423,24 +452,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C51CD772B8DE31800E39CB0 /* SearchEntity.swift in Sources */,
+				7C51CD7B2B8DE3B700E39CB0 /* Entity.swift in Sources */,
 				7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */,
 				7C51CD4F2B8DB4D200E39CB0 /* ChartViewController.swift in Sources */,
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD492B8DB3CB00E39CB0 /* TabBarViewController.swift in Sources */,
+				7C51CD7F2B8DE5B000E39CB0 /* SearchRepository.swift in Sources */,
 				7C51CD282B8DB13E00E39CB0 /* CoinSearchViewController.swift in Sources */,
 				7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */,
 				7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */,
 				7C51CD4B2B8DB47F00E39CB0 /* TrendingViewController.swift in Sources */,
+				7C51CD792B8DE32100E39CB0 /* CoinEntity.swift in Sources */,
 				7C51CD372B8DB2C400E39CB0 /* BaseTableViewCell.swift in Sources */,
 				7C51CD392B8DB2D400E39CB0 /* BaseCollectionViewCell.swift in Sources */,
 				7C51CD332B8DB2A700E39CB0 /* BaseView.swift in Sources */,
+				7C51CD752B8DE31100E39CB0 /* TrendingEntity.swift in Sources */,
 				7C51CD352B8DB2B400E39CB0 /* BaseViewController.swift in Sources */,
+				7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */,
 				7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */,
 				7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */,
 				7C51CD312B8DB29700E39CB0 /* Then+.swift in Sources */,
 				7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */,
 				7C51CD682B8DC08600E39CB0 /* APIService.swift in Sources */,
 				7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */,
+				7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */,
 				7C51CD2F2B8DB28000E39CB0 /* UIView+.swift in Sources */,
 				7C51CD712B8DC84100E39CB0 /* CoinDTO.swift in Sources */,
 				7C51CD612B8DC05600E39CB0 /* TrendingDTO.swift in Sources */,
