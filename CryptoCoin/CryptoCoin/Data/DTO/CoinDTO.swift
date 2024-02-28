@@ -35,13 +35,11 @@ struct CoinDTO: DTO {
                           priceChangePercentage24H:
                             String(format: "%.2f", priceChangePercentage24H ?? 0) + "%",
                           isUp: priceChangePercentage24H ?? 0 > 0 ? true : false,
-                          high24h: high24H,
-                          low24h: low24H,
-                          ath: ath,
-                          athDate: athDate,
-                          atl: atl,
-                          atl_date: atlDate,
-                          lastUpdated: lastUpdated,
+                          high24h: NumberFormatterManager.shared.toCurruncy(price: high24H),
+                          low24h: NumberFormatterManager.shared.toCurruncy(price: low24H),
+                          ath: NumberFormatterManager.shared.toCurruncy(price: Int(ath)),
+                          atl: NumberFormatterManager.shared.toCurruncy(price: Int(atl)),
+                          lastUpdated: DateFormatterManager.shared.formattedDate(input: lastUpdated),
                           sparklineIn7D: sparklineIn7D?.price ?? [],
                           score: nil,
                           price: nil)

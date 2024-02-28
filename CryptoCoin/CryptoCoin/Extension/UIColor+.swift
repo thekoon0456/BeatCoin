@@ -28,5 +28,3 @@ extension UIColor {
                   alpha: alpha)
     }
 }
-
-extension Parameters: Encodable { }

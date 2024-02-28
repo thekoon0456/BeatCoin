@@ -15,12 +15,10 @@ struct CoinEntity: Entity {
     let currentPrice: String //현재가
     let priceChangePercentage24H: String
     let isUp: Bool
-    let high24h: Int? //고가
-    let low24h: Int? //저가
-    let ath: Double? //신고점
-    let athDate: String? //신고점일자
-    let atl: Double? //신저점
-    let atl_date: String? //신저점
+    let high24h: String //고가
+    let low24h: String //저가
+    let ath: String //신고점
+    let atl: String //신저점
     let lastUpdated: String? //업데이트 시각
     let sparklineIn7D: [Double]? //-> price
     let score: Int?

@@ -44,6 +44,7 @@ enum CCConst {
 enum CCDesign {
     
     enum Font {
+        case big
         case titleBold
         case subtitle
         case priceBold
@@ -53,6 +54,8 @@ enum CCDesign {
         
         var font: UIFont {
             switch self {
+            case .big:
+                    .boldSystemFont(ofSize: 28)
             case .titleBold:
                     .boldSystemFont(ofSize: 14)
             case .subtitle:
@@ -130,11 +133,11 @@ enum CCDesign {
         var name: String {
             switch self {
             case .trend:
-                "tab_portfolio"
+                "tab_trend"
             case .search:
                 "tab_search"
             case .portfolio:
-                "tab_trend"
+                "tab_portfolio"
             case .user:
                 "tab_user"
             }

@@ -52,7 +52,9 @@
 		7C51CD922B8DFB8700E39CB0 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD912B8DFB8700E39CB0 /* ChartViewModel.swift */; };
 		7C75BDEA2B8F04B1004D5DA5 /* NFTEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDE92B8F04B1004D5DA5 /* NFTEntity.swift */; };
 		7C75BDED2B8F1623004D5DA5 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */; };
-		7C75BDEF2B8F2380004D5DA5 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEE2B8F2380004D5DA5 /* NumberFormatter.swift */; };
+		7C75BDEF2B8F2380004D5DA5 /* NumberFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */; };
+		7C75BDF12B8F2D26004D5DA5 /* ChartPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */; };
+		7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,7 +99,9 @@
 		7C51CD912B8DFB8700E39CB0 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7C75BDE92B8F04B1004D5DA5 /* NFTEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTEntity.swift; sourceTree = "<group>"; };
 		7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
-		7C75BDEE2B8F2380004D5DA5 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
+		7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterManager.swift; sourceTree = "<group>"; };
+		7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPriceView.swift; sourceTree = "<group>"; };
+		7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,7 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD662B8DC07500E39CB0 /* NetworkService */,
-				7C75BDEE2B8F2380004D5DA5 /* NumberFormatter.swift */,
+				7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */,
+				7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD4E2B8DB4D200E39CB0 /* ChartViewController.swift */,
+				7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,10 +504,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C75BDF12B8F2D26004D5DA5 /* ChartPriceView.swift in Sources */,
 				7C51CD7B2B8DE3B700E39CB0 /* Data.swift in Sources */,
 				7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */,
 				7C51CD4F2B8DB4D200E39CB0 /* ChartViewController.swift in Sources */,
-				7C75BDEF2B8F2380004D5DA5 /* NumberFormatter.swift in Sources */,
+				7C75BDEF2B8F2380004D5DA5 /* NumberFormatterManager.swift in Sources */,
 				7C51CD882B8DF7F900E39CB0 /* UserFavorite.swift in Sources */,
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD492B8DB3CB00E39CB0 /* TabBarViewController.swift in Sources */,
@@ -523,6 +530,7 @@
 				7C51CD752B8DE31100E39CB0 /* TrendingEntity.swift in Sources */,
 				7C51CD352B8DB2B400E39CB0 /* BaseViewController.swift in Sources */,
 				7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */,
+				7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */,
 				7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */,
 				7C51CD8A2B8DF84800E39CB0 /* UserFavoriteRepository.swift in Sources */,
 				7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */,
