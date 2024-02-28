@@ -11,7 +11,6 @@ import Foundation
 struct SearchDTO: DTO {
     let coins: [SearchCoin]
     let exchanges: [Exchange]
-    let icos: [String?]
     let categories: [SearchCategory]
     let nfts: [SearchNft]
 }
@@ -35,7 +34,7 @@ struct SearchCoin: DTO {
         case marketCapRank = "market_cap_rank"
         case thumb, large
     }
-    
+
     var toEntity: CoinEntity {
         return CoinEntity(id: id,
                           name: name,
@@ -72,3 +71,4 @@ struct SearchNft: DTO {
     let id, name, symbol: String
     let thumb: String
 }
+

@@ -30,11 +30,20 @@ final class CoinSearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        bind()
     }
     
     // MARK: - Helpers
+    
+    private func bind() {
+        viewModel.outputCoinData.bind { [weak self] coin in
+            guard let self else { return }
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Configure
     
     override func configureHierarchy() {
         view.addSubviews(searchBar, tableView)
@@ -60,15 +69,24 @@ final class CoinSearchViewController: BaseViewController {
 
 extension CoinSearchViewController: UISearchBarDelegate {
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.inputSearchText.onNext(searchBar.text)
+        view.endEditing(true)
+    }
 }
 
 extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        viewModel.outputCoinData.currentValue?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell,
+              let data = viewModel.outputCoinData.currentValue
+        else { return UITableViewCell() }
+        
+        cell.configureCell(data[indexPath.row])
+        return cell
     }
 }

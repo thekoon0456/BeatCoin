@@ -35,11 +35,14 @@ final class FavoriteViewController: BaseViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.inputViewWillAppear.onNext(())
+    }
+    
     // MARK: - Helpers
     
     func bind() {
-        viewModel.inputViewDidLoad.onNext(())
-        
         viewModel.outputCoinData.bind { [weak self] coins in
             guard let self else { return }
             print(coins)

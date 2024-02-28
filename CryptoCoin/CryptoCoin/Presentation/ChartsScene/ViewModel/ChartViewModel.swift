@@ -25,12 +25,21 @@ final class ChartViewModel: ViewModel {
             guard let self,
                   let id else { return }
             callRequest(id: id)
+            checkFavorite(id: id)
         }
         
         inputFavorite.bind { [weak self] id in
             guard let self,
                   let id else { return }
             setFavorite(id: id)
+        }
+    }
+    
+    private func callRequest(id: String?) {
+        guard let id else { return }
+        repository.fetch(router: .coin(ids: [id])) { [weak self] coin in
+            guard let self else { return }
+            outputCoinData.onNext(coin)
         }
     }
     
@@ -45,12 +54,12 @@ final class ChartViewModel: ViewModel {
         }
     }
     
-    private func callRequest(id: String?) {
-        guard let id else { return }
-        repository.fetch(router: .coin(ids: [id])) { [weak self] coin in
-            guard let self else { return }
-            outputCoinData.onNext(coin)
+    private func checkFavorite(id: String) {
+        let fav = favoriteRepository.fetch().map { $0.coinID }
+        if fav.contains(id) {
+            outputFavorite.onNext(true)
+        } else {
+            outputFavorite.onNext(false)
         }
     }
-    
 }

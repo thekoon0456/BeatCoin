@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum Router: URLRequestConvertible {
-
+    
     case trending
     case searchCoin(query: String)
     case coin(ids: [String])
@@ -41,11 +41,9 @@ enum Router: URLRequestConvertible {
         case .searchCoin(let query):
             ["query": query]
         case .coin(let ids):
-            [
-                "vs_currency": "krw",
-                "ids": ids.joined(separator: ","),
-                "sparkline": "true"
-            ]
+            ["vs_currency": "krw",
+             "ids": ids.joined(separator: ","),
+             "sparkline": "true"]
         }
     }
     

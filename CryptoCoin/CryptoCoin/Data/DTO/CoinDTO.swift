@@ -11,8 +11,10 @@ import Foundation
 struct CoinDTO: DTO {
     let id, symbol, name: String
     let image: String
-    let currentPrice, marketCap, marketCapRank, fullyDilutedValuation: Int
-    let totalVolume, high24H, low24H: Int
+    let currentPrice: Double
+    let marketCap, marketCapRank: Int
+    let fullyDilutedValuation: Int?
+    let totalVolume, high24H, low24H: Double
     let priceChange24H: Double
     let priceChangePercentage24H: Double?
     let marketCapChange24H: Double?
@@ -31,12 +33,12 @@ struct CoinDTO: DTO {
                           name: name,
                           symbol: symbol.uppercased(),
                           image: image,
-                          currentPrice: NumberFormatterManager.shared.toCurruncy(price: currentPrice),
+                          currentPrice: NumberFormatterManager.shared.toCurruncy(price: Int(currentPrice)),
                           priceChangePercentage24H:
                             String(format: "%.2f", priceChangePercentage24H ?? 0) + "%",
                           isUp: priceChangePercentage24H ?? 0 > 0 ? true : false,
-                          high24h: NumberFormatterManager.shared.toCurruncy(price: high24H),
-                          low24h: NumberFormatterManager.shared.toCurruncy(price: low24H),
+                          high24h: NumberFormatterManager.shared.toCurruncy(price: Int(high24H)),
+                          low24h: NumberFormatterManager.shared.toCurruncy(price: Int(low24H)),
                           ath: NumberFormatterManager.shared.toCurruncy(price: Int(ath)),
                           atl: NumberFormatterManager.shared.toCurruncy(price: Int(atl)),
                           lastUpdated: DateFormatterManager.shared.formattedDate(input: lastUpdated),

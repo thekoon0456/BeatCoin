@@ -55,6 +55,7 @@
 		7C75BDEF2B8F2380004D5DA5 /* NumberFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */; };
 		7C75BDF12B8F2D26004D5DA5 /* ChartPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */; };
 		7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */; };
+		7C75BDFB2B8F58F4004D5DA5 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterManager.swift; sourceTree = "<group>"; };
 		7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPriceView.swift; sourceTree = "<group>"; };
 		7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
+		7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD272B8DB13E00E39CB0 /* CoinSearchViewController.swift */,
+				7C75BDF92B8F58E6004D5DA5 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -415,6 +418,14 @@
 			isa = PBXGroup;
 			children = (
 				7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		7C75BDF92B8F58E6004D5DA5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -522,6 +533,7 @@
 				7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */,
 				7C51CD4B2B8DB47F00E39CB0 /* TrendingViewController.swift in Sources */,
 				7C51CD792B8DE32100E39CB0 /* CoinEntity.swift in Sources */,
+				7C75BDFB2B8F58F4004D5DA5 /* SearchCell.swift in Sources */,
 				7C51CD372B8DB2C400E39CB0 /* BaseTableViewCell.swift in Sources */,
 				7C51CD8E2B8DFB6500E39CB0 /* CoinSearchViewModel.swift in Sources */,
 				7C51CD392B8DB2D400E39CB0 /* BaseCollectionViewCell.swift in Sources */,

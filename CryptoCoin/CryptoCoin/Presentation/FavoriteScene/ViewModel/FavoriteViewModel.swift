@@ -12,22 +12,26 @@ final class FavoriteViewModel: ViewModel {
     // MARK: - Properties
     let repository = CoinRepository()
     let favoriteRepository = UserFavoriteRepository()
-    let inputViewDidLoad = Observable<Void?>(nil)
+    let inputViewWillAppear = Observable<Void?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     
     init() { transform() }
     
     private func transform() {
-        inputViewDidLoad.bind { [weak self] _ in
+        inputViewWillAppear.bind { [weak self] tap in
             guard let self else { return }
             let ids = favoriteRepository.fetch().map { $0.coinID }
-            print(ids)
+            print("현재 id:", ids)
             callRequest(ids: ids)
         }
     }
     
     private func callRequest(ids: [String]?) {
-        guard let ids else { return }
+        guard let ids,
+              !ids.isEmpty else { 
+            outputCoinData.onNext([])
+            return
+        }
         repository.fetch(router: .coin(ids: ids)) { [weak self] coin in
             guard let self else { return }
             outputCoinData.onNext(coin)
