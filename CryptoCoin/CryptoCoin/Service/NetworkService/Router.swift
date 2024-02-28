@@ -9,7 +9,7 @@ import Foundation
 
 import Alamofire
 
-enum Router {
+enum Router: URLRequestConvertible {
 
     case trending
     case searchCoin(query: String)
@@ -19,14 +19,14 @@ enum Router {
         "https://api.coingecko.com/api/v3"
     }
     
-    var endPoint: URL {
+    var endPoint: String {
         switch self {
         case .trending:
-            URL(string: baseURL + "/search/trending")!
+            "/search/trending"
         case .searchCoin:
-            URL(string: baseURL + "/search")!
+            "/search"
         case .coin:
-            URL(string: baseURL + "/coins/markets?")!
+            "/coins/markets?"
         }
     }
     
@@ -34,7 +34,7 @@ enum Router {
         .get
     }
     
-    var parameter: Parameters {
+    var parameters: Parameters {
         switch self {
         case .trending:
             [:]
@@ -47,5 +47,13 @@ enum Router {
                 "sparkline": true
             ]
         }
+    }
+    
+    func asURLRequest() throws -> URLRequest {
+        let url = try baseURL.asURL().appendingPathComponent(endPoint)
+        var request = URLRequest(url: url)
+        request.method = method
+        
+        return try URLEncoding.default.encode(request, with: parameters)
     }
 }
