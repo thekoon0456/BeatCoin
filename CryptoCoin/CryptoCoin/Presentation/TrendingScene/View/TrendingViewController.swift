@@ -40,6 +40,10 @@ final class TrendingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let repo = TrendingRepository()
+        repo.fetch(router: .trending) { entity in
+            print(entity)
+        }
     }
     
     // MARK: - Helpers

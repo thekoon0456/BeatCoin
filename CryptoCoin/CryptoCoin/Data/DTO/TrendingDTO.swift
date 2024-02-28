@@ -12,6 +12,12 @@ struct TrendingDTO: Decodable {
     let coins: [Coin]
     let nfts: [Nft]
     let categories: [Category]
+    
+    var toEntity: TrendingEntity {
+        let coins = self.coins.map { $0.toEntity }
+        let nfts = self.nfts.map { $0.toEntity }
+        return TrendingEntity(coins: coins, nfts: nfts)
+    }
 }
 
 // MARK: - Category
@@ -22,7 +28,7 @@ struct Category: Decodable {
     let slug: String
     let coinsCount: Int
     let data: CategoryData
-
+    
     enum CodingKeys: String, CodingKey {
         case id, name
         case marketCap1HChange = "market_cap_1h_change"
@@ -37,7 +43,7 @@ struct CategoryData: Decodable {
     let marketCap, marketCapBtc, totalVolume, totalVolumeBtc: Double
     let marketCapChangePercentage24H: [String: Double]
     let sparkline: String
-
+    
     enum CodingKeys: String, CodingKey {
         case marketCap = "market_cap"
         case marketCapBtc = "market_cap_btc"
@@ -51,6 +57,25 @@ struct CategoryData: Decodable {
 // MARK: - Coin
 struct Coin: Decodable {
     let item: Item
+    
+    var toEntity: CoinEntity {
+        return CoinEntity(id: item.id,
+                          name: item.name,
+                          symbol: item.symbol,
+                          image: item.thumb,
+                          currentPrice: nil,
+                          high24h: nil,
+                          low24h: nil,
+                          ath: nil,
+                          athDate: nil,
+                          atl: nil,
+                          atl_date: nil,
+                          lastUpdated: nil,
+                          sparklineIn7D: nil,
+                          score: item.score,
+                          price: item.data.price,
+                          priceChangePercentage24H: item.data.priceChangePercentage24H)
+    }
 }
 
 // MARK: - Item
@@ -64,7 +89,7 @@ struct Item: Decodable {
     let priceBtc: Double
     let score: Int
     let data: ItemData
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case coinID = "coin_id"
@@ -83,7 +108,7 @@ struct ItemData: Decodable {
     let marketCap, marketCapBtc, totalVolume, totalVolumeBtc: String
     let sparkline: String
     let content: Content?
-
+    
     enum CodingKeys: String, CodingKey {
         case price
         case priceBtc = "price_btc"
@@ -109,7 +134,7 @@ struct Nft: Decodable {
     let nativeCurrencySymbol: String
     let floorPriceInNativeCurrency, floorPrice24HPercentageChange: Double
     let data: NftData
-
+    
     enum CodingKeys: String, CodingKey {
         case id, name, symbol, thumb
         case nftContractID = "nft_contract_id"
@@ -118,6 +143,16 @@ struct Nft: Decodable {
         case floorPrice24HPercentageChange = "floor_price_24h_percentage_change"
         case data
     }
+    
+    var toEntity: NFTEntity {
+        return NFTEntity(id: id,
+                         name: name,
+                         symbol: symbol,
+                         thumb: thumb,
+                         floorPrice: data.floorPrice,
+                         floorPrice24hPercentageChange: floorPrice24HPercentageChange)
+    }
+    
 }
 
 // MARK: - NftData

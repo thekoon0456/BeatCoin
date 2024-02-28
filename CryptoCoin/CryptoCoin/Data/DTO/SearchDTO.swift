@@ -35,6 +35,25 @@ struct SearchCoin: Decodable {
         case marketCapRank = "market_cap_rank"
         case thumb, large
     }
+    
+    var toEntity: CoinEntity {
+        return CoinEntity(id: id,
+                          name: name,
+                          symbol: symbol,
+                          image: thumb,
+                          currentPrice: nil,
+                          high24h: nil,
+                          low24h: nil,
+                          ath: nil,
+                          athDate: nil,
+                          atl: nil,
+                          atl_date: nil,
+                          lastUpdated: nil,
+                          sparklineIn7D: nil,
+                          score: nil,
+                          price: nil,
+                          priceChangePercentage24H: nil)
+    }
 }
 
 // MARK: - Exchange

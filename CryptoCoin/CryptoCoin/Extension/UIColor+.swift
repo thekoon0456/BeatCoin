@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 extension UIColor {
     
@@ -27,3 +28,5 @@ extension UIColor {
                   alpha: alpha)
     }
 }
+
+extension Parameters: Encodable { }

@@ -25,6 +25,25 @@ struct CoinDTO: Decodable {
     let lastUpdated: String
     let sparklineIn7D: SparklineIn7D?
 
+    var toEntity: CoinEntity {
+        return CoinEntity(id: id,
+                          name: name,
+                          symbol: symbol,
+                          image: image,
+                          currentPrice: currentPrice,
+                          high24h: high24H,
+                          low24h: low24H,
+                          ath: ath,
+                          athDate: athDate,
+                          atl: atl,
+                          atl_date: atlDate,
+                          lastUpdated: lastUpdated,
+                          sparklineIn7D: sparklineIn7D?.price ?? [],
+                          score: nil,
+                          price: nil,
+                          priceChangePercentage24H: nil)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id, symbol, name, image
         case currentPrice = "current_price"
