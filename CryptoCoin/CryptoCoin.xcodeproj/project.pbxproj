@@ -51,6 +51,8 @@
 		7C51CD902B8DFB7400E39CB0 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD8F2B8DFB7400E39CB0 /* FavoriteViewModel.swift */; };
 		7C51CD922B8DFB8700E39CB0 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD912B8DFB8700E39CB0 /* ChartViewModel.swift */; };
 		7C75BDEA2B8F04B1004D5DA5 /* NFTEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDE92B8F04B1004D5DA5 /* NFTEntity.swift */; };
+		7C75BDED2B8F1623004D5DA5 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */; };
+		7C75BDEF2B8F2380004D5DA5 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEE2B8F2380004D5DA5 /* NumberFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		7C51CD8F2B8DFB7400E39CB0 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		7C51CD912B8DFB8700E39CB0 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7C75BDE92B8F04B1004D5DA5 /* NFTEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTEntity.swift; sourceTree = "<group>"; };
+		7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		7C75BDEE2B8F2380004D5DA5 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD662B8DC07500E39CB0 /* NetworkService */,
+				7C75BDEE2B8F2380004D5DA5 /* NumberFormatter.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD4C2B8DB4A200E39CB0 /* FavoriteViewController.swift */,
+				7C75BDEB2B8F1617004D5DA5 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -397,6 +403,14 @@
 				7C51CD872B8DF7F900E39CB0 /* UserFavorite.swift */,
 			);
 			path = RealmModel;
+			sourceTree = "<group>";
+		};
+		7C75BDEB2B8F1617004D5DA5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,6 +501,7 @@
 				7C51CD7B2B8DE3B700E39CB0 /* Data.swift in Sources */,
 				7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */,
 				7C51CD4F2B8DB4D200E39CB0 /* ChartViewController.swift in Sources */,
+				7C75BDEF2B8F2380004D5DA5 /* NumberFormatter.swift in Sources */,
 				7C51CD882B8DF7F900E39CB0 /* UserFavorite.swift in Sources */,
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD492B8DB3CB00E39CB0 /* TabBarViewController.swift in Sources */,
@@ -515,6 +530,7 @@
 				7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */,
 				7C51CD682B8DC08600E39CB0 /* APIService.swift in Sources */,
 				7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */,
+				7C75BDED2B8F1623004D5DA5 /* FavoriteCell.swift in Sources */,
 				7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */,
 				7C51CD2F2B8DB28000E39CB0 /* UIView+.swift in Sources */,
 				7C51CD922B8DFB8700E39CB0 /* ChartViewModel.swift in Sources */,

@@ -7,6 +7,20 @@
 
 import UIKit
 
+enum CCLayout {
+    case width
+    case height
+    
+    var value: CGFloat {
+        switch self {
+        case .width:
+            UIScreen.main.bounds.width
+        case .height:
+            UIScreen.main.bounds.height
+        }
+    }
+}
+
 enum CCConst {
     
     enum NaviTitle {
@@ -29,6 +43,32 @@ enum CCConst {
 
 enum CCDesign {
     
+    enum Font {
+        case titleBold
+        case subtitle
+        case priceBold
+        case price
+        case percentBold
+        case percent
+        
+        var font: UIFont {
+            switch self {
+            case .titleBold:
+                    .boldSystemFont(ofSize: 14)
+            case .subtitle:
+                    .systemFont(ofSize: 12)
+            case .priceBold:
+                    .boldSystemFont(ofSize: 14)
+            case .price:
+                    .systemFont(ofSize: 12)
+            case .percentBold:
+                    .boldSystemFont(ofSize: 12)
+            case .percent:
+                    .systemFont(ofSize: 12)
+            }
+        }
+    }
+    
     enum Color {
         case tintColor
         case highPrice
@@ -48,7 +88,7 @@ enum CCDesign {
             case .highPrice:
                 UIColor(hex: "F04452")
             case .highPriceBC:
-                UIColor(hex: "FFFAED")
+                UIColor(hex: "FFEAED")
             case .lowPrice:
                 UIColor(hex: "3282F8")
             case .lowPriceBC:

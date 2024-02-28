@@ -13,11 +13,7 @@ final class ChartViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let repo = CoinRepository()
-        repo.fetch(router: .coin(ids: ["solana"])) { entity in
-            print(entity)
-        }
+
     }
     
     override func configureHierarchy() {

@@ -63,7 +63,11 @@ struct Coin: DTO {
                           name: item.name,
                           symbol: item.symbol,
                           image: item.thumb,
-                          currentPrice: nil,
+                          currentPrice: item.data.price,
+                          priceChangePercentage24H:
+                            String(format: "%.2f", item.data.priceChangePercentage24H["krw"] ?? 0) + "%"
+                          ,
+                          isUp: item.data.priceChangePercentage24H["krw"] ?? 0 > 0 ? true : false,
                           high24h: nil,
                           low24h: nil,
                           ath: nil,
@@ -73,8 +77,7 @@ struct Coin: DTO {
                           lastUpdated: nil,
                           sparklineIn7D: nil,
                           score: item.score,
-                          price: item.data.price,
-                          priceChangePercentage24H: item.data.priceChangePercentage24H)
+                          price: item.data.price)
     }
 }
 

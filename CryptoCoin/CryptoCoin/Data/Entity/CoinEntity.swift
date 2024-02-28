@@ -12,7 +12,9 @@ struct CoinEntity: Entity {
     let name: String //코인 이름
     let symbol: String //코인 통화 단위
     let image: String //코인 아이콘
-    let currentPrice: Int? //현재가
+    let currentPrice: String //현재가
+    let priceChangePercentage24H: String
+    let isUp: Bool
     let high24h: Int? //고가
     let low24h: Int? //저가
     let ath: Double? //신고점
@@ -23,5 +25,4 @@ struct CoinEntity: Entity {
     let sparklineIn7D: [Double]? //-> price
     let score: Int?
     let price: String?
-    let priceChangePercentage24H: [String: Double]?
 }

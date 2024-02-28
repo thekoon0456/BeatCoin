@@ -30,11 +30,7 @@ final class CoinSearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let repo = SearchRepository()
-        repo.fetch(router: .searchCoin(query: "bitcoin")) { entity in
-            print(entity)
-        }
+
         
     }
     

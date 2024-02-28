@@ -41,7 +41,9 @@ struct SearchCoin: DTO {
                           name: name,
                           symbol: symbol,
                           image: thumb,
-                          currentPrice: nil,
+                          currentPrice: "",
+                          priceChangePercentage24H: "",
+                          isUp: false,
                           high24h: nil,
                           low24h: nil,
                           ath: nil,
@@ -51,8 +53,7 @@ struct SearchCoin: DTO {
                           lastUpdated: nil,
                           sparklineIn7D: nil,
                           score: nil,
-                          price: nil,
-                          priceChangePercentage24H: nil)
+                          price: nil)
     }
 }
 

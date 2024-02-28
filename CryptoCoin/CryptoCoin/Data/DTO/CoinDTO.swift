@@ -15,7 +15,7 @@ struct CoinDTO: DTO {
     let totalVolume, high24H, low24H: Int
     let priceChange24H: Double
     let priceChangePercentage24H: Double?
-    let marketCapChange24H: Int
+    let marketCapChange24H: Double?
     let marketCapChangePercentage24H, circulatingSupply, totalSupply, maxSupply: Double?
     let ath: Double
     let athChangePercentage: Double
@@ -29,9 +29,12 @@ struct CoinDTO: DTO {
     var toEntity: CoinEntity {
         return CoinEntity(id: id,
                           name: name,
-                          symbol: symbol,
+                          symbol: symbol.uppercased(),
                           image: image,
-                          currentPrice: currentPrice,
+                          currentPrice: NumberFormatterManager.shared.toCurruncy(price: currentPrice),
+                          priceChangePercentage24H:
+                            String(format: "%.2f", priceChangePercentage24H ?? 0) + "%",
+                          isUp: priceChangePercentage24H ?? 0 > 0 ? true : false,
                           high24h: high24H,
                           low24h: low24H,
                           ath: ath,
@@ -41,8 +44,7 @@ struct CoinDTO: DTO {
                           lastUpdated: lastUpdated,
                           sparklineIn7D: sparklineIn7D?.price ?? [],
                           score: nil,
-                          price: nil,
-                          priceChangePercentage24H: nil)
+                          price: nil)
     }
     
     enum CodingKeys: String, CodingKey {
