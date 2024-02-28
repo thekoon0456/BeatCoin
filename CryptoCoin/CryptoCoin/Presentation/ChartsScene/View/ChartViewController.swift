@@ -19,6 +19,7 @@ final class ChartViewController: BaseViewController {
         $0.rightAxis.enabled = false
         $0.leftAxis.enabled = false
         $0.xAxis.enabled = false
+        $0.dragEnabled = false
         $0.legend.enabled = false
         $0.setVisibleXRangeMinimum(1)
     }
@@ -181,7 +182,7 @@ final class ChartViewController: BaseViewController {
         }
     
         mainPriceLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
