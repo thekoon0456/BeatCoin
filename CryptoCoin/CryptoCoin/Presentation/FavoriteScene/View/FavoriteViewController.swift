@@ -38,7 +38,7 @@ final class FavoriteViewController: BaseViewController {
     // MARK: - Helpers
     
     func bind() {
-        viewModel.inputViewDidLoad.onNext(["solana", "bitcoin"])
+        viewModel.inputViewDidLoad.onNext(())
         
         viewModel.outputCoinData.bind { [weak self] coins in
             guard let self else { return }

@@ -10,22 +10,12 @@ import Foundation
 import RealmSwift
 
 final class UserFavoriteRepository: realmRepository {
-    func delete(_: UserFavorite) {
-        
-    }
-    
 
     private let realm = try! Realm()
-    
-//    var list: Results<T>!
     
     func printURL() {
         print(realm.configuration.fileURL ?? "")
     }
-    
-//    init() {
-//        self.list = realm.objects(T.self)
-//    }
     
     // MARK: - Create
     
@@ -71,6 +61,7 @@ final class UserFavoriteRepository: realmRepository {
         do {
             try realm.write {
                 realm.delete(item)
+                print("DEBUG: realm Delete")
             }
         } catch {
             print(error.localizedDescription)

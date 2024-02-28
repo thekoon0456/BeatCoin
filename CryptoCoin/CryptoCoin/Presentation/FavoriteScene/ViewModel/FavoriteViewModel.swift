@@ -11,14 +11,17 @@ final class FavoriteViewModel: ViewModel {
     
     // MARK: - Properties
     let repository = CoinRepository()
-    let inputViewDidLoad = Observable<[String]?>(nil)
+    let favoriteRepository = UserFavoriteRepository()
+    let inputViewDidLoad = Observable<Void?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     
     init() { transform() }
     
     private func transform() {
-        inputViewDidLoad.bind { [weak self] ids in
+        inputViewDidLoad.bind { [weak self] _ in
             guard let self else { return }
+            let ids = favoriteRepository.fetch().map { $0.coinID }
+            print(ids)
             callRequest(ids: ids)
         }
     }

@@ -91,6 +91,7 @@ final class ChartViewController: BaseViewController {
         viewModel.outputFavorite.bind { [weak self] bool in
             guard let self,
                   let bool else { return }
+            print(bool)
             favoriteButton.isSelected = bool
         }
     }
