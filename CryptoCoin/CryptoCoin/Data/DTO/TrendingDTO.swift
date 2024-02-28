@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - TrendingDTO
-struct TrendingDTO: Decodable {
+struct TrendingDTO: DTO {
     let coins: [Coin]
     let nfts: [Nft]
     let categories: [Category]
@@ -21,7 +21,7 @@ struct TrendingDTO: Decodable {
 }
 
 // MARK: - Category
-struct Category: Decodable {
+struct Category: DTO {
     let id: Int
     let name: String
     let marketCap1HChange: Double
@@ -39,7 +39,7 @@ struct Category: Decodable {
 }
 
 // MARK: - CategoryData
-struct CategoryData: Decodable {
+struct CategoryData: DTO {
     let marketCap, marketCapBtc, totalVolume, totalVolumeBtc: Double
     let marketCapChangePercentage24H: [String: Double]
     let sparkline: String
@@ -55,7 +55,7 @@ struct CategoryData: Decodable {
 }
 
 // MARK: - Coin
-struct Coin: Decodable {
+struct Coin: DTO {
     let item: Item
     
     var toEntity: CoinEntity {
@@ -79,7 +79,7 @@ struct Coin: Decodable {
 }
 
 // MARK: - Item
-struct Item: Decodable {
+struct Item: DTO {
     let id: String
     let coinID: Int
     let name, symbol: String
@@ -102,7 +102,7 @@ struct Item: Decodable {
 }
 
 // MARK: - ItemData
-struct ItemData: Decodable {
+struct ItemData: DTO {
     let price, priceBtc: String
     let priceChangePercentage24H: [String: Double]
     let marketCap, marketCapBtc, totalVolume, totalVolumeBtc: String
@@ -122,12 +122,12 @@ struct ItemData: Decodable {
 }
 
 // MARK: - Content
-struct Content: Decodable {
+struct Content: DTO {
     let title, description: String
 }
 
 // MARK: - Nft
-struct Nft: Decodable {
+struct Nft: DTO {
     let id, name, symbol: String
     let thumb: String
     let nftContractID: Int
@@ -156,7 +156,7 @@ struct Nft: Decodable {
 }
 
 // MARK: - NftData
-struct NftData: Decodable {
+struct NftData: DTO {
     let floorPrice, floorPriceInUsd24HPercentageChange, h24Volume, h24AverageSalePrice: String
     let sparkline: String
     let content: String?

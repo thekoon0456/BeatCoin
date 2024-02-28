@@ -7,4 +7,6 @@
 
 import Foundation
 
+protocol DTO: Decodable { }
+
 protocol Entity { }

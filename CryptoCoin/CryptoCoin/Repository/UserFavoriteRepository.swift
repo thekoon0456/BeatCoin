@@ -32,13 +32,9 @@ final class UserFavoriteRepository: realmRepository {
     
     // MARK: - Read
     
-    func fetch() -> Results<UserFavorite> {
-        return realm.objects(UserFavorite.self)
-    }
-    
-    func fetchFavorite() -> [String] {
-        let containIDs = realm.objects(T.self).where { $0.isFavorite == true }.map { $0.coinID }
-        return Array(containIDs)
+    func fetch() -> [UserFavorite] {
+        let item = realm.objects(UserFavorite.self)
+        return Array(item)
     }
     
     // MARK: - Update

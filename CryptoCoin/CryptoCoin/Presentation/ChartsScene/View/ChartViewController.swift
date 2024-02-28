@@ -15,7 +15,7 @@ final class ChartViewController: BaseViewController {
         super.viewDidLoad()
         
         let repo = CoinRepository()
-        repo.fetch(router: .coin(ids: ["bitcoin"])) { entity in
+        repo.fetch(router: .coin(ids: ["solana"])) { entity in
             print(entity)
         }
     }

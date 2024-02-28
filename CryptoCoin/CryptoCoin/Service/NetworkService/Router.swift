@@ -26,7 +26,7 @@ enum Router: URLRequestConvertible {
         case .searchCoin:
             "/search"
         case .coin:
-            "/coins/markets?"
+            "/coins/markets"
         }
     }
     
@@ -43,7 +43,7 @@ enum Router: URLRequestConvertible {
         case .coin(let ids):
             [
                 "vs_currency": "krw",
-                "ids": ids.joined(separator: ", "),
+                "ids": ids.joined(separator: ","),
                 "sparkline": true
             ]
         }

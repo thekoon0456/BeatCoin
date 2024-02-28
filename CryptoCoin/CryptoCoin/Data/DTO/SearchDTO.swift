@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - SearchDTO
-struct SearchDTO: Decodable {
+struct SearchDTO: DTO {
     let coins: [SearchCoin]
     let exchanges: [Exchange]
     let icos: [String?]
@@ -17,13 +17,13 @@ struct SearchDTO: Decodable {
 }
 
 // MARK: - Category
-struct SearchCategory: Decodable {
+struct SearchCategory: DTO {
     let id: Int
     let name: String
 }
 
 // MARK: - Coin
-struct SearchCoin: Decodable {
+struct SearchCoin: DTO {
     let id, name, apiSymbol, symbol: String
     let marketCapRank: Int?
     let thumb, large: String
@@ -57,7 +57,7 @@ struct SearchCoin: Decodable {
 }
 
 // MARK: - Exchange
-struct Exchange: Decodable {
+struct Exchange: DTO {
     let id, name, marketType: String
     let thumb, large: String
 
@@ -69,7 +69,7 @@ struct Exchange: Decodable {
 }
 
 // MARK: - Nft
-struct SearchNft: Decodable {
+struct SearchNft: DTO {
     let id, name, symbol: String
     let thumb: String
 }

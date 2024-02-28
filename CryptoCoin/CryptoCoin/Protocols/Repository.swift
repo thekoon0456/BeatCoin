@@ -19,7 +19,7 @@ protocol realmRepository {
     associatedtype T: Object
     
     func create(_: T)
-    func fetch() -> Results<T>
+    func fetch() -> [T]
     func update(_: T)
     func delete(_: T)
     func deleteAll()

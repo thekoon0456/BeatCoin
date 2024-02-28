@@ -7,7 +7,7 @@
 
 import Foundation
  
-struct TrendingEntity {
+struct TrendingEntity: Entity {
     let coins: [CoinEntity]
     let nfts: [NFTEntity]
 }

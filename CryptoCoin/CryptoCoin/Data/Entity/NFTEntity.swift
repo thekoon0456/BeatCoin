@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NFTEntity {
+struct NFTEntity: Entity {
     let id: String //"pyth-network"
     let name: String //"Pyth Network"
     let symbol: String //"PYTH"

@@ -38,7 +38,7 @@
 		7C51CD712B8DC84100E39CB0 /* CoinDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */; };
 		7C51CD752B8DE31100E39CB0 /* TrendingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD742B8DE31100E39CB0 /* TrendingEntity.swift */; };
 		7C51CD792B8DE32100E39CB0 /* CoinEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD782B8DE32100E39CB0 /* CoinEntity.swift */; };
-		7C51CD7B2B8DE3B700E39CB0 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */; };
+		7C51CD7B2B8DE3B700E39CB0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7A2B8DE3B700E39CB0 /* Data.swift */; };
 		7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */; };
 		7C51CD7F2B8DE5B000E39CB0 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */; };
 		7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */; };
@@ -81,7 +81,7 @@
 		7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDTO.swift; sourceTree = "<group>"; };
 		7C51CD742B8DE31100E39CB0 /* TrendingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingEntity.swift; sourceTree = "<group>"; };
 		7C51CD782B8DE32100E39CB0 /* CoinEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinEntity.swift; sourceTree = "<group>"; };
-		7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		7C51CD7A2B8DE3B700E39CB0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		7C51CD7C2B8DE5A800E39CB0 /* TrendingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingRepository.swift; sourceTree = "<group>"; };
 		7C51CD7E2B8DE5B000E39CB0 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		7C51CD802B8DE5B900E39CB0 /* CoinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRepository.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		7C51CD202B8DB0BB00E39CB0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				7C51CD7A2B8DE3B700E39CB0 /* Entity.swift */,
+				7C51CD7A2B8DE3B700E39CB0 /* Data.swift */,
 				7C51CD852B8DF22900E39CB0 /* ViewModel.swift */,
 				7C51CD832B8DF22400E39CB0 /* Repository.swift */,
 			);
@@ -484,7 +484,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C51CD7B2B8DE3B700E39CB0 /* Entity.swift in Sources */,
+				7C51CD7B2B8DE3B700E39CB0 /* Data.swift in Sources */,
 				7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */,
 				7C51CD4F2B8DB4D200E39CB0 /* ChartViewController.swift in Sources */,
 				7C51CD882B8DF7F900E39CB0 /* UserFavorite.swift in Sources */,

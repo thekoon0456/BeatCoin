@@ -8,18 +8,19 @@
 import Foundation
 
 // MARK: - CoinDTO
-struct CoinDTO: Decodable {
+struct CoinDTO: DTO {
     let id, symbol, name: String
     let image: String
     let currentPrice, marketCap, marketCapRank, fullyDilutedValuation: Int
-    let totalVolume, high24H, low24H, priceChange24H: Int
-    let priceChangePercentage24H: Double
+    let totalVolume, high24H, low24H: Int
+    let priceChange24H: Double
+    let priceChangePercentage24H: Double?
     let marketCapChange24H: Int
-    let marketCapChangePercentage24H, circulatingSupply, totalSupply, maxSupply: Double
-    let ath: Int
+    let marketCapChangePercentage24H, circulatingSupply, totalSupply, maxSupply: Double?
+    let ath: Double
     let athChangePercentage: Double
     let athDate: String
-    let atl: Int
+    let atl: Double
     let atlChangePercentage: Double
     let atlDate: String
     let lastUpdated: String
@@ -72,6 +73,6 @@ struct CoinDTO: Decodable {
 }
 
 // MARK: - SparklineIn7D
-struct SparklineIn7D: Decodable {
+struct SparklineIn7D: DTO {
     let price: [Double]
 }
