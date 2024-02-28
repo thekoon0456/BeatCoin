@@ -49,7 +49,7 @@ struct SearchCoin: DTO {
                           ath: "",
                           atl: "",
                           lastUpdated: nil,
-                          sparklineIn7D: nil,
+                          sparklineIn7D: [],
                           score: nil,
                           price: nil)
     }

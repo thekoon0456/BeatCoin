@@ -73,7 +73,7 @@ struct Coin: DTO {
                           ath: "",
                           atl: "",
                           lastUpdated: nil,
-                          sparklineIn7D: nil,
+                          sparklineIn7D: [],
                           score: item.score,
                           price: item.data.price)
     }

@@ -20,7 +20,7 @@ struct CoinEntity: Entity {
     let ath: String //신고점
     let atl: String //신저점
     let lastUpdated: String? //업데이트 시각
-    let sparklineIn7D: [Double]? //-> price
+    let sparklineIn7D: [Double] //-> price
     let score: Int?
     let price: String?
 }

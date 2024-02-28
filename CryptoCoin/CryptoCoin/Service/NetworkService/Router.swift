@@ -44,7 +44,7 @@ enum Router: URLRequestConvertible {
             [
                 "vs_currency": "krw",
                 "ids": ids.joined(separator: ","),
-                "sparkline": true
+                "sparkline": "true"
             ]
         }
     }
