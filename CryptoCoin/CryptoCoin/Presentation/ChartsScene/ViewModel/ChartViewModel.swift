@@ -13,19 +13,20 @@ final class ChartViewModel: ViewModel {
     
     private let repository = CoinRepository()
     private let favoriteRepository = UserFavoriteRepository()
-    let inputFavorite = Observable<String?>(nil)
+    var coinID: String?
+    let inputViewDidLoad = Observable<Void?>(nil)
     let inputCoinName = Observable<String?>(nil)
+    let inputFavorite = Observable<String?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputFavorite = Observable<Bool?>(nil)
     
     init() { transform() }
-    
+
     private func transform() {
-        inputCoinName.bind { [weak self] id in
-            guard let self,
-                  let id else { return }
-            callRequest(id: id)
-            checkFavorite(id: id)
+        inputViewDidLoad.bind { [weak self] _ in
+            guard let self else { return }
+            callRequest(id: coinID)
+            checkFavorite(id: coinID)
         }
         
         inputFavorite.bind { [weak self] id in
@@ -37,8 +38,10 @@ final class ChartViewModel: ViewModel {
     
     private func callRequest(id: String?) {
         guard let id else { return }
+        print("리퀘스트id \(id)")
         repository.fetch(router: .coin(ids: [id])) { [weak self] coin in
             guard let self else { return }
+            print(#function, coin)
             outputCoinData.onNext(coin)
         }
     }
@@ -54,7 +57,8 @@ final class ChartViewModel: ViewModel {
         }
     }
     
-    private func checkFavorite(id: String) {
+    private func checkFavorite(id: String?) {
+        guard let id else { return }
         let fav = favoriteRepository.fetch().map { $0.coinID }
         if fav.contains(id) {
             outputFavorite.onNext(true)

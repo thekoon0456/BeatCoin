@@ -34,7 +34,7 @@ final class Observable<T> {
     // MARK: - Helpers
     
     func bind(listener: Listener?) {
-        listener?(value)
+//        listener?(value)
         self.listener = listener
     }
     

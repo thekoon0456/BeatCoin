@@ -84,7 +84,7 @@ struct Item: DTO {
     let id: String
     let coinID: Int
     let name, symbol: String
-    let marketCapRank: Int
+    let marketCapRank: Int?
     let thumb, small, large: String
     let slug: String
     let priceBtc: Double

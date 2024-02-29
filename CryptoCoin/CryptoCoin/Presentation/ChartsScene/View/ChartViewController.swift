@@ -14,7 +14,7 @@ import SnapKit
 final class ChartViewController: BaseViewController {
     
     // MARK: - Properties
-    private let viewModel = ChartViewModel()
+    let viewModel = ChartViewModel()
     private lazy var chartView = LineChartView().then {
         $0.rightAxis.enabled = false
         $0.leftAxis.enabled = false
@@ -72,15 +72,16 @@ final class ChartViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.inputCoinName.onNext("solana")
+        
         bind()
-
+        viewModel.inputViewDidLoad.onNext(())
     }
     
     // MARK: - Selectors
     
      @objc private func favoriteButtonTapped() {
-         viewModel.inputFavorite.onNext((viewModel.outputCoinData.currentValue.first?.id))
+         guard let id = viewModel.outputCoinData.currentValue.first?.id else { return }
+         viewModel.inputFavorite.onNext(id)
     }
     
     // MARK: - Helpers
@@ -90,14 +91,15 @@ final class ChartViewController: BaseViewController {
             guard let self,
                   let coin = coin.first
             else { return }
-            print(coin)
-            setData(coin)
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                setData(coin)
+            }
         }
         
         viewModel.outputFavorite.bind { [weak self] bool in
             guard let self,
                   let bool else { return }
-            print("현재 bool", bool)
             favoriteButton.isSelected = bool
         }
     }
