@@ -87,14 +87,14 @@ final class TrendingFavoriteCell: BaseCollectionViewCell {
         
         priceLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-8)
             make.bottom.equalTo(percentLabel.snp.top).offset(-4)
         }
         
         percentLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(4)
-            make.leading.equalToSuperview().offset(8)
+            make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-8)
-            make.bottom.equalToSuperview().offset(-4)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     

@@ -43,9 +43,16 @@ final class TrendingCell: BaseCollectionViewCell {
         $0.setImage(UIImage(named: CCDesign.Icon.starFill.name), for: .selected)
     }
     
+    // MARK: - Lifecycles
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
     // MARK: - Helpers
     
     func configureCell(_ data: CoinEntity) {
+        rankLabel.text = String((data.score ?? 0) + 1)
         iconImageView.kf.setImage(with: URL(string: data.image))
         titleLabel.text = data.name
         subtitleLabel.text = data.symbol
@@ -54,6 +61,18 @@ final class TrendingCell: BaseCollectionViewCell {
         persentLabel.textColor = data.isUp
         ? CCDesign.Color.highPrice.color
         : CCDesign.Color.lowPrice.color
+    }
+    
+    func configureNFTCell(_ data: NFTEntity, index: Int) {
+        rankLabel.text = String(index + 1)
+        iconImageView.kf.setImage(with: URL(string: data.thumb))
+        titleLabel.text = data.name
+        subtitleLabel.text = data.symbol
+        priceLabel.text = data.floorPrice
+        persentLabel.text = String(data.floorPrice24hPercentageChange)
+//        persentLabel.textColor = data.isUp
+//        ? CCDesign.Color.highPrice.color
+//        : CCDesign.Color.lowPrice.color
     }
     
     // MARK: - Configure
@@ -71,6 +90,7 @@ final class TrendingCell: BaseCollectionViewCell {
         rankLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(12)
+            make.width.equalTo(16)
             make.bottom.lessThanOrEqualToSuperview().offset(-8)
         }
         iconImageView.snp.makeConstraints { make in
@@ -100,7 +120,7 @@ final class TrendingCell: BaseCollectionViewCell {
         }
         
         persentLabel.snp.makeConstraints { make in
-            make.top.equalTo(priceLabel.snp.bottom).offset(4)
+            make.top.equalTo(priceLabel.snp.bottom)
             make.trailing.equalToSuperview().offset(-12)
         }
     }
