@@ -15,16 +15,17 @@ final class APIService {
     
     private init() { }
     
-    func callRequest<T: Decodable>(router: Router, type: T.Type = T.self, completionHandler: @escaping ((T) -> Void)) {
-        
+    func callRequest<T: Decodable>(router: Router,
+                                   type: T.Type = T.self,
+                                   completionHandler: @escaping ((Result<T, Error>) -> Void)) {
         AF.request(router)
             .validate(statusCode: 200...299)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let success):
-                    completionHandler(success)
+                    completionHandler(.success(success))
                 case .failure(let failure):
-                    print(failure)
+                    completionHandler(.failure(failure))
                 }
             }
     }

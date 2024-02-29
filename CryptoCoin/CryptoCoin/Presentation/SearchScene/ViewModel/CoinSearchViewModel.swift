@@ -19,6 +19,7 @@ final class CoinSearchViewModel: ViewModel {
     let outputFavorite = Observable<[Bool]?>(nil)
     let outputFavoriteIndex = Observable<Int?>(nil)
     let outputReloadView = Observable<Void?>(nil)
+    let outputError = Observable<CCError?>(nil)
     
     init() { transform() }
     
@@ -37,14 +38,22 @@ final class CoinSearchViewModel: ViewModel {
             setFavorite(coinData)
             outputFavoriteIndex.onNext(index)
         }
+        
+        
     }
     
     private func callRequest(id: String?) {
         guard let id else { return }
         repository.fetch(router: .searchCoin(query: id)) { [weak self] coin in
             guard let self else { return }
-            setFavorite(coin)
-            outputCoinData.onNext(coin)
+            switch coin {
+            case .success(let success):
+                setFavorite(success)
+                outputCoinData.onNext(success)
+            case .failure(let failure):
+                outputError.onNext(checkError(error: failure))
+            }
+
         }
     }
     

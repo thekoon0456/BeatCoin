@@ -9,4 +9,5 @@ import Foundation
 
 final class TrendingViewModel: ViewModel {
     
+    let outputError = Observable<CCError?>(nil)
 }

@@ -102,6 +102,24 @@ final class ChartViewController: BaseViewController {
                   let bool else { return }
             favoriteButton.isSelected = bool
         }
+        
+        viewModel.outputError.bind { [weak self] error in
+            guard let self,
+                  let error
+            else { return }
+            
+            showAlert(title: "",
+                      message: error.description,
+                      primaryButtonTitle: "재시도하기",
+                      okButtonTitle: "취소") { [weak self] _ in
+                guard let self else { return }
+                viewModel.inputViewDidLoad.onNext(())
+                dismiss(animated: true)
+            } okAction: { [weak self] _ in
+                guard let self else { return }
+                dismiss(animated: true)
+            }
+        }
     }
     
     // MARK: - Configure

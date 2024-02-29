@@ -9,11 +9,16 @@ import Foundation
 
 final class SearchRepository {
     
-    func fetch(router: Router, completionHandler: @escaping (([CoinEntity]) -> Void)) {
+    func fetch(router: Router, completionHandler: @escaping ((Result<[CoinEntity], Error>) -> Void)) {
         APIService.shared.callRequest(router: router,
                                       type: SearchDTO.self) { data in
-            let entity = data.coins.map { $0.toEntity }
-            completionHandler(entity)
+            switch data {
+            case .success(let success):
+                let entity = success.coins.map { $0.toEntity }
+                completionHandler(.success(entity))
+            case .failure(let failure):
+                completionHandler(.failure(failure))
+            }
         }
     }
 }

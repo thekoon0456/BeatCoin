@@ -19,6 +19,7 @@ final class ChartViewModel: ViewModel {
     let inputFavorite = Observable<String?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputFavorite = Observable<Bool?>(nil)
+    let outputError = Observable<CCError?>(nil)
     
     init() { transform() }
 
@@ -40,7 +41,12 @@ final class ChartViewModel: ViewModel {
         guard let id else { return }
         repository.fetch(router: .coin(ids: [id])) { [weak self] coin in
             guard let self else { return }
-            outputCoinData.onNext(coin)
+            switch coin {
+            case .success(let success):
+                outputCoinData.onNext(success)
+            case .failure(let failure):
+                outputError.onNext(checkError(error: failure))
+            }
         }
     }
     

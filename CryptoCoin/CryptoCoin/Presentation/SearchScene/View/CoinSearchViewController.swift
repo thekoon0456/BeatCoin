@@ -21,6 +21,7 @@ final class CoinSearchViewController: BaseViewController {
         $0.searchBar.searchBarStyle = .minimal
         $0.searchBar.tintColor = CCDesign.Color.tintColor.color
         $0.searchBar.delegate = self
+        $0.hidesNavigationBarDuringPresentation = false
     }
     
     private lazy var tableView = UITableView().then {
@@ -40,7 +41,7 @@ final class CoinSearchViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        viewModel.inputSearchText.onNext(searchBar.text)
+        viewModel.inputSearchText.onNext(searchController.searchBar.text)
     }
     
     // MARK: - Selectors
@@ -71,6 +72,23 @@ final class CoinSearchViewController: BaseViewController {
             
             //modal
             setToast(index)
+        }
+        
+        viewModel.outputError.bind { [weak self] error in
+            guard let self,
+                  let error
+            else { return }
+            
+            showAlert(message: error.description,
+                      primaryButtonTitle: "재시도하기",
+                      okButtonTitle: "취소") { [weak self] _ in
+                guard let self else { return }
+                viewModel.inputSearchText.onNext((searchController.searchBar.text))
+                dismiss(animated: true)
+            } okAction: { [weak self] _ in
+                guard let self else { return }
+                dismiss(animated: true)
+            }
         }
     }
     
@@ -107,6 +125,7 @@ final class CoinSearchViewController: BaseViewController {
         super.configureView()
         navigationItem.title = CCConst.NaviTitle.search.name
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
 

@@ -9,10 +9,15 @@ import Foundation
 
 final class TrendingRepository: Repository {
 
-    func fetch(router: Router, completionHandler: @escaping ((TrendingEntity) -> Void)) {
+    func fetch(router: Router, completionHandler: @escaping ((Result<TrendingEntity, Error>) -> Void)) {
         APIService.shared.callRequest(router: router,
                                       type: TrendingDTO.self) { data in
-            completionHandler(data.toEntity)
+            switch data {
+            case .success(let success):
+                completionHandler(.success(success.toEntity))
+            case .failure(let failure):
+                completionHandler(.failure(failure))
+            }
         }
     }
 }

@@ -10,3 +10,13 @@ import Foundation
 protocol ViewModel {
     
 }
+
+extension ViewModel {
+    
+    func checkError(error: Error) -> CCError {
+        guard let code = error.asAFError?.responseCode,
+              let error = CCError(rawValue: code)
+        else { return .unKnown }
+        return error
+    }
+}

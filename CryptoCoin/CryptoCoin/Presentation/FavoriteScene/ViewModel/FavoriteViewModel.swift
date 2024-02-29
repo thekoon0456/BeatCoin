@@ -14,6 +14,7 @@ final class FavoriteViewModel: ViewModel {
     let favoriteRepository = UserFavoriteRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
+    let outputError = Observable<CCError?>(nil)
     
     init() { transform() }
     
@@ -31,9 +32,15 @@ final class FavoriteViewModel: ViewModel {
             outputCoinData.onNext([])
             return
         }
+        
         repository.fetch(router: .coin(ids: ids)) { [weak self] coin in
             guard let self else { return }
-            outputCoinData.onNext(coin)
+            switch coin {
+            case .success(let success):
+                outputCoinData.onNext(success)
+            case .failure(let failure):
+                outputError.onNext(checkError(error: failure))
+            }
         }
     }
 }
