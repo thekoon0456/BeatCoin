@@ -33,10 +33,11 @@ final class SearchCell: BaseTableViewCell {
     
     // MARK: - Helpers
     
-    func configureCell(_ data: CoinEntity) {
+    func configureCell(_ data: CoinEntity, isFavorite: Bool) {
         iconImageView.kf.setImage(with: URL(string: data.image))
         titleLabel.text = data.name
         subtitleLabel.text = data.symbol
+        favoriteButton.isSelected = isFavorite
     }
     
     // MARK: - Configure

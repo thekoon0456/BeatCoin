@@ -87,10 +87,10 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell,
-              let data = viewModel.outputCoinData.currentValue
+              let data = viewModel.outputCoinData.currentValue?[indexPath.row],
+              let isFavorite = viewModel.outputFavorite.currentValue?[indexPath.row]
         else { return UITableViewCell() }
-        
-        cell.configureCell(data[indexPath.row])
+        cell.configureCell(data, isFavorite: isFavorite)
         return cell
     }
 }
