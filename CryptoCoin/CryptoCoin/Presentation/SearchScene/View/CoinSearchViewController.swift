@@ -47,6 +47,20 @@ final class CoinSearchViewController: BaseViewController {
     
     @objc private func favoriteButtonTapped(sender: UIButton) {
         viewModel.inputFavoriteButtonTapped.onNext(sender.tag)
+        guard let coin = viewModel.outputCoinData.currentValue?[sender.tag],
+              let isFavorite = viewModel.outputFavorite.currentValue?[sender.tag] else { return }
+        let toastMessage = isFavorite
+        ? Toast.setFavorite(coin: coin.name)
+        : Toast.deleteFavorite(coin: coin.name)
+        let vc = ToastViewController(inputMessage: toastMessage)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self else { return }
+            dismiss(animated: true)
+        }
    }
     
     // MARK: - Helpers

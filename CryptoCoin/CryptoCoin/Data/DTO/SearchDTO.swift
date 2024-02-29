@@ -25,7 +25,8 @@ struct SearchCategory: DTO {
 struct SearchCoin: DTO {
     let id, name, apiSymbol, symbol: String
     let marketCapRank: Int?
-    let thumb, large: String
+    let thumb: String
+    let large: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -57,7 +58,8 @@ struct SearchCoin: DTO {
 // MARK: - Exchange
 struct Exchange: DTO {
     let id, name, marketType: String
-    let thumb, large: String
+    let thumb: String
+    let large: String
 
     enum CodingKeys: String, CodingKey {
         case id, name

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C27191A2B9054910036F3FA /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2719192B9054910036F3FA /* Toast.swift */; };
 		7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CCFC2B8DB01D00E39CB0 /* AppDelegate.swift */; };
 		7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CCFE2B8DB01D00E39CB0 /* SceneDelegate.swift */; };
 		7C51CD062B8DB01E00E39CB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C51CD052B8DB01E00E39CB0 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C2719192B9054910036F3FA /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		7C51CCF92B8DB01D00E39CB0 /* CryptoCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C51CCFC2B8DB01D00E39CB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C51CCFE2B8DB01D00E39CB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD292B8DB1E400E39CB0 /* Observable.swift */,
+				7C2719192B9054910036F3FA /* Toast.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				7C51CD282B8DB13E00E39CB0 /* CoinSearchViewController.swift in Sources */,
 				7C51CD8C2B8DFB4400E39CB0 /* TrendingViewModel.swift in Sources */,
 				7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */,
+				7C27191A2B9054910036F3FA /* Toast.swift in Sources */,
 				7C51CD862B8DF22900E39CB0 /* ViewModel.swift in Sources */,
 				7C51CD902B8DFB7400E39CB0 /* FavoriteViewModel.swift in Sources */,
 				7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */,
