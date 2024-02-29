@@ -12,9 +12,7 @@ final class SearchCell: BaseTableViewCell {
     // MARK: - Properties
     
     private lazy var iconImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
-        $0.layer.cornerRadius = 20
-        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFit
     }
     
     private let titleLabel = UILabel().then {

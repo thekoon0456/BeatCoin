@@ -21,8 +21,6 @@ final class FavoriteCell: BaseCollectionViewCell {
 
     private lazy var iconImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.layer.cornerRadius = 20
-        $0.clipsToBounds = true
     }
     
     private let titleLabel = UILabel().then {

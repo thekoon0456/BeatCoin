@@ -40,7 +40,7 @@ struct SearchCoin: DTO {
         return CoinEntity(id: id,
                           name: name,
                           symbol: symbol,
-                          image: thumb,
+                          image: large ?? thumb,
                           currentPrice: "",
                           priceChangePercentage24H: "",
                           isUp: false,

@@ -77,6 +77,11 @@ final class ChartViewController: BaseViewController {
         viewModel.inputViewDidLoad.onNext(())
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     // MARK: - Selectors
     
     @objc private func favoriteButtonTapped() {
@@ -274,6 +279,7 @@ final class ChartViewController: BaseViewController {
     override func configureView() {
         super.configureView()
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = ""
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteButton)
     }
 }

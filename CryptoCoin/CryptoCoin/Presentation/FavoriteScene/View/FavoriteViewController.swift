@@ -12,6 +12,7 @@ import SnapKit
 final class FavoriteViewController: BaseViewController {
     
     // MARK: - Properties
+    
     let viewModel = FavoriteViewModel()
     
     private lazy var collectionView = {
@@ -36,6 +37,8 @@ final class FavoriteViewController: BaseViewController {
         return cv
     }()
     
+    // MARK: - Lifecycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,12 +48,7 @@ final class FavoriteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.inputViewWillAppear.onNext(())
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        collectionView.frame = view.bounds
-        collectionView.reloadData()
+        
     }
     
     // MARK: - Helpers
@@ -104,6 +102,7 @@ final class FavoriteViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
+        navigationItem.backButtonDisplayMode = .minimal
         navigationItem.title = CCConst.NaviTitle.favorite.name
     }
 }
@@ -139,22 +138,24 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension FavoriteViewController: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     
+    //드래그 아이템 필수구현
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         []
     }
     
+    //드래그 설정되있으면 move
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-            if collectionView.hasActiveDrag {
-                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-            }
-            return UICollectionViewDropProposal(operation: .forbidden)
+        if collectionView.hasActiveDrag {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
+        return UICollectionViewDropProposal(operation: .forbidden)
+    }
     
+    //드래그 아이템 업데이트
     private func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
         var data = viewModel.outputCoinData.currentValue
-        if
-            let item = coordinator.items.first,
-            let sourceIndexPath = item.sourceIndexPath {
+        if let item = coordinator.items.first,
+           let sourceIndexPath = item.sourceIndexPath {
             collectionView.performBatchUpdates({
                 let temp = data[sourceIndexPath.item]
                 data.remove(at: sourceIndexPath.item)
@@ -172,15 +173,16 @@ extension FavoriteViewController: UICollectionViewDragDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         var destinationIndexPath: IndexPath
-         if let indexPath = coordinator.destinationIndexPath {
-             destinationIndexPath = indexPath
-         } else {
-             let row = collectionView.numberOfItems(inSection: 0)
-             destinationIndexPath = IndexPath(item: row - 1, section: 0)
-         }
-         
-         if coordinator.proposal.operation == .move {
-             reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
-         }
-     }
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let row = collectionView.numberOfItems(inSection: 0)
+            destinationIndexPath = IndexPath(item: row - 1, section: 0)
+        }
+        
+        //이동하고 업데이트
+        if coordinator.proposal.operation == .move {
+            reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
+        }
+    }
 }

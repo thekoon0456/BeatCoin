@@ -147,6 +147,7 @@ final class CoinSearchViewController: BaseViewController {
         navigationItem.title = CCConst.NaviTitle.search.name
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.backButtonDisplayMode = .minimal
     }
 }
 
