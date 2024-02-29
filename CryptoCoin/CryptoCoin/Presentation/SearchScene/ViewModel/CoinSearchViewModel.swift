@@ -21,14 +21,12 @@ final class CoinSearchViewModel: ViewModel {
     private func transform() {
         inputSearchText.bind { [weak self] id in
             guard let self else { return }
-            print("id:", id)
             callRequest(id: id)
         }
     }
     
     private func callRequest(id: String?) {
         guard let id else { return }
-        print("id:", id)
         repository.fetch(router: .searchCoin(query: id)) { [weak self] coin in
             guard let self else { return }
             print(coin)

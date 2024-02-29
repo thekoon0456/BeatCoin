@@ -35,17 +35,6 @@ final class CoinSearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        AF.request("https://api.coingecko.com/api/v3/search?query=bitcoin")
-//            .validate(statusCode: 200...299)
-//            .responseDecodable(of: SearchDTO.self) { response in
-//                switch response.result {
-//                case .success(let success):
-//                    print(success)
-//                case .failure(let failure):
-//                    print(failure)
-//                }
-//            }
-        
         bind()
     }
     

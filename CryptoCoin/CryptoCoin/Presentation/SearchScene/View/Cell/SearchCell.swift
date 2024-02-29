@@ -73,8 +73,4 @@ final class SearchCell: BaseTableViewCell {
             make.trailing.equalToSuperview().offset(-8)
         }
     }
-    
-    override func configureView() {
-        
-    }
 }
