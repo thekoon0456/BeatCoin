@@ -21,11 +21,18 @@ final class FavoriteViewController: BaseViewController {
         layout.minimumInteritemSpacing = 16
         layout.minimumLineSpacing = 16
         layout.sectionInset = .init(top: 16, left: 16, bottom: 0, right: 16)
-        
+        let refreshControl = UIRefreshControl().then {
+            $0.tintColor = CCDesign.Color.tintColor.color
+            $0.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        }
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
         cv.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.identifier)
+        cv.refreshControl = refreshControl
+        cv.dragInteractionEnabled = true
+        cv.dragDelegate = self
+        cv.dropDelegate = self
         return cv
     }()
     
@@ -40,6 +47,12 @@ final class FavoriteViewController: BaseViewController {
         viewModel.inputViewWillAppear.onNext(())
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
+        collectionView.reloadData()
+    }
+    
     // MARK: - Helpers
     
     func bind() {
@@ -52,17 +65,28 @@ final class FavoriteViewController: BaseViewController {
             guard let self,
                   let error
             else { return }
-            
-            showAlert(message: error.description,
-                      primaryButtonTitle: "재시도하기",
-                      okButtonTitle: "취소") { [weak self] _ in
+            DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                viewModel.inputViewWillAppear.onNext(())
-                dismiss(animated: true)
-            } okAction: { [weak self] _ in
-                guard let self else { return }
-                dismiss(animated: true)
+                showAlert(message: error.description,
+                          primaryButtonTitle: "재시도하기",
+                          okButtonTitle: "취소") { [weak self] _ in
+                    guard let self else { return }
+                    viewModel.inputViewWillAppear.onNext(())
+                    dismiss(animated: true)
+                } okAction: { [weak self] _ in
+                    guard let self else { return }
+                    dismiss(animated: true)
+                }
             }
+        }
+    }
+    
+    @objc func refreshData() {
+        viewModel.inputViewWillAppear.onNext(())
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self else { return }
+            collectionView.refreshControl?.endRefreshing()
         }
     }
     
@@ -85,6 +109,15 @@ final class FavoriteViewController: BaseViewController {
 }
 
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.outputCoinData.currentValue.count
     }
@@ -102,4 +135,52 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         vc.viewModel.coinID = data.id
         navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+extension FavoriteViewController: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        []
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+            if collectionView.hasActiveDrag {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+            return UICollectionViewDropProposal(operation: .forbidden)
+        }
+    
+    private func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
+        var data = viewModel.outputCoinData.currentValue
+        if
+            let item = coordinator.items.first,
+            let sourceIndexPath = item.sourceIndexPath {
+            collectionView.performBatchUpdates({
+                let temp = data[sourceIndexPath.item]
+                data.remove(at: sourceIndexPath.item)
+                data.insert(temp, at: destinationIndexPath.item)
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+                viewModel.outputCoinData.onNext(data)
+            }) { done in
+                
+            }
+            
+            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        var destinationIndexPath: IndexPath
+         if let indexPath = coordinator.destinationIndexPath {
+             destinationIndexPath = indexPath
+         } else {
+             let row = collectionView.numberOfItems(inSection: 0)
+             destinationIndexPath = IndexPath(item: row - 1, section: 0)
+         }
+         
+         if coordinator.proposal.operation == .move {
+             reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
+         }
+     }
 }

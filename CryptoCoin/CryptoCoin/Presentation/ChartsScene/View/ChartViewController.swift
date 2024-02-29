@@ -79,9 +79,9 @@ final class ChartViewController: BaseViewController {
     
     // MARK: - Selectors
     
-     @objc private func favoriteButtonTapped() {
-         guard let id = viewModel.outputCoinData.currentValue.first?.id else { return }
-         viewModel.inputFavorite.onNext(id)
+    @objc private func favoriteButtonTapped() {
+        guard let id = viewModel.outputCoinData.currentValue.first?.id else { return }
+        viewModel.inputFavorite.onNext(id)
     }
     
     // MARK: - Helpers
@@ -112,8 +112,7 @@ final class ChartViewController: BaseViewController {
                 setMaxToast()
             }
             
-            showAlert(title: "",
-                      message: error.description,
+            showAlert(message: error.description,
                       primaryButtonTitle: "재시도하기",
                       okButtonTitle: "취소") { [weak self] _ in
                 guard let self else { return }
@@ -132,15 +131,14 @@ final class ChartViewController: BaseViewController {
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
-            guard let self else { return }
-            dismiss(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            vc.dismiss(animated: true)
         }
     }
     
     // MARK: - Configure
     
-    // 데이터 적용하기
+    // Chart 데이터 적용하기
     func setLineData(lineChartView: LineChartView, lineChartDataEntries: [ChartDataEntry]) {
         let set = LineChartDataSet(entries: lineChartDataEntries)
         //gradient 설정
@@ -159,8 +157,8 @@ final class ChartViewController: BaseViewController {
         let lineChartData = LineChartData(dataSet: set)
         lineChartView.data = lineChartData
     }
-
-    // entry 만들기
+    
+    // Chart entry 만들기
     func entryData(values: [Double]) -> [ChartDataEntry] {
         var lineDataEntries: [ChartDataEntry] = []
         for i in 0 ..< values.count {
@@ -215,7 +213,7 @@ final class ChartViewController: BaseViewController {
             make.trailing.lessThanOrEqualToSuperview()
             make.centerY.equalTo(iconImageView.snp.centerY)
         }
-    
+        
         mainPriceLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(20)

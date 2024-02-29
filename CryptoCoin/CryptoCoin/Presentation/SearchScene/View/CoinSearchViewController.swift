@@ -67,11 +67,13 @@ final class CoinSearchViewController: BaseViewController {
             guard let self,
                   let index
             else { return }
-            let indexPath = IndexPath(item: index, section: 0)
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
             
             //modal
-            setFavoriteToast(index)
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                setFavoriteToast(index)
+            }
         }
         
         viewModel.outputError.bind { [weak self] error in
@@ -79,19 +81,24 @@ final class CoinSearchViewController: BaseViewController {
                   let error
             else { return }
             
-            if error == .maxFavorite {
-                setMaxToast()
-            }
-            
-            showAlert(message: error.description,
-                      primaryButtonTitle: "재시도하기",
-                      okButtonTitle: "취소") { [weak self] _ in
+            DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                viewModel.inputSearchText.onNext((searchController.searchBar.text))
-                dismiss(animated: true)
-            } okAction: { [weak self] _ in
-                guard let self else { return }
-                dismiss(animated: true)
+                
+                if error == .maxFavorite {
+                    setMaxToast()
+                    return
+                }
+                
+                showAlert(message: error.description,
+                          primaryButtonTitle: "재시도하기",
+                          okButtonTitle: "취소") { [weak self] _ in
+                    guard let self else { return }
+                    viewModel.inputSearchText.onNext((searchController.searchBar.text))
+                    dismiss(animated: true)
+                } okAction: { [weak self] _ in
+                    guard let self else { return }
+                    dismiss(animated: true)
+                }
             }
         }
     }
@@ -107,9 +114,8 @@ final class CoinSearchViewController: BaseViewController {
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
-            guard let self else { return }
-            dismiss(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            vc.dismiss(animated: true)
         }
     }
     
@@ -119,9 +125,8 @@ final class CoinSearchViewController: BaseViewController {
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
-            guard let self else { return }
-            dismiss(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            vc.dismiss(animated: true)
         }
     }
     

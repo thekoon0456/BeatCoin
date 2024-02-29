@@ -53,8 +53,4 @@ final class ChartPriceView: BaseView {
             make.bottom.equalToSuperview().offset(-4)
         }
     }
-    
-    override func configureView() {
-        
-    }
 }
