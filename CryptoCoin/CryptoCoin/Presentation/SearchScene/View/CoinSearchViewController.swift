@@ -15,12 +15,12 @@ final class CoinSearchViewController: BaseViewController {
     
     private let viewModel = CoinSearchViewModel()
     
-    private lazy var searchBar = UISearchBar().then {
-        $0.placeholder = "Search Coin"
-        $0.backgroundColor = .clear
-        $0.searchBarStyle = .minimal
-        $0.tintColor = CCDesign.Color.tintColor.color
-        $0.delegate = self
+    private lazy var searchController = UISearchController().then {
+        $0.searchBar.placeholder = "Search Coin"
+        $0.searchBar.backgroundColor = .clear
+        $0.searchBar.searchBarStyle = .minimal
+        $0.searchBar.tintColor = CCDesign.Color.tintColor.color
+        $0.searchBar.delegate = self
     }
     
     private lazy var tableView = UITableView().then {
@@ -94,24 +94,19 @@ final class CoinSearchViewController: BaseViewController {
     // MARK: - Configure
     
     override func configureHierarchy() {
-        view.addSubviews(searchBar, tableView)
+        view.addSubviews(tableView)
     }
     
     override func configureLayout() {
-        searchBar.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(48)
-        }
-        
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom)
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
     override func configureView() {
         super.configureView()
         navigationItem.title = CCConst.NaviTitle.search.name
+        navigationItem.searchController = searchController
     }
 }
 
@@ -135,7 +130,7 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
               let isFavorite = viewModel.outputFavorite.currentValue?[indexPath.row]
         else { return UITableViewCell() }
         
-        cell.configureCell(data, keyword: searchBar.text, isFavorite: isFavorite, tag: indexPath.row)
+        cell.configureCell(data, keyword: searchController.searchBar.text, isFavorite: isFavorite, tag: indexPath.row)
         cell.favoriteButton.addTarget(self,
                                       action: #selector(favoriteButtonTapped),
                                       for: .touchUpInside)
