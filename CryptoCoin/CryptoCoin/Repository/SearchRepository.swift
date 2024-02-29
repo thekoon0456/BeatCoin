@@ -12,6 +12,7 @@ final class SearchRepository {
     func fetch(router: Router, completionHandler: @escaping (([CoinEntity]) -> Void)) {
         APIService.shared.callRequest(router: router,
                                       type: SearchDTO.self) { data in
+            print(data)
             let entity = data.coins.map { $0.toEntity }
             completionHandler(entity)
         }

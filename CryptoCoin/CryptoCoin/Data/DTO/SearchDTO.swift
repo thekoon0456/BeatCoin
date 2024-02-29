@@ -10,9 +10,9 @@ import Foundation
 // MARK: - SearchDTO
 struct SearchDTO: DTO {
     let coins: [SearchCoin]
-    let exchanges: [Exchange]
-    let categories: [SearchCategory]
-    let nfts: [SearchNft]
+    let exchanges: [Exchange]?
+    let categories: [SearchCategory]?
+    let nfts: [SearchNft]?
 }
 
 // MARK: - Category

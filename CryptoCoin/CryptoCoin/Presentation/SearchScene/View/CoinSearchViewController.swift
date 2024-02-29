@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Alamofire
+
 final class CoinSearchViewController: BaseViewController {
     
     // MARK: - Properties
@@ -24,12 +26,25 @@ final class CoinSearchViewController: BaseViewController {
     private lazy var tableView = UITableView().then {
         $0.dataSource = self
         $0.delegate = self
+        $0.register(SearchCell.self, forCellReuseIdentifier: SearchCell.identifier)
+        $0.rowHeight = UITableView.automaticDimension
     }
     
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        AF.request("https://api.coingecko.com/api/v3/search?query=bitcoin")
+//            .validate(statusCode: 200...299)
+//            .responseDecodable(of: SearchDTO.self) { response in
+//                switch response.result {
+//                case .success(let success):
+//                    print(success)
+//                case .failure(let failure):
+//                    print(failure)
+//                }
+//            }
         
         bind()
     }
