@@ -37,6 +37,12 @@ final class CoinSearchViewController: BaseViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.inputSearchText.onNext(searchBar.text)
+    }
+    
     // MARK: - Selectors
     
     @objc private func favoriteButtonTapped(sender: UIButton) {

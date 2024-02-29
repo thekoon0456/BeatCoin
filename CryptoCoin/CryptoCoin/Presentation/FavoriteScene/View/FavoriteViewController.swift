@@ -80,4 +80,10 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = viewModel.outputCoinData.currentValue[indexPath.item]
+        let vc = ChartViewController()
+        vc.viewModel.coinID = data.id
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
