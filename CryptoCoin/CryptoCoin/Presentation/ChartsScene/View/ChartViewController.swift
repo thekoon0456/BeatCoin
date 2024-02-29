@@ -80,7 +80,6 @@ final class ChartViewController: BaseViewController {
     // MARK: - Selectors
     
      @objc private func favoriteButtonTapped() {
-         print("눌림")
          viewModel.inputFavorite.onNext((viewModel.outputCoinData.currentValue.first?.id))
     }
     

@@ -27,7 +27,6 @@ final class CoinSearchViewController: BaseViewController {
         $0.dataSource = self
         $0.delegate = self
         $0.register(SearchCell.self, forCellReuseIdentifier: SearchCell.identifier)
-        $0.rowHeight = UITableView.automaticDimension
     }
     
     // MARK: - Lifecycles
@@ -38,10 +37,21 @@ final class CoinSearchViewController: BaseViewController {
         bind()
     }
     
+    // MARK: - Selectors
+    
+    @objc private func favoriteButtonTapped(sender: UIButton) {
+        viewModel.inputFavoriteButtonTapped.onNext(sender.tag)
+   }
+    
     // MARK: - Helpers
     
     private func bind() {
         viewModel.outputCoinData.bind { [weak self] coin in
+            guard let self else { return }
+            tableView.reloadData()
+        }
+        
+        viewModel.outputFavorite.bind { [weak self] coin in
             guard let self else { return }
             tableView.reloadData()
         }
@@ -90,7 +100,10 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
               let data = viewModel.outputCoinData.currentValue?[indexPath.row],
               let isFavorite = viewModel.outputFavorite.currentValue?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configureCell(data, isFavorite: isFavorite)
+        cell.configureCell(data, isFavorite: isFavorite, tag: indexPath.row)
+        cell.favoriteButton.addTarget(self,
+                                      action: #selector(favoriteButtonTapped),
+                                      for: .touchUpInside)
         return cell
     }
 }

@@ -90,6 +90,7 @@ final class FavoriteCell: BaseCollectionViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalTo(iconImageView.snp.trailing).offset(8)
+            make.trailing.equalToSuperview().offset(-8)
         }
         
         subtitleLabel.snp.makeConstraints { make in

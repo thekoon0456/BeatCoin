@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 final class UserFavorite: Object {
-    @Persisted(primaryKey: true) var id: String
+    @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var coinID: String //검색 쿼리 id
     
     convenience init(coinID: String) {

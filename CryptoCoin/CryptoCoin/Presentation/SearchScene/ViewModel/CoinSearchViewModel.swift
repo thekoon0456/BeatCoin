@@ -14,8 +14,10 @@ final class CoinSearchViewModel: ViewModel {
     let repository = SearchRepository()
     let favoriteRepository = UserFavoriteRepository()
     let inputSearchText = Observable<String?>(nil)
+    let inputFavoriteButtonTapped = Observable<Int?>(nil)
     let outputCoinData = Observable<[CoinEntity]?>(nil)
     let outputFavorite = Observable<[Bool]?>(nil)
+    let outputReloadView = Observable<Void?>(nil)
     
     init() { transform() }
     
@@ -24,6 +26,15 @@ final class CoinSearchViewModel: ViewModel {
             guard let self else { return }
             callRequest(id: id)
         }
+        
+        inputFavoriteButtonTapped.bind { [weak self] index in
+            guard let self,
+                  let index,
+                  let coinData = outputCoinData.currentValue
+            else { return }
+            favoriteToggle(coin: coinData[index])
+            resultFavorite(coinData)
+        }
     }
     
     private func callRequest(id: String?) {
@@ -31,27 +42,27 @@ final class CoinSearchViewModel: ViewModel {
         repository.fetch(router: .searchCoin(query: id)) { [weak self] coin in
             guard let self else { return }
             outputCoinData.onNext(coin)
-            checkFavorite(coin)
+            resultFavorite(coin)
         }
     }
     
-//    private func setFavorite(id: String) {
-//        let fav = favoriteRepository.fetch().map { $0.coinID }
-//        
-//        if fav.contains(id) {
-//            favoriteRepository.delete(favoriteRepository.fetchItem(id: id))
-//            outputFavorite.onNext(false)
-//        } else {
-//            favoriteRepository.create(UserFavorite(coinID: id))
-//            outputFavorite.onNext(true)
-//        }
-//    }
-    
-    private func checkFavorite(_ coin: [CoinEntity]) {
+    private func favoriteToggle(coin: CoinEntity) {
         let fav = favoriteRepository.fetch().map { $0.coinID }
-        let isFavorite = coin.map { 
+        
+        if fav.contains(coin.id) {
+            favoriteRepository.delete(favoriteRepository.fetchItem(id: coin.id))
+        } else {
+            let item = UserFavorite(coinID: coin.id)
+            favoriteRepository.create(item)
+        }
+    }
+    
+    private func resultFavorite(_ coin: [CoinEntity]) {
+        let fav = favoriteRepository.fetch().map { $0.coinID }
+        let isFavorite = coin.map {
             fav.contains($0.id) ? true : false
         }
+        
         outputFavorite.onNext(isFavorite)
     }
 }

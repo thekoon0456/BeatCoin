@@ -26,17 +26,18 @@ final class SearchCell: BaseTableViewCell {
         $0.textColor = CCDesign.Color.gray.color
     }
     
-    private lazy var favoriteButton = UIButton().then {
+    lazy var favoriteButton = UIButton().then {
         $0.setImage(UIImage(named: CCDesign.Icon.star.name), for: .normal)
         $0.setImage(UIImage(named: CCDesign.Icon.starFill.name), for: .selected)
     }
     
     // MARK: - Helpers
     
-    func configureCell(_ data: CoinEntity, isFavorite: Bool) {
+    func configureCell(_ data: CoinEntity, isFavorite: Bool, tag: Int) {
         iconImageView.kf.setImage(with: URL(string: data.image))
         titleLabel.text = data.name
         subtitleLabel.text = data.symbol
+        favoriteButton.tag = tag
         favoriteButton.isSelected = isFavorite
     }
     
@@ -60,6 +61,7 @@ final class SearchCell: BaseTableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(iconImageView.snp.top)
+            make.trailing.equalToSuperview().offset(-8)
             make.leading.equalTo(iconImageView.snp.trailing).offset(8)
         }
         
