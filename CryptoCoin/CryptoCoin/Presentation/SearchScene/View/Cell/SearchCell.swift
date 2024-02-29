@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 final class SearchCell: BaseTableViewCell {
     
     // MARK: - Properties

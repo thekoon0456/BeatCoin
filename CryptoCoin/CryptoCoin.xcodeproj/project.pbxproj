@@ -59,6 +59,8 @@
 		7C75BDF12B8F2D26004D5DA5 /* ChartPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */; };
 		7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */; };
 		7C75BDFB2B8F58F4004D5DA5 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */; };
+		7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */; };
+		7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BDA2B90AF8300493767 /* TrendingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +112,8 @@
 		7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPriceView.swift; sourceTree = "<group>"; };
 		7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 		7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingFavoriteCell.swift; sourceTree = "<group>"; };
+		7CC87BDA2B90AF8300493767 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD4A2B8DB47F00E39CB0 /* TrendingViewController.swift */,
+				7CC87BD72B90AF6500493767 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -439,6 +444,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		7CC87BD72B90AF6500493767 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */,
+				7CC87BDA2B90AF8300493767 /* TrendingCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -552,6 +566,7 @@
 				7C51CD752B8DE31100E39CB0 /* TrendingEntity.swift in Sources */,
 				7C51CD352B8DB2B400E39CB0 /* BaseViewController.swift in Sources */,
 				7C27191C2B906AEF0036F3FA /* CCError.swift in Sources */,
+				7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */,
 				7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */,
 				7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */,
 				7C27191E2B906ED20036F3FA /* UIViewController+.swift in Sources */,
@@ -562,6 +577,7 @@
 				7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */,
 				7C51CD682B8DC08600E39CB0 /* APIService.swift in Sources */,
 				7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */,
+				7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */,
 				7C75BDED2B8F1623004D5DA5 /* FavoriteCell.swift in Sources */,
 				7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */,
 				7C51CD2F2B8DB28000E39CB0 /* UIView+.swift in Sources */,

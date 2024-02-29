@@ -154,7 +154,7 @@ final class ChartViewController: BaseViewController {
         set.fillAlpha = 1
         set.fill = LinearGradientFill(gradient: gradient, angle: 90)
         set.drawFilledEnabled = true
-        set.colors = [.clear]
+        set.colors = [CCDesign.Color.tintColor.color]
         set.mode = .cubicBezier
         //점 설정
         set.drawCirclesEnabled = false
