@@ -52,15 +52,14 @@ final class SearchCell: BaseTableViewCell {
     
     override func configureLayout() {
         iconImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(40)
             make.top.equalToSuperview().offset(8)
-            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(8)
-            make.bottom.equalToSuperview().offset(-8)
-            make.size.equalTo(40)
+            make.bottom.lessThanOrEqualToSuperview().offset(-8)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(iconImageView.snp.top)
+            make.top.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-8)
             make.leading.equalTo(iconImageView.snp.trailing).offset(8)
         }
@@ -71,7 +70,6 @@ final class SearchCell: BaseTableViewCell {
         }
         
         favoriteButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-8)
         }

@@ -21,7 +21,6 @@ final class FavoriteViewModel: ViewModel {
         inputViewWillAppear.bind { [weak self] tap in
             guard let self else { return }
             let ids = favoriteRepository.fetch().map { $0.coinID }
-            print("현재 id:", ids)
             callRequest(ids: ids)
         }
     }

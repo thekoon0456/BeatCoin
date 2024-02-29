@@ -38,10 +38,8 @@ final class ChartViewModel: ViewModel {
     
     private func callRequest(id: String?) {
         guard let id else { return }
-        print("리퀘스트id \(id)")
         repository.fetch(router: .coin(ids: [id])) { [weak self] coin in
             guard let self else { return }
-            print(#function, coin)
             outputCoinData.onNext(coin)
         }
     }

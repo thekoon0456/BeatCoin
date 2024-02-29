@@ -45,7 +45,6 @@ final class FavoriteViewController: BaseViewController {
     func bind() {
         viewModel.outputCoinData.bind { [weak self] coins in
             guard let self else { return }
-            print(coins)
             collectionView.reloadData()
         }
     }
