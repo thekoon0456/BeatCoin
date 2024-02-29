@@ -14,6 +14,7 @@ final class FavoriteViewController: BaseViewController {
     // MARK: - Properties
     
     let viewModel = FavoriteViewModel()
+    var updateTimer: Timer?
     
     private lazy var collectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -43,12 +44,29 @@ final class FavoriteViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+//        setAutoUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = CCConst.NaviTitle.favorite.name
         viewModel.inputViewWillAppear.onNext(())
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        updateTimer?.invalidate()
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func refreshData() {
+        print(#function)
+        viewModel.inputViewWillAppear.onNext(())
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self else { return }
+            collectionView.refreshControl?.endRefreshing()
+        }
     }
     
     // MARK: - Helpers
@@ -79,15 +97,14 @@ final class FavoriteViewController: BaseViewController {
         }
     }
     
-    @objc func refreshData() {
-        viewModel.inputViewWillAppear.onNext(())
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            guard let self else { return }
-            collectionView.refreshControl?.endRefreshing()
-        }
+    func setAutoUpdate() {
+        updateTimer = Timer.scheduledTimer(timeInterval: 10.0,
+                             target: self,
+                             selector: #selector(refreshData),
+                             userInfo: nil,
+                             repeats: true)
     }
-    
+
     // MARK: - Configure
     
     override func configureHierarchy() {

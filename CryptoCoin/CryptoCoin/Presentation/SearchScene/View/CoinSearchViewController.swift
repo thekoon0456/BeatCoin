@@ -14,6 +14,7 @@ final class CoinSearchViewController: BaseViewController {
     // MARK: - Properties
     
     private let viewModel = CoinSearchViewModel()
+    var updateTimer: Timer?
     
     private lazy var searchController = UISearchController().then {
         $0.searchBar.placeholder = "Search Coin"
@@ -36,6 +37,7 @@ final class CoinSearchViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+//        setAutoUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,10 +46,18 @@ final class CoinSearchViewController: BaseViewController {
         viewModel.inputSearchText.onNext(searchController.searchBar.text)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        updateTimer?.invalidate()
+    }
+    
     // MARK: - Selectors
     
     @objc private func favoriteButtonTapped(sender: UIButton) {
         viewModel.inputFavoriteButtonTapped.onNext(sender.tag)
+    }
+    
+    @objc func refreshData() {
+        viewModel.inputSearchText.onNext(searchController.searchBar.text)
     }
     
     // MARK: - Helpers
@@ -101,6 +111,14 @@ final class CoinSearchViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    func setAutoUpdate() {
+        updateTimer = Timer.scheduledTimer(timeInterval: 10.0,
+                             target: self,
+                             selector: #selector(refreshData),
+                             userInfo: nil,
+                             repeats: true)
     }
     
     private func setFavoriteToast(_ index: Int) {
