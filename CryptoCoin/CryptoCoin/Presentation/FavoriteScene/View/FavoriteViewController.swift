@@ -161,7 +161,7 @@ extension FavoriteViewController: UICollectionViewDragDelegate, UICollectionView
                 data.insert(temp, at: destinationIndexPath.item)
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
-                viewModel.outputCoinData.onNext(data)
+                viewModel.inputUpdateFavorite.onNext(data)
             }) { done in
                 
             }

@@ -13,6 +13,7 @@ final class FavoriteViewModel: ViewModel {
     let repository = CoinRepository()
     let favoriteRepository = UserFavoriteRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
+    let inputUpdateFavorite = Observable<[CoinEntity]?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputError = Observable<CCError?>(nil)
     
@@ -23,6 +24,15 @@ final class FavoriteViewModel: ViewModel {
             guard let self else { return }
             let ids = favoriteRepository.fetch().map { $0.coinID }
             callRequest(ids: ids)
+        }
+        
+        inputUpdateFavorite.bind { [weak self] coin in
+            guard let self,
+            let coin
+            else { return }
+            let fav = coin.map { UserFavorite(coinID: $0.id) }
+            favoriteRepository.updateAll(item: fav)
+            outputCoinData.onNext(coin)
         }
     }
     

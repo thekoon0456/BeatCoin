@@ -54,6 +54,18 @@ final class UserFavoriteRepository: realmRepository {
         }
     }
     
+    func updateAll(item: [UserFavorite]) {
+        do {
+            try realm.write {
+                realm.deleteAll()
+                realm.add(item)
+                print("DEBUG: realmUpdate \(item)")
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     // MARK: - Delete
     
     func delete(_ item: UserFavorite?) {
@@ -78,4 +90,3 @@ final class UserFavoriteRepository: realmRepository {
         }
     }
 }
-
