@@ -18,6 +18,7 @@ enum CCError: Int, CaseIterable, Error {
     case forbidden = 403
     case accessDenied = 1020
     case unKnown
+    case maxFavorite
     
     var description: String {
         switch self {
@@ -40,7 +41,9 @@ enum CCError: Int, CaseIterable, Error {
         case .accessDenied:
             "방화벽 접근 거부되었습니다. 확인해주세요."
         case .unKnown:
-            "알 수 없는 에러입니다. 운영자에게 문의해주세요."
+            "네트워크 오류입니다. 네트워크 연결을 확인해주세요."
+        case .maxFavorite:
+            "즐겨찾기는 최대 10개까지 저장 가능해요."
         }
     }
 }

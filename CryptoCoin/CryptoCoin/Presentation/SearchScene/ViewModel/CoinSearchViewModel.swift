@@ -18,7 +18,6 @@ final class CoinSearchViewModel: ViewModel {
     let outputCoinData = Observable<[CoinEntity]?>(nil)
     let outputFavorite = Observable<[Bool]?>(nil)
     let outputFavoriteIndex = Observable<Int?>(nil)
-    let outputReloadView = Observable<Void?>(nil)
     let outputError = Observable<CCError?>(nil)
     
     init() { transform() }
@@ -53,7 +52,7 @@ final class CoinSearchViewModel: ViewModel {
             case .failure(let failure):
                 outputError.onNext(checkError(error: failure))
             }
-
+            
         }
     }
     
@@ -67,13 +66,20 @@ final class CoinSearchViewModel: ViewModel {
     }
     
     private func favoriteToggle(coin: CoinEntity) {
-        let fav = favoriteRepository.fetch().map { $0.coinID }
-        
-        if fav.contains(coin.id) {
+        let favorite = favoriteRepository.fetch()
+        let favoriteID = favorite.map { $0.coinID }
+        //삭제
+        if favoriteID.contains(coin.id) {
             favoriteRepository.delete(favoriteRepository.fetchItem(id: coin.id))
-        } else {
-            let item = UserFavorite(coinID: coin.id)
-            favoriteRepository.create(item)
+            return
         }
+        
+        //추가
+        guard favorite.count < 10 else {
+            outputError.onNext(.maxFavorite)
+            return
+        }
+        let item = UserFavorite(coinID: coin.id)
+        favoriteRepository.create(item)
     }
 }

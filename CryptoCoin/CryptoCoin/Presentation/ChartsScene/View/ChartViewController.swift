@@ -108,6 +108,10 @@ final class ChartViewController: BaseViewController {
                   let error
             else { return }
             
+            if error == .maxFavorite {
+                setMaxToast()
+            }
+            
             showAlert(title: "",
                       message: error.description,
                       primaryButtonTitle: "재시도하기",
@@ -119,6 +123,18 @@ final class ChartViewController: BaseViewController {
                 guard let self else { return }
                 dismiss(animated: true)
             }
+        }
+    }
+    
+    private func setMaxToast() {
+        let vc = ToastViewController(inputMessage: .maxFavorite)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+            guard let self else { return }
+            dismiss(animated: true)
         }
     }
     

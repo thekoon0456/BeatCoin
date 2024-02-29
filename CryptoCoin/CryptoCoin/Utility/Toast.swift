@@ -10,6 +10,7 @@ import UIKit
 enum Toast {
     case setFavorite(coin: String)
     case deleteFavorite(coin: String)
+    case maxFavorite
     
     var message: String {
         switch self {
@@ -17,6 +18,8 @@ enum Toast {
             coin + "이 즐겨찾기에 추가되었습니다."
         case .deleteFavorite(let coin):
             coin + "이 즐겨찾기에 해제되었습니다."
+        case .maxFavorite:
+            "즐겨찾기는 10개까지 가능해요."
         }
     }
 }

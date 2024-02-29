@@ -71,13 +71,17 @@ final class CoinSearchViewController: BaseViewController {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             
             //modal
-            setToast(index)
+            setFavoriteToast(index)
         }
         
         viewModel.outputError.bind { [weak self] error in
             guard let self,
                   let error
             else { return }
+            
+            if error == .maxFavorite {
+                setMaxToast()
+            }
             
             showAlert(message: error.description,
                       primaryButtonTitle: "재시도하기",
@@ -92,13 +96,25 @@ final class CoinSearchViewController: BaseViewController {
         }
     }
     
-    private func setToast(_ index: Int) {
+    private func setFavoriteToast(_ index: Int) {
         guard let coin = viewModel.outputCoinData.currentValue?[index],
               let isFavorite = viewModel.outputFavorite.currentValue?[index] else { return }
         let toastMessage = isFavorite
         ? Toast.setFavorite(coin: coin.name)
         : Toast.deleteFavorite(coin: coin.name)
         let vc = ToastViewController(inputMessage: toastMessage)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+            guard let self else { return }
+            dismiss(animated: true)
+        }
+    }
+    
+    private func setMaxToast() {
+        let vc = ToastViewController(inputMessage: .maxFavorite)
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)

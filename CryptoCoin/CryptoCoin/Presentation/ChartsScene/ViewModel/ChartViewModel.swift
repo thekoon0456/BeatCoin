@@ -51,14 +51,23 @@ final class ChartViewModel: ViewModel {
     }
     
     private func setFavorite(id: String) {
-        let fav = favoriteRepository.fetch().map { $0.coinID }
-        if fav.contains(id) {
+        let favorite = favoriteRepository.fetch()
+        let favoriteID = favorite.map { $0.coinID }
+        
+        if favoriteID.contains(id) {
             favoriteRepository.delete(favoriteRepository.fetchItem(id: id))
             outputFavorite.onNext(false)
-        } else {
-            favoriteRepository.create(UserFavorite(coinID: id))
-            outputFavorite.onNext(true)
+            return
         }
+        
+        //추가
+        guard favorite.count < 10 else {
+            outputError.onNext(.maxFavorite)
+            return
+        }
+        let item = UserFavorite(coinID: id)
+        favoriteRepository.create(item)
+        outputFavorite.onNext(true)
     }
     
     private func checkFavorite(id: String?) {
