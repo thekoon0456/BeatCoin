@@ -17,6 +17,7 @@ final class CoinSearchViewModel: ViewModel {
     let inputFavoriteButtonTapped = Observable<Int?>(nil)
     let outputCoinData = Observable<[CoinEntity]?>(nil)
     let outputFavorite = Observable<[Bool]?>(nil)
+    let outputFavoriteIndex = Observable<Int?>(nil)
     let outputReloadView = Observable<Void?>(nil)
     
     init() { transform() }
@@ -33,7 +34,8 @@ final class CoinSearchViewModel: ViewModel {
                   let coinData = outputCoinData.currentValue
             else { return }
             favoriteToggle(coin: coinData[index])
-            resultFavorite(coinData)
+            setFavorite(coinData)
+            outputFavoriteIndex.onNext(index)
         }
     }
     
@@ -41,9 +43,18 @@ final class CoinSearchViewModel: ViewModel {
         guard let id else { return }
         repository.fetch(router: .searchCoin(query: id)) { [weak self] coin in
             guard let self else { return }
+            setFavorite(coin)
             outputCoinData.onNext(coin)
-            resultFavorite(coin)
         }
+    }
+    
+    private func setFavorite(_ coin: [CoinEntity]) {
+        let fav = favoriteRepository.fetch().map { $0.coinID }
+        let isFavorite = coin.map {
+            fav.contains($0.id) ? true : false
+        }
+        
+        outputFavorite.onNext(isFavorite)
     }
     
     private func favoriteToggle(coin: CoinEntity) {
@@ -55,14 +66,5 @@ final class CoinSearchViewModel: ViewModel {
             let item = UserFavorite(coinID: coin.id)
             favoriteRepository.create(item)
         }
-    }
-    
-    private func resultFavorite(_ coin: [CoinEntity]) {
-        let fav = favoriteRepository.fetch().map { $0.coinID }
-        let isFavorite = coin.map {
-            fav.contains($0.id) ? true : false
-        }
-        
-        outputFavorite.onNext(isFavorite)
     }
 }

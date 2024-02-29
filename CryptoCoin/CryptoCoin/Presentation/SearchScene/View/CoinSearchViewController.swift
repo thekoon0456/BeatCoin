@@ -40,28 +40,14 @@ final class CoinSearchViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.inputSearchText.onNext(searchBar.text)
+//        viewModel.inputSearchText.onNext(searchBar.text)
     }
     
     // MARK: - Selectors
     
     @objc private func favoriteButtonTapped(sender: UIButton) {
         viewModel.inputFavoriteButtonTapped.onNext(sender.tag)
-        guard let coin = viewModel.outputCoinData.currentValue?[sender.tag],
-              let isFavorite = viewModel.outputFavorite.currentValue?[sender.tag] else { return }
-        let toastMessage = isFavorite
-        ? Toast.setFavorite(coin: coin.name)
-        : Toast.deleteFavorite(coin: coin.name)
-        let vc = ToastViewController(inputMessage: toastMessage)
-        vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self else { return }
-            dismiss(animated: true)
-        }
-   }
+    }
     
     // MARK: - Helpers
     
@@ -71,9 +57,33 @@ final class CoinSearchViewController: BaseViewController {
             tableView.reloadData()
         }
         
-        viewModel.outputFavorite.bind { [weak self] coin in
+        viewModel.outputFavorite.bind { [weak self] _ in
             guard let self else { return }
             tableView.reloadData()
+        }
+        
+        viewModel.outputFavoriteIndex.bind { [weak self] index in
+            guard let self,
+                  let index
+            else { return }
+            let indexPath = IndexPath(item: index, section: 0)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            
+            //modal
+            guard let coin = viewModel.outputCoinData.currentValue?[index],
+                  let isFavorite = viewModel.outputFavorite.currentValue?[index] else { return }
+            let toastMessage = isFavorite
+            ? Toast.setFavorite(coin: coin.name)
+            : Toast.deleteFavorite(coin: coin.name)
+            let vc = ToastViewController(inputMessage: toastMessage)
+            vc.modalPresentationStyle = .overFullScreen
+            vc.modalTransitionStyle = .crossDissolve
+            present(vc, animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+                guard let self else { return }
+                dismiss(animated: true)
+            }
         }
     }
     

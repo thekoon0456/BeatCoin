@@ -31,6 +31,7 @@ final class ToastViewController: BaseViewController {
         $0.font = .boldSystemFont(ofSize: 20)
         $0.textColor = .white
         $0.textAlignment = .center
+        $0.adjustsFontSizeToFitWidth = true
         $0.numberOfLines = 0
         $0.padding = .init(top: 12, left: 12, bottom: 12, right: 12)
         $0.backgroundColor = CCDesign.Color.tintColor.color
@@ -55,8 +56,7 @@ final class ToastViewController: BaseViewController {
     
     override func configureLayout() {
         messageLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
+            make.width.equalToSuperview().offset(-48)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-100)
         }
