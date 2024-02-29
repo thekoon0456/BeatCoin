@@ -40,7 +40,7 @@ final class CoinSearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        navigationItem.title = CCConst.NaviTitle.search.name
         viewModel.inputSearchText.onNext(searchController.searchBar.text)
     }
     
@@ -144,7 +144,6 @@ final class CoinSearchViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        navigationItem.title = CCConst.NaviTitle.search.name
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.backButtonDisplayMode = .minimal
@@ -182,6 +181,7 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let data = viewModel.outputCoinData.currentValue?[indexPath.row] else { return }
         let vc = ChartViewController()
         vc.viewModel.coinID = data.id
+        navigationItem.title = ""
         navigationController?.pushViewController(vc, animated: true)
     }
 }

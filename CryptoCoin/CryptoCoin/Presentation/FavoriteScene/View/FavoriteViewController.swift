@@ -47,8 +47,8 @@ final class FavoriteViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.title = CCConst.NaviTitle.favorite.name
         viewModel.inputViewWillAppear.onNext(())
-        
     }
     
     // MARK: - Helpers
@@ -132,6 +132,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         let data = viewModel.outputCoinData.currentValue[indexPath.item]
         let vc = ChartViewController()
         vc.viewModel.coinID = data.id
+        navigationItem.title = ""
         navigationController?.pushViewController(vc, animated: true)
     }
 }
