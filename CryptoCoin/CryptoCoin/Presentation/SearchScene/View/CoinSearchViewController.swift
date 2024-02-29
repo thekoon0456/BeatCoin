@@ -70,20 +70,24 @@ final class CoinSearchViewController: BaseViewController {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             
             //modal
-            guard let coin = viewModel.outputCoinData.currentValue?[index],
-                  let isFavorite = viewModel.outputFavorite.currentValue?[index] else { return }
-            let toastMessage = isFavorite
-            ? Toast.setFavorite(coin: coin.name)
-            : Toast.deleteFavorite(coin: coin.name)
-            let vc = ToastViewController(inputMessage: toastMessage)
-            vc.modalPresentationStyle = .overFullScreen
-            vc.modalTransitionStyle = .crossDissolve
-            present(vc, animated: true)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
-                guard let self else { return }
-                dismiss(animated: true)
-            }
+            setToast(index)
+        }
+    }
+    
+    private func setToast(_ index: Int) {
+        guard let coin = viewModel.outputCoinData.currentValue?[index],
+              let isFavorite = viewModel.outputFavorite.currentValue?[index] else { return }
+        let toastMessage = isFavorite
+        ? Toast.setFavorite(coin: coin.name)
+        : Toast.deleteFavorite(coin: coin.name)
+        let vc = ToastViewController(inputMessage: toastMessage)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+            guard let self else { return }
+            dismiss(animated: true)
         }
     }
     
@@ -130,7 +134,8 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
               let data = viewModel.outputCoinData.currentValue?[indexPath.row],
               let isFavorite = viewModel.outputFavorite.currentValue?[indexPath.row]
         else { return UITableViewCell() }
-        cell.configureCell(data, isFavorite: isFavorite, tag: indexPath.row)
+        
+        cell.configureCell(data, keyword: searchBar.text, isFavorite: isFavorite, tag: indexPath.row)
         cell.favoriteButton.addTarget(self,
                                       action: #selector(favoriteButtonTapped),
                                       for: .touchUpInside)

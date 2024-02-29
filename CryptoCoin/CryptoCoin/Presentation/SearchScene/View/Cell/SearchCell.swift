@@ -33,12 +33,23 @@ final class SearchCell: BaseTableViewCell {
     
     // MARK: - Helpers
     
-    func configureCell(_ data: CoinEntity, isFavorite: Bool, tag: Int) {
+    func configureCell(_ data: CoinEntity, keyword: String?, isFavorite: Bool, tag: Int) {
         iconImageView.kf.setImage(with: URL(string: data.image))
-        titleLabel.text = data.name
+        titleLabel.attributedText = configureattributedText(data.name, pointText: keyword)
         subtitleLabel.text = data.symbol
         favoriteButton.tag = tag
         favoriteButton.isSelected = isFavorite
+    }
+    
+    
+    func configureattributedText(_ inputText: String, pointText: String?) -> NSAttributedString {
+        let lowercasedInputText = inputText.lowercased()
+        let lowercasedPointText = pointText?.lowercased() ?? ""
+        let attributedString = NSMutableAttributedString(string: inputText)
+        attributedString.addAttribute(.foregroundColor,
+                                      value: CCDesign.Color.tintColor.color,
+                                      range: (lowercasedInputText as NSString).range(of: lowercasedPointText))
+        return attributedString
     }
     
     // MARK: - Configure
