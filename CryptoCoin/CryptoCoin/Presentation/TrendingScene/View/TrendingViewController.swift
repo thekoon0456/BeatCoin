@@ -123,6 +123,26 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch Section(rawValue: indexPath.section) {
+        case .favorite:
+            let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
+            let vc = ChartViewController()
+            vc.viewModel.coinID = data.id
+            navigationItem.title = ""
+            navigationController?.pushViewController(vc, animated: true)
+        case .topCoin:
+            guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }
+            let vc = ChartViewController()
+            vc.viewModel.coinID = data.id
+            navigationItem.title = ""
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+    }
+    
+    //헤더뷰
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
@@ -140,7 +160,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
                 header.setTitle(Section.topCoin.title)
             case .topNFT:
                 header.setTitle(Section.topNFT.title)
-            case .none:
+            default:
                 break
             }
             return header
@@ -150,8 +170,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-
-// MARK: - Layout
+// MARK: - CollectionView Layout
 
 extension TrendingViewController {
     
