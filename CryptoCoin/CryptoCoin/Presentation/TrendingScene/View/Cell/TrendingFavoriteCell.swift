@@ -14,11 +14,6 @@ final class TrendingFavoriteCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    private let backView = UIView().then {
-        $0.backgroundColor = CCDesign.Color.lightGray.color
-        $0.layer.cornerRadius = 10
-    }
-
     private lazy var iconImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
@@ -56,8 +51,7 @@ final class TrendingFavoriteCell: BaseCollectionViewCell {
     // MARK: - Configure
     
     override func configureHierarchy() {
-        contentView.addSubview(backView)
-        backView.addSubviews(iconImageView,
+        contentView.addSubviews(iconImageView,
                              titleLabel,
                              subtitleLabel,
                              priceLabel,
@@ -65,10 +59,6 @@ final class TrendingFavoriteCell: BaseCollectionViewCell {
     }
     
     override func configureLayout() {
-        backView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         iconImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(20)
             make.size.equalTo(40)
@@ -99,11 +89,8 @@ final class TrendingFavoriteCell: BaseCollectionViewCell {
     }
     
     override func configureView() {
-        layer.masksToBounds = false
-        layer.shadowOpacity = 0.8
-        layer.shadowOffset = .init(width: 0, height: 0)
-        layer.shadowColor = CCDesign.Color.lightGray.color.cgColor
-        layer.shadowRadius = 5
+        contentView.backgroundColor = CCDesign.Color.lightGray.color
+        contentView.layer.cornerRadius = 12
     }
 }
 

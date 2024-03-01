@@ -11,6 +11,7 @@ enum CCDesign {
     
     enum Font {
         case big
+        case rank
         case titleBold
         case subtitle
         case priceBold
@@ -22,6 +23,8 @@ enum CCDesign {
             switch self {
             case .big:
                     .boldSystemFont(ofSize: 28)
+            case .rank:
+                    .systemFont(ofSize: 24)
             case .titleBold:
                     .boldSystemFont(ofSize: 14)
             case .subtitle:

@@ -152,7 +152,8 @@ struct Nft: DTO {
                          symbol: symbol,
                          thumb: thumb,
                          floorPrice: data.floorPrice,
-                         floorPrice24hPercentageChange: floorPrice24HPercentageChange)
+                         floorPrice24hPercentageChange: String(format: "%.2f", floorPrice24HPercentageChange) + "%",
+                         isUp: floorPrice24HPercentageChange > 0 ? true : false)
     }
     
 }

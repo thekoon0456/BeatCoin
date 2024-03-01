@@ -14,7 +14,7 @@ final class TrendingCell: BaseCollectionViewCell {
     // MARK: - Properties
     
     private let rankLabel = UILabel().then {
-        $0.font = CCDesign.Font.big.font
+        $0.font = CCDesign.Font.rank.font
     }
     
     private lazy var iconImageView = UIImageView().then {
@@ -43,12 +43,6 @@ final class TrendingCell: BaseCollectionViewCell {
         $0.setImage(UIImage(named: CCDesign.Icon.starFill.name), for: .selected)
     }
     
-    // MARK: - Lifecycles
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
     // MARK: - Helpers
     
     func configureCell(_ data: CoinEntity) {
@@ -69,10 +63,10 @@ final class TrendingCell: BaseCollectionViewCell {
         titleLabel.text = data.name
         subtitleLabel.text = data.symbol
         priceLabel.text = data.floorPrice
-        persentLabel.text = String(data.floorPrice24hPercentageChange)
-//        persentLabel.textColor = data.isUp
-//        ? CCDesign.Color.highPrice.color
-//        : CCDesign.Color.lowPrice.color
+        persentLabel.text = data.floorPrice24hPercentageChange
+        persentLabel.textColor = data.isUp
+        ? CCDesign.Color.highPrice.color
+        : CCDesign.Color.lowPrice.color
     }
     
     // MARK: - Configure
@@ -90,37 +84,34 @@ final class TrendingCell: BaseCollectionViewCell {
         rankLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(12)
-            make.width.equalTo(16)
-            make.bottom.lessThanOrEqualToSuperview().offset(-8)
+            make.centerY.equalToSuperview()
         }
+        
         iconImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
-            make.top.equalToSuperview().offset(20)
-            make.leading.equalTo(rankLabel.snp.trailing).offset(8)
-            make.bottom.lessThanOrEqualToSuperview().offset(-20)
+            make.size.equalTo(30)
+            make.leading.equalTo(rankLabel.snp.trailing).offset(12)
+            make.centerY.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(iconImageView.snp.top)
-            make.trailing.equalToSuperview().offset(-8)
-            make.leading.equalTo(iconImageView.snp.trailing).offset(8)
-            make.trailing.greaterThanOrEqualTo(priceLabel.snp.leading).offset(-4)
+            make.leading.equalTo(iconImageView.snp.trailing).offset(12)
+            make.trailing.lessThanOrEqualTo(priceLabel.snp.leading).offset(-4)
         }
         
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.equalTo(titleLabel.snp.leading)
-            make.trailing.greaterThanOrEqualTo(persentLabel.snp.leading).offset(-4)
+            make.trailing.lessThanOrEqualTo(persentLabel.snp.leading).offset(-4)
         }
         
         priceLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-12)
             make.centerY.equalTo(titleLabel.snp.centerY)
         }
         
         persentLabel.snp.makeConstraints { make in
-            make.top.equalTo(priceLabel.snp.bottom)
+            make.top.equalTo(priceLabel.snp.bottom).offset(4)
             make.trailing.equalToSuperview().offset(-12)
         }
     }

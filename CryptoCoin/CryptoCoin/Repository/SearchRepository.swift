@@ -14,8 +14,7 @@ final class SearchRepository {
                                       type: SearchDTO.self) { data in
             switch data {
             case .success(let success):
-                let entity = success.coins.map { $0.toEntity }
-                completionHandler(.success(entity))
+                completionHandler(.success(success.coins.map { $0.toEntity }))
             case .failure(let failure):
                 completionHandler(.failure(failure))
             }
