@@ -62,6 +62,7 @@
 		7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */; };
 		7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BDA2B90AF8300493767 /* TrendingCell.swift */; };
 		7CCC5E3F2B91BC5E0089334F /* CCDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */; };
+		7CCC5E412B91C48A0089334F /* TrendingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5E402B91C48A0089334F /* TrendingHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingFavoriteCell.swift; sourceTree = "<group>"; };
 		7CC87BDA2B90AF8300493767 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCDesign.swift; sourceTree = "<group>"; };
+		7CCC5E402B91C48A0089334F /* TrendingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,6 +454,7 @@
 			children = (
 				7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */,
 				7CC87BDA2B90AF8300493767 /* TrendingCell.swift */,
+				7CCC5E402B91C48A0089334F /* TrendingHeaderView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */,
 				7C27191E2B906ED20036F3FA /* UIViewController+.swift in Sources */,
 				7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */,
+				7CCC5E412B91C48A0089334F /* TrendingHeaderView.swift in Sources */,
 				7C51CD8A2B8DF84800E39CB0 /* UserFavoriteRepository.swift in Sources */,
 				7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */,
 				7C51CD312B8DB29700E39CB0 /* Then+.swift in Sources */,

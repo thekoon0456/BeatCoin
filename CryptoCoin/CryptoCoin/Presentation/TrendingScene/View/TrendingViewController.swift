@@ -21,6 +21,9 @@ final class TrendingViewController: BaseViewController {
                     forCellWithReuseIdentifier: TrendingFavoriteCell.identifier)
         cv.register(TrendingCell.self,
                     forCellWithReuseIdentifier: TrendingCell.identifier)
+        cv.register(TrendingHeaderView.self,
+                    forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: TrendingHeaderView.identifier)
         return cv
     }()
     
@@ -79,9 +82,6 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        Section(rawValue: section)?.column ?? 0
-////        viewModel.outputFavoriteCoinData.currentValue.count
-        
         guard let section = Section(rawValue: section) else { return 0 }
         
         switch section {
@@ -118,6 +118,30 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             cell.configureNFTCell(viewModel.outputTrendingNFT.currentValue![indexPath.item], index: indexPath.item)
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                               withReuseIdentifier: TrendingHeaderView.identifier,
+                                                                               for: indexPath) as? TrendingHeaderView
+            else {
+                return UICollectionReusableView()
+            }
+            switch Section(rawValue: indexPath.section) {
+            case .favorite:
+                header.titleLabel.text = Section.favorite.title
+            case .topCoin:
+                header.titleLabel.text = Section.topCoin.title
+            case .topNFT:
+                header.titleLabel.text = Section.topNFT.title
+            case .none:
+                break
+            }
+            return header
+        }
+        
+        return UICollectionReusableView()
     }
 }
 
@@ -168,31 +192,27 @@ extension TrendingViewController {
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6),
                                                        heightDimension: .fractionalHeight(0.3))
-
+                
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                               heightDimension: .absolute(50)),
-                                                            elementKind: Section.favorite.title,
+                                                            elementKind:  UICollectionView.elementKindSectionHeader,
                                                             alignment: .topLeading)]
                 section.orthogonalScrollingBehavior = .groupPaging
-//                section.orthogonalScrollingBehavior = .groupPagingCentered
+                //                section.orthogonalScrollingBehavior = .groupPagingCentered
                 return section
             case .topCoin, .topNFT, .none:
-                let itemInset: CGFloat = 2.5
-                
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(0.3))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//                item.contentInsets = NSDirectionalEdgeInsets(top: itemInset, leading: itemInset, bottom: itemInset, trailing: itemInset)
-                
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
                                                        heightDimension: .fractionalHeight(1/3))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                               heightDimension: .absolute(50)),
-                                                            elementKind: Section.topCoin.title,
+                                                            elementKind:  UICollectionView.elementKindSectionHeader,
                                                             alignment: .topLeading)]
                 section.orthogonalScrollingBehavior = .groupPaging
                 return section
@@ -203,49 +223,3 @@ extension TrendingViewController {
         return layout
     }
 }
-
-
-//enum TrendingSection: Int, CaseIterable {
-//    case myFavorite
-//    case top15Coin
-//    case top7NFT
-//
-//    var title: String {
-//        switch self {
-//        case .myFavorite:
-//            "My Favorite"
-//        case .top15Coin:
-//            "Top 15 Coin"
-//        case .top7NFT:
-//            "Top7 NFT"
-//        }
-//    }
-//}
-
-//
-//extension TrendingViewController: UITableViewDelegate, UITableViewDataSource {
-//    
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        TrendingSection.allCases.count
-//    }
-//    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let header = UILabel().then {
-//            $0.text = TrendingSection.allCases[section].title
-//            $0.font = .boldSystemFont(ofSize: 24)
-//        }
-//        return header
-//    }
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 1
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        return UITableViewCell()
-//    }
-//    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        200
-//    }
-//}
