@@ -41,6 +41,7 @@ final class TrendingViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         viewModel.inputViewWillAppear.onNext(())
+        navigationItem.title = CCConst.NaviTitle.trending.name
     }
     
     // MARK: - Helpers
@@ -68,7 +69,6 @@ final class TrendingViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        navigationItem.title = CCConst.NaviTitle.trending.name
     }
 }
 
@@ -129,13 +129,13 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
             let vc = ChartViewController()
             vc.viewModel.coinID = data.id
-            navigationItem.title = ""
+            navigationItem.title = .none
             navigationController?.pushViewController(vc, animated: true)
         case .topCoin:
             guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }
             let vc = ChartViewController()
             vc.viewModel.coinID = data.id
-            navigationItem.title = ""
+            navigationItem.title = .none
             navigationController?.pushViewController(vc, animated: true)
         default:
             break

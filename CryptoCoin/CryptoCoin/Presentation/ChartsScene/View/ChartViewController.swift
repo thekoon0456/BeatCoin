@@ -277,7 +277,7 @@ final class ChartViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        navigationItem.title = ""
+        navigationItem.title = .none
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteButton)
     }

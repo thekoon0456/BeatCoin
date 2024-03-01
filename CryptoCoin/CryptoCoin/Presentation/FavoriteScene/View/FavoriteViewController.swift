@@ -14,7 +14,7 @@ final class FavoriteViewController: BaseViewController {
     // MARK: - Properties
     
     let viewModel = FavoriteViewModel()
-    var updateTimer: Timer?
+    private var updateTimer: Timer?
     
     private lazy var collectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -149,7 +149,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         let data = viewModel.outputCoinData.currentValue[indexPath.item]
         let vc = ChartViewController()
         vc.viewModel.coinID = data.id
-        navigationItem.title = ""
+        navigationItem.title = .none
         navigationController?.pushViewController(vc, animated: true)
     }
 }

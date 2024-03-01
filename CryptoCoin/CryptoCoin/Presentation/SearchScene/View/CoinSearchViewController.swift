@@ -14,7 +14,7 @@ final class CoinSearchViewController: BaseViewController {
     // MARK: - Properties
     
     private let viewModel = CoinSearchViewModel()
-    var updateTimer: Timer?
+    private var updateTimer: Timer?
     
     private lazy var searchController = UISearchController().then {
         $0.searchBar.placeholder = "Search Coin"
@@ -22,7 +22,7 @@ final class CoinSearchViewController: BaseViewController {
         $0.searchBar.searchBarStyle = .minimal
         $0.searchBar.tintColor = CCDesign.Color.tintColor.color
         $0.searchBar.delegate = self
-        $0.hidesNavigationBarDuringPresentation = false
+        $0.definesPresentationContext = true
     }
     
     private lazy var tableView = UITableView().then {
@@ -38,12 +38,14 @@ final class CoinSearchViewController: BaseViewController {
         
         bind()
 //        setAutoUpdate()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = CCConst.NaviTitle.search.name
+        
         viewModel.inputSearchText.onNext(searchController.searchBar.text)
+        navigationItem.title = CCConst.NaviTitle.search.name
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -121,6 +123,31 @@ final class CoinSearchViewController: BaseViewController {
                              repeats: true)
     }
     
+    // MARK: - Configure
+    
+    override func configureHierarchy() {
+        view.addSubviews(tableView)
+    }
+    
+    override func configureLayout() {
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    override func configureView() {
+        super.configureView()
+        navigationItem.searchController = searchController
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.backButtonDisplayMode = .minimal
+    }
+}
+
+// MARK: - Toast
+
+extension CoinSearchViewController {
+    
     private func setFavoriteToast(_ index: Int) {
         guard let coin = viewModel.outputCoinData.currentValue?[index],
               let isFavorite = viewModel.outputFavorite.currentValue?[index] else { return }
@@ -147,25 +174,6 @@ final class CoinSearchViewController: BaseViewController {
             vc.dismiss(animated: true)
         }
     }
-    
-    // MARK: - Configure
-    
-    override func configureHierarchy() {
-        view.addSubviews(tableView)
-    }
-    
-    override func configureLayout() {
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
-    override func configureView() {
-        super.configureView()
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.backButtonDisplayMode = .minimal
-    }
 }
 
 extension CoinSearchViewController: UISearchBarDelegate {
@@ -173,6 +181,16 @@ extension CoinSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.inputSearchText.onNext(searchBar.text)
         view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard let inputText = searchBar.text,
+              inputText.count < 30 else { return false }
+        
+        let input = (inputText as NSString).replacingCharacters(in: range, with: text)
+        let trimmedText = input.trimmingCharacters(in: .whitespaces)
+        let hasWhiteSpace = input != trimmedText
+        return !hasWhiteSpace
     }
 }
 
@@ -199,7 +217,7 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let data = viewModel.outputCoinData.currentValue?[indexPath.row] else { return }
         let vc = ChartViewController()
         vc.viewModel.coinID = data.id
-        navigationItem.title = ""
+        navigationItem.title = .none
         navigationController?.pushViewController(vc, animated: true)
     }
 }
