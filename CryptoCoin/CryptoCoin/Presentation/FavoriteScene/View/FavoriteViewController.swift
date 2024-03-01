@@ -44,6 +44,7 @@ final class FavoriteViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+        // MARK: - 10초마다 요청
 //        setAutoUpdate()
     }
     

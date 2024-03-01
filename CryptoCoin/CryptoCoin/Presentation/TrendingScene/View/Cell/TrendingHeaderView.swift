@@ -37,7 +37,7 @@ final class TrendingHeaderView: UICollectionReusableView {
     // MARK: - Configure
     
     func setTitle(_ title: String) {
-        self.titleLabel.text = title
+        titleLabel.text = title
     }
     
     private func configureHierarchy() {

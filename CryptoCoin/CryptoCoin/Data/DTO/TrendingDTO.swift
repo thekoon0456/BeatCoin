@@ -67,7 +67,7 @@ struct Coin: DTO {
                           priceChangePercentage24H:
                             String(format: "%.2f", item.data.priceChangePercentage24H["krw"] ?? 0) + "%"
                           ,
-                          isUp: item.data.priceChangePercentage24H["krw"] ?? 0 > 0 ? true : false,
+                          isUp: item.data.priceChangePercentage24H["krw"] ?? 0 >= 0 ? true : false,
                           high24h: "",
                           low24h: "",
                           ath: "",

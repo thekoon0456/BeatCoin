@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class SearchRepository {
+final class SearchRepository: Repository {
     
-    func fetch(router: Router, completionHandler: @escaping ((Result<[CoinEntity], Error>) -> Void)) {
+    func fetch(router: APIRouter, completionHandler: @escaping ((Result<[CoinEntity], Error>) -> Void)) {
         APIService.shared.callRequest(router: router,
                                       type: SearchDTO.self) { data in
             switch data {

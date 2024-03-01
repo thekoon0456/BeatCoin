@@ -9,7 +9,7 @@ import Foundation
 
 import Alamofire
 
-enum Router: URLRequestConvertible {
+enum APIRouter: URLRequestConvertible {
     
     case trending
     case searchCoin(query: String)

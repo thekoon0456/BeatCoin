@@ -9,7 +9,7 @@ import Foundation
 
 final class CoinRepository: Repository {
     
-    func fetch(router: Router, completionHandler: @escaping ((Result<[CoinEntity], Error>) -> Void)) {
+    func fetch(router: APIRouter, completionHandler: @escaping ((Result<[CoinEntity], Error>) -> Void)) {
         APIService.shared.callRequest(router: router,
                                       type: [CoinDTO].self) { data in
             switch data {

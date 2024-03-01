@@ -9,7 +9,7 @@ import Foundation
 
 import RealmSwift
 
-final class UserFavoriteRepository: realmRepository {
+final class UserFavoriteRepository: RealmRepository {
 
     private let realm = try! Realm()
     

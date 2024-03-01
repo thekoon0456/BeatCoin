@@ -9,11 +9,6 @@ import Foundation
 
 final class DateFormatterManager {
     
-    enum DateStyle: String {
-        case input = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        case update = "M/d hh:mm:ss 업데이트"
-    }
-    
     static let shared = DateFormatterManager()
     
     private init() { }
@@ -41,5 +36,15 @@ final class DateFormatterManager {
         formatter.dateFormat = format.rawValue
         let result = formatter.date(from: stringDate)
         return result
+    }
+}
+
+// MARK: - DateStyle
+
+extension DateFormatterManager {
+    
+    enum DateStyle: String {
+        case input = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        case update = "M/d hh:mm:ss 업데이트"
     }
 }

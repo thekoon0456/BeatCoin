@@ -15,7 +15,7 @@ final class APIService {
     
     private init() { }
     
-    func callRequest<T: Decodable>(router: Router,
+    func callRequest<T: Decodable>(router: APIRouter,
                                    type: T.Type = T.self,
                                    completionHandler: @escaping ((Result<T, Error>) -> Void)) {
         AF.request(router)

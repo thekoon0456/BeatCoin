@@ -13,6 +13,7 @@ final class TrendingViewController: BaseViewController {
     
     // MARK: - Properties
     private let viewModel = TrendingViewModel()
+    
     private lazy var collectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: setLayout())
         cv.delegate = self
@@ -26,8 +27,6 @@ final class TrendingViewController: BaseViewController {
                     withReuseIdentifier: TrendingHeaderView.identifier)
         return cv
     }()
-    
-    private let headerLabel = UILabel()
     
     // MARK: - Lifecycles
     
@@ -84,7 +83,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         guard let section = Section(rawValue: section) else { return 0 }
         switch section {
         case .favorite:
-            return viewModel.outputFavoriteCoinData.currentValue.count
+            return viewModel.outputFavoriteCoinData.currentValue.count >= 2 ? viewModel.outputFavoriteCoinData.currentValue.count : 0
         case .topCoin:
             return viewModel.outputTrendingCoin.currentValue?.count ?? 0
         case .topNFT:
@@ -201,18 +200,18 @@ extension TrendingViewController {
         let layout = UICollectionViewCompositionalLayout { (section, env) -> NSCollectionLayoutSection? in
             switch Section(rawValue: section) {
             case .favorite:
-                guard self.viewModel.outputFavoriteCoinData.currentValue.count > 2 else { return nil }
-                
+                guard self.viewModel.outputFavoriteCoinData.currentValue.count >= 2 else { return nil }
+                           
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 12,
-                                                             leading: 12,
-                                                             bottom: 12,
-                                                             trailing: 0)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6),
                                                        heightDimension: .fractionalHeight(0.3))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.contentInsets = NSDirectionalEdgeInsets(top: 12,
+                                                              leading: 12,
+                                                              bottom: 12,
+                                                              trailing: 12)
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                               heightDimension: .absolute(50)),
@@ -227,6 +226,10 @@ extension TrendingViewController {
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
                                                        heightDimension: .fractionalHeight(0.3))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+                group.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                              leading: 0,
+                                                              bottom: 0,
+                                                              trailing: 12)
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                               heightDimension: .absolute(50)),

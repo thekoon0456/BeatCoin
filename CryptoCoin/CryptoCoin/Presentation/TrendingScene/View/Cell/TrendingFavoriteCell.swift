@@ -52,10 +52,10 @@ final class TrendingFavoriteCell: BaseCollectionViewCell {
     
     override func configureHierarchy() {
         contentView.addSubviews(iconImageView,
-                             titleLabel,
-                             subtitleLabel,
-                             priceLabel,
-                             percentLabel)
+                                titleLabel,
+                                subtitleLabel,
+                                priceLabel,
+                                percentLabel)
     }
     
     override func configureLayout() {

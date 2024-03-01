@@ -36,7 +36,7 @@
 		7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */; };
 		7C51CD612B8DC05600E39CB0 /* TrendingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD602B8DC05600E39CB0 /* TrendingDTO.swift */; };
 		7C51CD682B8DC08600E39CB0 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD672B8DC08600E39CB0 /* APIService.swift */; };
-		7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6A2B8DC0BE00E39CB0 /* Router.swift */; };
+		7C51CD6B2B8DC0BE00E39CB0 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6A2B8DC0BE00E39CB0 /* APIRouter.swift */; };
 		7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD6E2B8DC7F900E39CB0 /* SearchDTO.swift */; };
 		7C51CD712B8DC84100E39CB0 /* CoinDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */; };
 		7C51CD752B8DE31100E39CB0 /* TrendingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD742B8DE31100E39CB0 /* TrendingEntity.swift */; };
@@ -91,7 +91,7 @@
 		7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		7C51CD602B8DC05600E39CB0 /* TrendingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingDTO.swift; sourceTree = "<group>"; };
 		7C51CD672B8DC08600E39CB0 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		7C51CD6A2B8DC0BE00E39CB0 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		7C51CD6A2B8DC0BE00E39CB0 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		7C51CD6E2B8DC7F900E39CB0 /* SearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDTO.swift; sourceTree = "<group>"; };
 		7C51CD702B8DC84100E39CB0 /* CoinDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDTO.swift; sourceTree = "<group>"; };
 		7C51CD742B8DE31100E39CB0 /* TrendingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingEntity.swift; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				7C27191B2B906AEF0036F3FA /* CCError.swift */,
-				7C51CD6A2B8DC0BE00E39CB0 /* Router.swift */,
+				7C51CD6A2B8DC0BE00E39CB0 /* APIRouter.swift */,
 				7C51CD672B8DC08600E39CB0 /* APIService.swift */,
 			);
 			path = NetworkService;
@@ -577,7 +577,7 @@
 				7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */,
 				7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */,
 				7C27191E2B906ED20036F3FA /* UIViewController+.swift in Sources */,
-				7C51CD6B2B8DC0BE00E39CB0 /* Router.swift in Sources */,
+				7C51CD6B2B8DC0BE00E39CB0 /* APIRouter.swift in Sources */,
 				7CCC5E412B91C48A0089334F /* TrendingHeaderView.swift in Sources */,
 				7C51CD8A2B8DF84800E39CB0 /* UserFavoriteRepository.swift in Sources */,
 				7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */,

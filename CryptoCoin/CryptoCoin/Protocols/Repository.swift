@@ -12,10 +12,10 @@ import RealmSwift
 protocol Repository {
     associatedtype T = Entity
     
-    func fetch(router: Router, completionHandler: @escaping ((T) -> Void))
+    func fetch(router: APIRouter, completionHandler: @escaping ((T) -> Void))
 }
 
-protocol realmRepository {
+protocol RealmRepository {
     associatedtype T: Object
     
     func create(_: T)

@@ -37,6 +37,7 @@ final class CoinSearchViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+        // MARK: - 10초마다 요청
 //        setAutoUpdate()
 
     }
@@ -176,6 +177,8 @@ extension CoinSearchViewController {
     }
 }
 
+// MARK: - SearchBar
+
 extension CoinSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -185,7 +188,7 @@ extension CoinSearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard let inputText = searchBar.text,
-              inputText.count < 30 else { return false }
+              inputText.count < 30 else { return false } //30자 제한
         
         let input = (inputText as NSString).replacingCharacters(in: range, with: text)
         let trimmedText = input.trimmingCharacters(in: .whitespaces)
@@ -193,6 +196,8 @@ extension CoinSearchViewController: UISearchBarDelegate {
         return !hasWhiteSpace
     }
 }
+
+// MARK: - TableView
 
 extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
     

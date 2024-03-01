@@ -36,7 +36,7 @@ struct CoinDTO: DTO {
                           currentPrice: NumberFormatterManager.shared.toCurruncy(price: Int(currentPrice)),
                           priceChangePercentage24H:
                             String(format: "%.2f", priceChangePercentage24H ?? 0) + "%",
-                          isUp: priceChangePercentage24H ?? 0 > 0 ? true : false,
+                          isUp: priceChangePercentage24H ?? 0 >= 0 ? true : false,
                           high24h: NumberFormatterManager.shared.toCurruncy(price: Int(high24H)),
                           low24h: NumberFormatterManager.shared.toCurruncy(price: Int(low24H)),
                           ath: NumberFormatterManager.shared.toCurruncy(price: Int(ath)),
