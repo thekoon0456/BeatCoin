@@ -17,7 +17,7 @@ final class TrendingHeaderView: UICollectionReusableView {
         return self.description()
     }
         
-    let titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.font = CCDesign.Font.big.font
     }
     
@@ -35,6 +35,10 @@ final class TrendingHeaderView: UICollectionReusableView {
     }
     
     // MARK: - Configure
+    
+    func setTitle(_ title: String) {
+        self.titleLabel.text = title
+    }
     
     private func configureHierarchy() {
         addSubview(titleLabel)

@@ -34,7 +34,7 @@ final class TrendingCell: BaseCollectionViewCell {
         $0.font = CCDesign.Font.titleBold.font
     }
     
-    private let persentLabel = UILabel().then {
+    private let percentLabel = UILabel().then {
         $0.font = CCDesign.Font.subtitle.font
     }
     
@@ -51,8 +51,8 @@ final class TrendingCell: BaseCollectionViewCell {
         titleLabel.text = data.name
         subtitleLabel.text = data.symbol
         priceLabel.text = data.currentPrice
-        persentLabel.text = data.priceChangePercentage24H
-        persentLabel.textColor = data.isUp
+        percentLabel.text = data.priceChangePercentage24H
+        percentLabel.textColor = data.isUp
         ? CCDesign.Color.highPrice.color
         : CCDesign.Color.lowPrice.color
     }
@@ -63,8 +63,8 @@ final class TrendingCell: BaseCollectionViewCell {
         titleLabel.text = data.name
         subtitleLabel.text = data.symbol
         priceLabel.text = data.floorPrice
-        persentLabel.text = data.floorPrice24hPercentageChange
-        persentLabel.textColor = data.isUp
+        percentLabel.text = data.floorPrice24hPercentageChange
+        percentLabel.textColor = data.isUp
         ? CCDesign.Color.highPrice.color
         : CCDesign.Color.lowPrice.color
     }
@@ -77,7 +77,7 @@ final class TrendingCell: BaseCollectionViewCell {
                                 titleLabel,
                                 subtitleLabel,
                                 priceLabel,
-                                persentLabel)
+                                percentLabel)
     }
     
     override func configureLayout() {
@@ -102,7 +102,7 @@ final class TrendingCell: BaseCollectionViewCell {
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.leading.equalTo(titleLabel.snp.leading)
-            make.trailing.lessThanOrEqualTo(persentLabel.snp.leading).offset(-4)
+            make.trailing.lessThanOrEqualTo(percentLabel.snp.leading).offset(-4)
         }
         
         priceLabel.snp.makeConstraints { make in
@@ -110,7 +110,7 @@ final class TrendingCell: BaseCollectionViewCell {
             make.centerY.equalTo(titleLabel.snp.centerY)
         }
         
-        persentLabel.snp.makeConstraints { make in
+        percentLabel.snp.makeConstraints { make in
             make.top.equalTo(priceLabel.snp.bottom).offset(4)
             make.trailing.equalToSuperview().offset(-12)
         }

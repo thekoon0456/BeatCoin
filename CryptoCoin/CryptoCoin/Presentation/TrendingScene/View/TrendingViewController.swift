@@ -121,27 +121,30 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                                withReuseIdentifier: TrendingHeaderView.identifier,
                                                                                for: indexPath) as? TrendingHeaderView
             else {
                 return UICollectionReusableView()
             }
+            
             switch Section(rawValue: indexPath.section) {
             case .favorite:
-                header.titleLabel.text = Section.favorite.title
+                header.setTitle(Section.favorite.title)
             case .topCoin:
-                header.titleLabel.text = Section.topCoin.title
+                header.setTitle(Section.topCoin.title)
             case .topNFT:
-                header.titleLabel.text = Section.topNFT.title
+                header.setTitle(Section.topNFT.title)
             case .none:
                 break
             }
+            
             return header
+        default:
+            return UICollectionReusableView()
         }
-        
-        return UICollectionReusableView()
     }
 }
 
@@ -159,9 +162,7 @@ extension TrendingViewController {
             switch self {
             case .favorite:
                 1
-            case .topCoin:
-                3
-            case .topNFT:
+            case .topCoin, .topNFT:
                 3
             }
         }
@@ -189,10 +190,8 @@ extension TrendingViewController {
                                                              leading: 12,
                                                              bottom: 12,
                                                              trailing: 0)
-                
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6),
                                                        heightDimension: .fractionalHeight(0.3))
-                
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
@@ -200,14 +199,13 @@ extension TrendingViewController {
                                                             elementKind:  UICollectionView.elementKindSectionHeader,
                                                             alignment: .topLeading)]
                 section.orthogonalScrollingBehavior = .groupPaging
-                //                section.orthogonalScrollingBehavior = .groupPagingCentered
                 return section
             case .topCoin, .topNFT, .none:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(0.3))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                                       heightDimension: .fractionalHeight(1/3))
+                                                       heightDimension: .fractionalHeight(0.3))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
