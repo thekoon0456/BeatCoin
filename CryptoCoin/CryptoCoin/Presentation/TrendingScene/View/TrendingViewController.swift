@@ -34,25 +34,22 @@ final class TrendingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.inputViewDidLoad.onNext(())
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.inputViewWillAppear.onNext(())
     }
     
     // MARK: - Helpers
     
     private func bind() {
-        viewModel.outputFavoriteCoinData.bind { [weak self] _ in
-            guard let self else { return }
-            collectionView.reloadData()
-        }
-        
-        viewModel.outputTrendingCoin.bind { [weak self] _ in
-            guard let self else { return }
-            collectionView.reloadData()
-        }
-        
-        viewModel.outputTrendingNFT.bind { [weak self] _ in
-            guard let self else { return }
+        viewModel.outputUpdateComplete.bind { [weak self] isComplete in
+            guard let self,
+                  isComplete == true
+            else { return }
             collectionView.reloadData()
         }
     }
@@ -75,6 +72,8 @@ final class TrendingViewController: BaseViewController {
     }
 }
 
+// MARK: - CollectionView
+
 extension TrendingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -94,7 +93,6 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
         
@@ -103,19 +101,24 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingFavoriteCell.identifier, for: indexPath) as? TrendingFavoriteCell else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(viewModel.outputFavoriteCoinData.currentValue[indexPath.item])
+            let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
+            cell.configureCell(data)
             return cell
         case .topCoin:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell,
+                  let data =  viewModel.outputTrendingCoin.currentValue?[indexPath.item]
+            else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(viewModel.outputTrendingCoin.currentValue![indexPath.item])
+            cell.configureCell(data)
             return cell
         case .topNFT:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell,
+                  let data =  viewModel.outputTrendingNFT.currentValue?[indexPath.item]
+            else {
                 return UICollectionViewCell()
             }
-            cell.configureNFTCell(viewModel.outputTrendingNFT.currentValue![indexPath.item], index: indexPath.item)
+            cell.configureNFTCell(data, index: indexPath.item)
             return cell
         }
     }
@@ -140,7 +143,6 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             case .none:
                 break
             }
-            
             return header
         default:
             return UICollectionReusableView()
