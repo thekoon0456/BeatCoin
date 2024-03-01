@@ -31,7 +31,7 @@
 		7C51CD4B2B8DB47F00E39CB0 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD4A2B8DB47F00E39CB0 /* TrendingViewController.swift */; };
 		7C51CD4D2B8DB4A200E39CB0 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD4C2B8DB4A200E39CB0 /* FavoriteViewController.swift */; };
 		7C51CD4F2B8DB4D200E39CB0 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD4E2B8DB4D200E39CB0 /* ChartViewController.swift */; };
-		7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD512B8DB58600E39CB0 /* CoinConst.swift */; };
+		7C51CD522B8DB58600E39CB0 /* CCConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD512B8DB58600E39CB0 /* CCConst.swift */; };
 		7C51CD552B8DBBEA00E39CB0 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 7C51CD542B8DBBEA00E39CB0 /* DGCharts */; };
 		7C51CD572B8DBC0D00E39CB0 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */; };
 		7C51CD612B8DC05600E39CB0 /* TrendingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51CD602B8DC05600E39CB0 /* TrendingDTO.swift */; };
@@ -61,6 +61,7 @@
 		7C75BDFB2B8F58F4004D5DA5 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */; };
 		7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */; };
 		7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BDA2B90AF8300493767 /* TrendingCell.swift */; };
+		7CCC5E3F2B91BC5E0089334F /* CCDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,7 +86,7 @@
 		7C51CD4A2B8DB47F00E39CB0 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		7C51CD4C2B8DB4A200E39CB0 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		7C51CD4E2B8DB4D200E39CB0 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		7C51CD512B8DB58600E39CB0 /* CoinConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinConst.swift; sourceTree = "<group>"; };
+		7C51CD512B8DB58600E39CB0 /* CCConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCConst.swift; sourceTree = "<group>"; };
 		7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		7C51CD602B8DC05600E39CB0 /* TrendingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingDTO.swift; sourceTree = "<group>"; };
 		7C51CD672B8DC08600E39CB0 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -114,6 +115,7 @@
 		7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingFavoriteCell.swift; sourceTree = "<group>"; };
 		7CC87BDA2B90AF8300493767 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
+		7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCDesign.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,7 +387,8 @@
 		7C51CD502B8DB57700E39CB0 /* Const */ = {
 			isa = PBXGroup;
 			children = (
-				7C51CD512B8DB58600E39CB0 /* CoinConst.swift */,
+				7C51CD512B8DB58600E39CB0 /* CCConst.swift */,
+				7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */,
 			);
 			path = Const;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				7C27191A2B9054910036F3FA /* Toast.swift in Sources */,
 				7C51CD862B8DF22900E39CB0 /* ViewModel.swift in Sources */,
 				7C51CD902B8DFB7400E39CB0 /* FavoriteViewModel.swift in Sources */,
+				7CCC5E3F2B91BC5E0089334F /* CCDesign.swift in Sources */,
 				7C51CCFF2B8DB01D00E39CB0 /* SceneDelegate.swift in Sources */,
 				7C51CD4B2B8DB47F00E39CB0 /* TrendingViewController.swift in Sources */,
 				7C51CD792B8DE32100E39CB0 /* CoinEntity.swift in Sources */,
@@ -576,7 +580,7 @@
 				7C51CD312B8DB29700E39CB0 /* Then+.swift in Sources */,
 				7C51CD6F2B8DC7F900E39CB0 /* SearchDTO.swift in Sources */,
 				7C51CD682B8DC08600E39CB0 /* APIService.swift in Sources */,
-				7C51CD522B8DB58600E39CB0 /* CoinConst.swift in Sources */,
+				7C51CD522B8DB58600E39CB0 /* CCConst.swift in Sources */,
 				7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */,
 				7C75BDED2B8F1623004D5DA5 /* FavoriteCell.swift in Sources */,
 				7C51CD812B8DE5B900E39CB0 /* CoinRepository.swift in Sources */,

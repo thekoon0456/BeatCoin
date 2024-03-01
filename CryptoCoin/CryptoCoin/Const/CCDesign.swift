@@ -1,45 +1,11 @@
 //
-//  CoinConst.swift
+//  CCDesign.swift
 //  CryptoCoin
 //
-//  Created by Deokhun KIM on 2/27/24.
+//  Created by Deokhun KIM on 3/1/24.
 //
 
 import UIKit
-
-enum CCLayout {
-    case width
-    case height
-    
-    var value: CGFloat {
-        switch self {
-        case .width:
-            UIScreen.main.bounds.width
-        case .height:
-            UIScreen.main.bounds.height
-        }
-    }
-}
-
-enum CCConst {
-    
-    enum NaviTitle {
-        case trending
-        case search
-        case favorite
-        
-        var name: String {
-            switch self {
-            case .trending:
-                "Crypto Coin"
-            case .search:
-                "Search"
-            case .favorite:
-                "Favorite Coin"
-            }
-        }
-    }
-}
 
 enum CCDesign {
     
@@ -148,3 +114,5 @@ enum CCDesign {
         }
     }
 }
+
+

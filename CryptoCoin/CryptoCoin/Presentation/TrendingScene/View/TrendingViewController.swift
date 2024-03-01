@@ -24,6 +24,8 @@ final class TrendingViewController: BaseViewController {
         return cv
     }()
     
+    private let headerLabel = UILabel()
+    
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
@@ -139,13 +141,24 @@ extension TrendingViewController {
                 3
             }
         }
+        
+        var title: String {
+            switch self {
+            case .favorite:
+                "My Favorite"
+            case .topCoin:
+                "Top 15 Coin"
+            case .topNFT:
+                "Top7 NFT"
+            }
+        }
     }
     
     private func setLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { (section, env) -> NSCollectionLayoutSection in
             switch Section(rawValue: section) {
             case .favorite:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 12,
@@ -153,11 +166,15 @@ extension TrendingViewController {
                                                              bottom: 12,
                                                              trailing: 0)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.1),
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6),
                                                        heightDimension: .fractionalHeight(0.3))
 
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
+                section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                              heightDimension: .absolute(50)),
+                                                            elementKind: Section.favorite.title,
+                                                            alignment: .topLeading)]
                 section.orthogonalScrollingBehavior = .groupPaging
 //                section.orthogonalScrollingBehavior = .groupPagingCentered
                 return section
@@ -173,6 +190,10 @@ extension TrendingViewController {
                                                        heightDimension: .fractionalHeight(1/3))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
+                section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                              heightDimension: .absolute(50)),
+                                                            elementKind: Section.topCoin.title,
+                                                            alignment: .topLeading)]
                 section.orthogonalScrollingBehavior = .groupPaging
                 return section
             }

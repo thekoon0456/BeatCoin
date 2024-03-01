@@ -50,7 +50,6 @@ final class ChartViewController: BaseViewController {
     private let updateLabel = UILabel().then {
         $0.font = CCDesign.Font.percent.font
         $0.textColor = CCDesign.Color.gray.color
-        $0.text = "Today"
     }
     
     private lazy var favoriteButton = UIButton().then {
@@ -59,13 +58,13 @@ final class ChartViewController: BaseViewController {
         $0.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
     }
     
-    private let highPriceView = ChartPriceView(title: "고가",
+    private let highPriceView = ChartPriceView(title: CCConst.priceLabel.highPrice.name,
                                                color: CCDesign.Color.highPrice.color)
-    private let highestPriceView = ChartPriceView(title: "신고점",
+    private let highestPriceView = ChartPriceView(title: CCConst.priceLabel.highestPrice.name,
                                                   color: CCDesign.Color.highPrice.color)
-    private let lowPriceView = ChartPriceView(title: "저가",
+    private let lowPriceView = ChartPriceView(title: CCConst.priceLabel.lowPrice.name,
                                               color: CCDesign.Color.lowPrice.color)
-    private let lowestPriceView = ChartPriceView(title: "신저점",
+    private let lowestPriceView = ChartPriceView(title: CCConst.priceLabel.lowestPrice.name,
                                                  color: CCDesign.Color.lowPrice.color)
     
     // MARK: - Lifecycles
