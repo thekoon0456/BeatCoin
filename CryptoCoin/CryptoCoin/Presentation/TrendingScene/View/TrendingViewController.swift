@@ -82,7 +82,6 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let section = Section(rawValue: section) else { return 0 }
-        
         switch section {
         case .favorite:
             return viewModel.outputFavoriteCoinData.currentValue.count
@@ -95,7 +94,6 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
-        
         switch section {
         case .favorite:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingFavoriteCell.identifier, for: indexPath) as? TrendingFavoriteCell else {
@@ -152,7 +150,6 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             else {
                 return UICollectionReusableView()
             }
-            
             switch Section(rawValue: indexPath.section) {
             case .favorite:
                 header.setTitle(Section.favorite.title)
@@ -201,9 +198,11 @@ extension TrendingViewController {
     }
     
     private func setLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { (section, env) -> NSCollectionLayoutSection in
+        let layout = UICollectionViewCompositionalLayout { (section, env) -> NSCollectionLayoutSection? in
             switch Section(rawValue: section) {
             case .favorite:
+                guard self.viewModel.outputFavoriteCoinData.currentValue.count > 2 else { return nil }
+                
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
