@@ -13,7 +13,7 @@ final class CoinSearchViewModel: ViewModel {
     
     weak var coordinator: SearchCoordinator?
     let repository = SearchRepository()
-    let favoriteRepository = UserFavoriteRepository()
+    let favoriteRepository = UserRepository()
     let inputPushDetail = Observable<String?>(nil)
     let inputSearchText = Observable<String?>(nil)
     let inputFavoriteButtonTapped = Observable<Int?>(nil)
@@ -61,38 +61,37 @@ final class CoinSearchViewModel: ViewModel {
             case .failure(let failure):
                 outputError.onNext(checkError(error: failure))
             }
-            
         }
     }
     
     private func setFavorite(_ coin: [CoinEntity]) {
-        let fav = favoriteRepository.fetch().map { $0.coinID }
+        guard let user = favoriteRepository.fetch() else { return }
+        let favoriteID = Array(user.favoriteID)
         let isFavorite = coin.map {
-            fav.contains($0.id) ? true : false
+            favoriteID.contains($0.id) ? true : false
         }
         
         outputFavorite.onNext(isFavorite)
     }
     
     private func favoriteToggle(coin: CoinEntity) {
-        let favorite = favoriteRepository.fetch()
-        let favoriteID = favorite.map { $0.coinID }
+        guard let user = favoriteRepository.fetch() else { return }
+        let favoriteID = Array(user.favoriteID)
         //삭제
         if favoriteID.contains(coin.id) {
-            favoriteRepository.delete(favoriteRepository.fetchItem(id: coin.id))
+            favoriteRepository.deleteFav(coin.id)
             outputToast.onNext(.deleteFavorite(coin: coin.id))
             return
         }
         
         //추가
-        guard favorite.count < 10 else {
+        guard favoriteID.count < 10 else {
             outputToast.onNext(.maxFavorite)
             return
         }
         
-        let item = UserFavorite(coinID: coin.id)
-        favoriteRepository.create(item)
-        outputToast.onNext(.setFavorite(coin: item.coinID))
+        favoriteRepository.createFav(coin.id)
+        outputToast.onNext(.setFavorite(coin: coin.id))
     }
     
     func pop() {

@@ -13,7 +13,7 @@ final class DetailChartViewModel: ViewModel {
     
     weak var coordinator: DetailChartCoordinator?
     private let repository = CoinRepository()
-    private let favoriteRepository = UserFavoriteRepository()
+    private let favoriteRepository = UserRepository()
     private var coinID: String?
     let inputViewDidLoad = Observable<Void?>(nil)
     let inputCoinName = Observable<String?>(nil)
@@ -57,32 +57,33 @@ final class DetailChartViewModel: ViewModel {
     }
     
     private func setFavorite(id: String) {
-        let favorite = favoriteRepository.fetch()
-        let favoriteID = favorite.map { $0.coinID }
+        guard let user = favoriteRepository.fetch() else { return }
+        let favoriteID = Array(user.favoriteID)
         
         if favoriteID.contains(id) {
-            favoriteRepository.delete(favoriteRepository.fetchItem(id: id))
+            favoriteRepository.deleteFav(id)
             outputFavorite.onNext(false)
             outputToast.onNext(.deleteFavorite(coin: id))
             return
         }
         
         //추가
-        guard favorite.count < 10 else {
+        guard favoriteID.count < 10 else {
             outputToast.onNext(.maxFavorite)
             return
         }
         
-        let item = UserFavorite(coinID: id)
-        favoriteRepository.create(item)
+        favoriteRepository.createFav(id)
         outputFavorite.onNext(true)
         outputToast.onNext(.setFavorite(coin: id))
     }
     
     private func checkFavorite(id: String?) {
         guard let id else { return }
-        let fav = favoriteRepository.fetch().map { $0.coinID }
-        if fav.contains(id) {
+        guard let user = favoriteRepository.fetch() else { return }
+        let favoriteID = Array(user.favoriteID)
+        
+        if favoriteID.contains(id) {
             outputFavorite.onNext(true)
         } else {
             outputFavorite.onNext(false)
