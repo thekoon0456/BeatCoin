@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FavoriteCoordinator: Coordinator {
+final class FavoriteCoordinator: Coordinator, DetailChartCoordinatorDelegate {
 
     // MARK: - Properties
     
@@ -37,5 +37,13 @@ final class FavoriteCoordinator: Coordinator {
                                      selectedImage: UIImage(named: CCDesign.TabIcon.portfolio.name))
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func pushToDetail(coinID: String?) {
+        let coordinator = DetailChartCoordinator(navigationController: navigationController)
+        coordinator.delegate = self
+        coordinator.coinID = coinID
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }

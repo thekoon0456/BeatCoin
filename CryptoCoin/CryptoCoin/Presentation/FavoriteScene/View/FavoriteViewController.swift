@@ -55,7 +55,6 @@ final class FavoriteViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = CCConst.NaviTitle.favorite.name
         viewModel.inputViewWillAppear.onNext(())
     }
     
@@ -124,8 +123,9 @@ final class FavoriteViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        navigationItem.backButtonDisplayMode = .minimal
         navigationItem.title = CCConst.NaviTitle.favorite.name
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.backButtonDisplayMode = .minimal
     }
 }
 
@@ -151,11 +151,8 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let data = viewModel.outputCoinData.currentValue[indexPath.item]
-//        let vc = DetailChartViewController()
-//        vc.viewModel.coinID = data.id
-//        navigationItem.title = .none
-//        navigationController?.pushViewController(vc, animated: true)
+        let data = viewModel.outputCoinData.currentValue[indexPath.item]
+        viewModel.inputPushDetail.onNext(data.id)
     }
 }
 

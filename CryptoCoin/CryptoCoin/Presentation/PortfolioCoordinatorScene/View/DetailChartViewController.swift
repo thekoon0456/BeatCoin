@@ -85,7 +85,6 @@ final class DetailChartViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.removeChildCoordinator()
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: - Selectors
@@ -285,7 +284,7 @@ final class DetailChartViewController: BaseViewController {
     override func configureView() {
         super.configureView()
         navigationItem.title = .none
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteButton)
     }
 }

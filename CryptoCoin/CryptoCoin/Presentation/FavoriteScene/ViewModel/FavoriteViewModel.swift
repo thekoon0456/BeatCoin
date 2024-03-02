@@ -15,6 +15,7 @@ final class FavoriteViewModel: ViewModel {
     let repository = CoinRepository()
     let favoriteRepository = UserFavoriteRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
+    let inputPushDetail = Observable<String?>(nil)
     let inputUpdateFavorite = Observable<[CoinEntity]?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputError = Observable<CCError?>(nil)
@@ -29,6 +30,11 @@ final class FavoriteViewModel: ViewModel {
             guard let self else { return }
             let ids = favoriteRepository.fetch().map { $0.coinID }
             callRequest(ids: ids)
+        }
+        
+        inputPushDetail.bind { [weak self] id in
+            guard let self else { return }
+            coordinator?.pushToDetail(coinID: id)
         }
         
         inputUpdateFavorite.bind { [weak self] coin in
@@ -58,4 +64,6 @@ final class FavoriteViewModel: ViewModel {
             }
         }
     }
+    
+    
 }

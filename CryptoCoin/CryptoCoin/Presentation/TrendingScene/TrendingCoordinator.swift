@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TrendingCoordinator: Coordinator {
+final class TrendingCoordinator: Coordinator, DetailChartCoordinatorDelegate {
 
     // MARK: - Properties
     
@@ -41,13 +41,9 @@ final class TrendingCoordinator: Coordinator {
     
     func pushToDetail(coinID: String?) {
         let coordinator = DetailChartCoordinator(navigationController: navigationController)
+        coordinator.delegate = self
         coordinator.coinID = coinID
         childCoordinators.append(coordinator)
         coordinator.start()
-    }
-    
-    func pop() {
-        navigationController?.popViewController(animated: true)
-        removeChildCoordinator()
     }
 }

@@ -51,7 +51,6 @@ final class CoinSearchViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         viewModel.inputSearchText.onNext(searchController.searchBar.text)
-        navigationItem.title = CCConst.NaviTitle.search.name
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,10 +142,11 @@ final class CoinSearchViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        navigationItem.searchController = searchController
+        navigationItem.title = CCConst.NaviTitle.search.name
         navigationItem.largeTitleDisplayMode = .always
-        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
 

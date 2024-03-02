@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DetailChartCoordinatorDelegate: AnyObject {
+    func removeChildCoordinator()
+}
+
 final class DetailChartCoordinator: Coordinator {
 
     // MARK: - Properties
@@ -15,6 +19,7 @@ final class DetailChartCoordinator: Coordinator {
     var childCoordinators: [Coordinator]
     var type: CoordinatorType
     var coinID: String?
+    weak var delegate: DetailChartCoordinatorDelegate?
     
     // MARK: - Lifecycles
     
@@ -34,5 +39,9 @@ final class DetailChartCoordinator: Coordinator {
         let vm = DetailChartViewModel(coordinator: self, coinID: coinID)
         let vc = DetailChartViewController(viewModel: vm)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func removeChildCoordinator() {
+        delegate?.removeChildCoordinator()
     }
 }

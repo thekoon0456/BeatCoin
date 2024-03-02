@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchCoordinator: Coordinator {
+final class SearchCoordinator: Coordinator, DetailChartCoordinatorDelegate {
 
     // MARK: - Properties
     
@@ -41,6 +41,7 @@ final class SearchCoordinator: Coordinator {
     
     func pushToDetail(coinID: String?) {
         let coordinator = DetailChartCoordinator(navigationController: navigationController)
+        coordinator.delegate = self
         coordinator.coinID = coinID
         childCoordinators.append(coordinator)
         coordinator.start()

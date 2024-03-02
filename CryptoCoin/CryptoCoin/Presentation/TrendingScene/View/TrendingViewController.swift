@@ -43,9 +43,8 @@ final class TrendingViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         viewModel.inputViewWillAppear.onNext(())
-        navigationItem.title = CCConst.NaviTitle.trending.name
     }
     
     // MARK: - Helpers
@@ -73,6 +72,9 @@ final class TrendingViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
+        navigationItem.title = CCConst.NaviTitle.trending.name
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.backButtonDisplayMode = .minimal
     }
 }
 
