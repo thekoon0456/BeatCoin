@@ -36,6 +36,6 @@ final class SearchCoordinator: Coordinator {
                                      image: UIImage(named: CCDesign.TabIcon.search.inactive),
                                      selectedImage: UIImage(named: CCDesign.TabIcon.search.name))
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

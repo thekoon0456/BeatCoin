@@ -17,7 +17,7 @@ final class TrendingCoordinator: Coordinator {
     
     // MARK: - Lifecycles
     
-    init(navigationController: UINavigationController? = nil) {
+    init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
         self.childCoordinators = []
         self.type = .trending
@@ -36,6 +36,19 @@ final class TrendingCoordinator: Coordinator {
                                      image: UIImage(named: CCDesign.TabIcon.trending.inactive),
                                      selectedImage: UIImage(named: CCDesign.TabIcon.trending.name))
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func pushToDetail(coinID: String?) {
+        print(#function)
+        let coordinator = DetailChartCoordinator(navigationController: navigationController)
+        coordinator.coinID = coinID
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+    
+    func pop() {
+        navigationController?.popViewController(animated: true)
+        removeChildCoordinator()
     }
 }

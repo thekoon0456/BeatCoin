@@ -16,6 +16,7 @@ final class TrendingViewModel: ViewModel {
     let coinRepository = CoinRepository()
     let favoriteRepository = UserFavoriteRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
+    let inputPushDetail = Observable<String?>(nil)
     let outputFavoriteCoinData = Observable<[CoinEntity]>([])
     let outputTrendingCoin = Observable<[CoinEntity]?>(nil)
     let outputTrendingNFT = Observable<[NFTEntity]?>(nil)
@@ -35,6 +36,12 @@ final class TrendingViewModel: ViewModel {
         inputViewWillAppear.bind { [weak self] _ in
             guard let self else { return }
             setAllUpdate()
+        }
+        
+        inputPushDetail.bind { [weak self] id in
+            guard let self else { return }
+            print(#function)
+            coordinator?.pushToDetail(coinID: id)
         }
     }
     

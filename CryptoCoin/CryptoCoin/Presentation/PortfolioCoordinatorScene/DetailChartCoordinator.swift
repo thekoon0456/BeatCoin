@@ -14,6 +14,7 @@ final class DetailChartCoordinator: Coordinator {
     var navigationController: UINavigationController?
     var childCoordinators: [Coordinator]
     var type: CoordinatorType
+    var coinID: String?
     
     // MARK: - Lifecycles
     
@@ -30,8 +31,9 @@ final class DetailChartCoordinator: Coordinator {
     // MARK: - Helpers
     
     func start() {
-        let vm = DetailChartViewModel(coordinator: self)
+        print(#function)
+        let vm = DetailChartViewModel(coordinator: self, coinID: coinID)
         let vc = DetailChartViewController(viewModel: vm)
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -34,6 +34,6 @@ final class UserCoordinator: Coordinator {
                                      image: UIImage(named: CCDesign.TabIcon.user.inactive),
                                      selectedImage: UIImage(named: CCDesign.TabIcon.user.name))
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

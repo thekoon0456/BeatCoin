@@ -27,18 +27,22 @@ final class AppCoordinator: Coordinator {
         let tabBarController = UITabBarController()
         let trendingNav = UINavigationController()
         let trendingCoordinator = TrendingCoordinator(navigationController: trendingNav)
+        childCoordinators.append(trendingCoordinator)
         trendingCoordinator.start()
         
         let searchNav = UINavigationController()
         let searchCoordinator = SearchCoordinator(navigationController: searchNav)
+        childCoordinators.append(searchCoordinator)
         searchCoordinator.start()
         
         let favoriteNav = UINavigationController()
         let favoriteCoordinator = FavoriteCoordinator(navigationController: favoriteNav)
+        childCoordinators.append(favoriteCoordinator)
         favoriteCoordinator.start()
         
         let userNav = UINavigationController()
         let userCoordinator = UserCoordinator(navigationController: userNav)
+        childCoordinators.append(userCoordinator)
         userCoordinator.start()
         
         tabBarController.viewControllers = [trendingNav, searchNav, favoriteNav, userNav]

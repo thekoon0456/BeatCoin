@@ -14,7 +14,7 @@ final class DetailChartViewModel: ViewModel {
     weak var coordinator: DetailChartCoordinator?
     private let repository = CoinRepository()
     private let favoriteRepository = UserFavoriteRepository()
-    var coinID: String?
+    private var coinID: String?
     let inputViewDidLoad = Observable<Void?>(nil)
     let inputCoinName = Observable<String?>(nil)
     let inputFavorite = Observable<String?>(nil)
@@ -22,8 +22,9 @@ final class DetailChartViewModel: ViewModel {
     let outputFavorite = Observable<Bool?>(nil)
     let outputError = Observable<CCError?>(nil)
     
-    init(coordinator: DetailChartCoordinator?) {
+    init(coordinator: DetailChartCoordinator?, coinID: String?) {
         self.coordinator = coordinator
+        self.coinID = coinID
         transform()
     }
 

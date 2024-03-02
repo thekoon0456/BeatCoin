@@ -36,6 +36,6 @@ final class FavoriteCoordinator: Coordinator {
                                      image: UIImage(named: CCDesign.TabIcon.portfolio.inactive),
                                      selectedImage: UIImage(named: CCDesign.TabIcon.portfolio.name))
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
