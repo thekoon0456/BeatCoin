@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class NumberFormatterManager {
+final class NumberFormatterService {
     
-    static let shared = NumberFormatterManager()
+    static let shared = NumberFormatterService()
     
     private init() { }
     

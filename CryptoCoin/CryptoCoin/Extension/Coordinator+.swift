@@ -7,14 +7,14 @@
 
 import UIKit
 
-extension UIViewController {
+extension Coordinator {
     
-    func showAlert(title: String = "오류",
+    func showAlert(title: String = "오류가 발생했어요",
                    message: String,
                    primaryButtonTitle: String,
                    okButtonTitle: String = "확인",
-                   primaryAction: @escaping (UIAlertAction) -> Void,
-                   okAction: @escaping (UIAlertAction) -> Void) {
+                   primaryAction: (() -> Void)?,
+                   okAction: (() -> Void)?) {
         
         let alert = UIAlertController(title: title,
                                       message: message,
@@ -22,13 +22,28 @@ extension UIViewController {
         
         alert.view.tintColor = CCDesign.Color.tintColor.color
         
-        let primaryButton = UIAlertAction(title: primaryButtonTitle, style: .default, handler: primaryAction)
-        let okButton = UIAlertAction(title: okButtonTitle, style: .destructive, handler: okAction)
+        let primaryButton = UIAlertAction(title: primaryButtonTitle, style: .default) { _ in
+            primaryAction?()
+        }
+        
+        let okButton = UIAlertAction(title: okButtonTitle, style: .destructive) { _ in
+            okAction?()
+        }
         
         alert.addAction(okButton)
         alert.addAction(primaryButton)
-
         
         navigationController?.present(alert, animated: true)
+    }
+    
+    func showToast(_ type: Toast) {
+        let vc = ToastViewController(inputMessage: type.message)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        navigationController?.present(vc, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            vc.dismiss(animated: true)
+        }
     }
 }

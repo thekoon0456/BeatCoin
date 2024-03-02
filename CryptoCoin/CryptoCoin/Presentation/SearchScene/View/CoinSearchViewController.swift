@@ -89,34 +89,34 @@ final class CoinSearchViewController: BaseViewController {
             //modal
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                setFavoriteToast(index)
+//                setFavoriteToast(index)
             }
         }
         
         viewModel.outputError.bind { [weak self] error in
-            guard let self,
-                  let error
-            else { return }
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                
-                if error == .maxFavorite {
-                    setMaxToast()
-                    return
-                }
-                
-                showAlert(message: error.description,
-                          primaryButtonTitle: "재시도하기",
-                          okButtonTitle: "취소") { [weak self] _ in
-                    guard let self else { return }
-                    viewModel.inputSearchText.onNext((searchController.searchBar.text))
-                    dismiss(animated: true)
-                } okAction: { [weak self] _ in
-                    guard let self else { return }
-                    dismiss(animated: true)
-                }
-            }
+//            guard let self,
+//                  let error
+//            else { return }
+//            
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self else { return }
+//                
+//                if error == .maxFavorite {
+////                    setMaxToast()
+//                    return
+//                }
+//                
+//                showAlert(message: error.description,
+//                          primaryButtonTitle: "재시도하기",
+//                          okButtonTitle: "취소") { [weak self] _ in
+//                    guard let self else { return }
+//                    viewModel.inputSearchText.onNext((searchController.searchBar.text))
+//                    dismiss(animated: true)
+//                } okAction: { [weak self] _ in
+//                    guard let self else { return }
+//                    dismiss(animated: true)
+//                }
+//            }
         }
     }
     
@@ -154,32 +154,32 @@ final class CoinSearchViewController: BaseViewController {
 
 extension CoinSearchViewController {
     
-    private func setFavoriteToast(_ index: Int) {
-        guard let coin = viewModel.outputCoinData.currentValue?[index],
-              let isFavorite = viewModel.outputFavorite.currentValue?[index] else { return }
-        let toastMessage = isFavorite
-        ? Toast.setFavorite(coin: coin.name)
-        : Toast.deleteFavorite(coin: coin.name)
-        let vc = ToastViewController(inputMessage: toastMessage)
-        vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            vc.dismiss(animated: true)
-        }
-    }
-    
-    private func setMaxToast() {
-        let vc = ToastViewController(inputMessage: .maxFavorite)
-        vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            vc.dismiss(animated: true)
-        }
-    }
+//    private func setFavoriteToast(_ index: Int) {
+//        guard let coin = viewModel.outputCoinData.currentValue?[index],
+//              let isFavorite = viewModel.outputFavorite.currentValue?[index] else { return }
+//        let toastMessage = isFavorite
+//        ? Toast.setFavorite(coin: coin.name)
+//        : Toast.deleteFavorite(coin: coin.name)
+//        let vc = ToastViewController(inputMessage: toastMessage)
+//        vc.modalPresentationStyle = .overFullScreen
+//        vc.modalTransitionStyle = .crossDissolve
+//        present(vc, animated: true)
+//        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+//            vc.dismiss(animated: true)
+//        }
+//    }
+//    
+//    private func setMaxToast() {
+//        let vc = ToastViewController(inputMessage: .maxFavorite)
+//        vc.modalPresentationStyle = .overFullScreen
+//        vc.modalTransitionStyle = .crossDissolve
+//        present(vc, animated: true)
+//        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+//            vc.dismiss(animated: true)
+//        }
+//    }
 }
 
 // MARK: - SearchBar

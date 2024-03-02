@@ -41,7 +41,8 @@ final class DetailChartCoordinator: Coordinator {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func removeChildCoordinator() {
+    func pop() {
         delegate?.removeChildCoordinator()
+        navigationController?.popViewController(animated: true)
     }
 }

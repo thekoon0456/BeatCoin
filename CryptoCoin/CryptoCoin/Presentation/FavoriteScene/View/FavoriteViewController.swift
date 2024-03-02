@@ -81,24 +81,24 @@ final class FavoriteViewController: BaseViewController {
             collectionView.reloadData()
         }
         
-        viewModel.outputError.bind { [weak self] error in
-            guard let self,
-                  let error
-            else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                showAlert(message: error.description,
-                          primaryButtonTitle: "재시도하기",
-                          okButtonTitle: "취소") { [weak self] _ in
-                    guard let self else { return }
-                    viewModel.inputViewWillAppear.onNext(())
-                    dismiss(animated: true)
-                } okAction: { [weak self] _ in
-                    guard let self else { return }
-                    dismiss(animated: true)
-                }
-            }
-        }
+//        viewModel.outputError.bind { [weak self] error in
+//            guard let self,
+//                  let error
+//            else { return }
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self else { return }
+//                showAlert(message: error.description,
+//                          primaryButtonTitle: "재시도하기",
+//                          okButtonTitle: "취소") { [weak self] _ in
+//                    guard let self else { return }
+//                    viewModel.inputViewWillAppear.onNext(())
+//                    dismiss(animated: true)
+//                } okAction: { [weak self] _ in
+//                    guard let self else { return }
+//                    dismiss(animated: true)
+//                }
+//            }
+//        }
     }
     
     func setAutoUpdate() {

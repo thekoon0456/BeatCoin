@@ -14,5 +14,5 @@ struct NFTEntity: Entity {
     let thumb: String //"https://assets.coingecko.com/nft_contracts/images/149/standard/wassies.png?1707287210"
     let floorPrice: String //최저가 data -> floor_price  "0.080 BTC"
     let floorPrice24hPercentageChange: String //등락여부 소수점 두자리까지
-    let isUp: Bool
+    let isUp: Bool //등락여부
 }

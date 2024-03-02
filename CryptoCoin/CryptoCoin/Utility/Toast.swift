@@ -28,7 +28,7 @@ final class ToastViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let inputMessage: Toast
+    let inputMessage: String
     
     private let messageLabel = PaddingLabel().then {
         $0.font = .boldSystemFont(ofSize: 20)
@@ -46,7 +46,7 @@ final class ToastViewController: BaseViewController {
     
     // MARK: - Helpers
     
-    init(inputMessage: Toast) {
+    init(inputMessage: String) {
         self.inputMessage = inputMessage
         super.init()
     }
@@ -67,7 +67,7 @@ final class ToastViewController: BaseViewController {
     
     override func configureView() {
         view.backgroundColor = .clear
-        messageLabel.text = inputMessage.message
+        messageLabel.text = inputMessage
     }
 }
 

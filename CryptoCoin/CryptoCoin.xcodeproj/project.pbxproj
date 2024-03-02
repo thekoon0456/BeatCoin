@@ -63,9 +63,9 @@
 		7C5D5A362B936F3C0087FC2B /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5D5A352B936F3C0087FC2B /* UserViewController.swift */; };
 		7C75BDEA2B8F04B1004D5DA5 /* NFTEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDE92B8F04B1004D5DA5 /* NFTEntity.swift */; };
 		7C75BDED2B8F1623004D5DA5 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */; };
-		7C75BDEF2B8F2380004D5DA5 /* NumberFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */; };
+		7C75BDEF2B8F2380004D5DA5 /* NumberFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDEE2B8F2380004D5DA5 /* NumberFormatterService.swift */; };
 		7C75BDF12B8F2D26004D5DA5 /* ChartPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */; };
-		7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */; };
+		7C75BDF32B8F33B9004D5DA5 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF22B8F33B9004D5DA5 /* DateFormatterService.swift */; };
 		7C75BDFB2B8F58F4004D5DA5 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */; };
 		7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */; };
 		7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BDA2B90AF8300493767 /* TrendingCell.swift */; };
@@ -126,9 +126,9 @@
 		7C5D5A352B936F3C0087FC2B /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		7C75BDE92B8F04B1004D5DA5 /* NFTEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTEntity.swift; sourceTree = "<group>"; };
 		7C75BDEC2B8F1623004D5DA5 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
-		7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterManager.swift; sourceTree = "<group>"; };
+		7C75BDEE2B8F2380004D5DA5 /* NumberFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterService.swift; sourceTree = "<group>"; };
 		7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPriceView.swift; sourceTree = "<group>"; };
-		7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
+		7C75BDF22B8F33B9004D5DA5 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingFavoriteCell.swift; sourceTree = "<group>"; };
 		7CC87BDA2B90AF8300493767 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
@@ -264,8 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				7C51CD662B8DC07500E39CB0 /* Network */,
-				7C75BDEE2B8F2380004D5DA5 /* NumberFormatterManager.swift */,
-				7C75BDF22B8F33B9004D5DA5 /* DateFormatterManager.swift */,
+				7C5D5A372B937C7D0087FC2B /* Formatter */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -473,6 +472,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		7C5D5A372B937C7D0087FC2B /* Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				7C75BDEE2B8F2380004D5DA5 /* NumberFormatterService.swift */,
+				7C75BDF22B8F33B9004D5DA5 /* DateFormatterService.swift */,
+			);
+			path = Formatter;
+			sourceTree = "<group>";
+		};
 		7C75BDEB2B8F1617004D5DA5 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,7 +599,7 @@
 				7C51CD2A2B8DB1E400E39CB0 /* Observable.swift in Sources */,
 				7C5D5A2B2B93610A0087FC2B /* FavoriteCoordinator.swift in Sources */,
 				7C51CD4F2B8DB4D200E39CB0 /* DetailChartViewController.swift in Sources */,
-				7C75BDEF2B8F2380004D5DA5 /* NumberFormatterManager.swift in Sources */,
+				7C75BDEF2B8F2380004D5DA5 /* NumberFormatterService.swift in Sources */,
 				7C51CD882B8DF7F900E39CB0 /* UserFavorite.swift in Sources */,
 				7C51CCFD2B8DB01D00E39CB0 /* AppDelegate.swift in Sources */,
 				7C51CD7F2B8DE5B000E39CB0 /* SearchRepository.swift in Sources */,
@@ -620,7 +628,7 @@
 				7C27191C2B906AEF0036F3FA /* CCError.swift in Sources */,
 				7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */,
 				7C51CD7D2B8DE5A800E39CB0 /* TrendingRepository.swift in Sources */,
-				7C75BDF32B8F33B9004D5DA5 /* DateFormatterManager.swift in Sources */,
+				7C75BDF32B8F33B9004D5DA5 /* DateFormatterService.swift in Sources */,
 				7C27191E2B906ED20036F3FA /* Coordinator+.swift in Sources */,
 				7C51CD6B2B8DC0BE00E39CB0 /* APIRouter.swift in Sources */,
 				7C5D5A232B935FD90087FC2B /* Coordinator.swift in Sources */,

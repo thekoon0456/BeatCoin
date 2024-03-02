@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class DateFormatterManager {
+final class DateFormatterService {
     
-    static let shared = DateFormatterManager()
+    static let shared = DateFormatterService()
     
     private init() { }
     
@@ -41,7 +41,7 @@ final class DateFormatterManager {
 
 // MARK: - DateStyle
 
-extension DateFormatterManager {
+extension DateFormatterService {
     
     enum DateStyle: String {
         case input = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"

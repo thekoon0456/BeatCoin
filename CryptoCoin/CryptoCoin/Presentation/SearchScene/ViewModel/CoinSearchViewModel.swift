@@ -84,7 +84,7 @@ final class CoinSearchViewModel: ViewModel {
         
         //추가
         guard favorite.count < 10 else {
-            outputError.onNext(.maxFavorite)
+//            outputError.onNext(.maxFavorite)
             return
         }
         let item = UserFavorite(coinID: coin.id)

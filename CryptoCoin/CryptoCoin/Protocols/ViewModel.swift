@@ -8,7 +8,9 @@
 import Foundation
 
 protocol ViewModel {
+    associatedtype T = Coordinator
     
+    var coordinator: T { get }
 }
 
 extension ViewModel {

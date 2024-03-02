@@ -84,7 +84,7 @@ final class DetailChartViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.removeChildCoordinator()
+        viewModel.pop()
     }
     
     // MARK: - Selectors
@@ -114,68 +114,28 @@ final class DetailChartViewController: BaseViewController {
         }
         
         viewModel.outputError.bind { [weak self] error in
-            guard let self,
-                  let error
-            else { return }
-            
-            if error == .maxFavorite {
-                setMaxToast()
-            }
-            
-            showAlert(message: error.description,
-                      primaryButtonTitle: "재시도하기",
-                      okButtonTitle: "취소") { [weak self] _ in
+                        guard let self,
+                              let error
+                        else { return }
+            viewModel.coordinator?.showAlert(message: error.description,
+                                             primaryButtonTitle: "재시도하기",
+                                             okButtonTitle: "되돌아가기",
+                                             primaryAction: {[weak self] in
                 guard let self else { return }
                 viewModel.inputViewDidLoad.onNext(())
-                dismiss(animated: true)
-            } okAction: { [weak self] _ in
+            }, okAction: { [weak self] in
                 guard let self else { return }
+                viewModel.pop()
                 dismiss(animated: true)
-            }
+            })
         }
-    }
-    
-    private func setMaxToast() {
-        let vc = ToastViewController(inputMessage: .maxFavorite)
-        vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            vc.dismiss(animated: true)
+        viewModel.outputToast.bind { [weak self] toast in
+            guard let self,
+            let toast
+            else { return }
+            viewModel.coordinator?.showToast(toast)
         }
-    }
-    
-    // MARK: - Configure
-    
-    // Chart 데이터 적용하기
-    func setLineData(lineChartView: LineChartView, lineChartDataEntries: [ChartDataEntry]) {
-        let set = LineChartDataSet(entries: lineChartDataEntries)
-        //gradient 설정
-        set.gradientPositions = [0, 1]
-        let gradientColors = [CCDesign.Color.white.color.cgColor,
-                              CCDesign.Color.tintColor.color.cgColor]
-        let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
-        set.fillAlpha = 1
-        set.fill = LinearGradientFill(gradient: gradient, angle: 90)
-        set.drawFilledEnabled = true
-        set.colors = [CCDesign.Color.tintColor.color]
-        set.mode = .cubicBezier
-        //점 설정
-        set.drawCirclesEnabled = false
-        set.drawCircleHoleEnabled = false
-        let lineChartData = LineChartData(dataSet: set)
-        lineChartView.data = lineChartData
-    }
-    
-    // Chart entry 만들기
-    func entryData(values: [Double]) -> [ChartDataEntry] {
-        var lineDataEntries: [ChartDataEntry] = []
-        for i in 0 ..< values.count {
-            let lineDataEntry = ChartDataEntry(x: Double(i), y: values[i])
-            lineDataEntries.append(lineDataEntry)
-        }
-        return lineDataEntries
     }
     
     private func setData(_ data: CoinEntity) {
@@ -286,5 +246,40 @@ final class DetailChartViewController: BaseViewController {
         navigationItem.title = .none
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteButton)
+    }
+}
+
+// MARK: - Chart
+
+extension DetailChartViewController {
+    
+    // Chart 데이터 적용하기
+    func setLineData(lineChartView: LineChartView, lineChartDataEntries: [ChartDataEntry]) {
+        let set = LineChartDataSet(entries: lineChartDataEntries)
+        //gradient 설정
+        set.gradientPositions = [0, 1]
+        let gradientColors = [CCDesign.Color.white.color.cgColor,
+                              CCDesign.Color.tintColor.color.cgColor]
+        let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
+        set.fillAlpha = 1
+        set.fill = LinearGradientFill(gradient: gradient, angle: 90)
+        set.drawFilledEnabled = true
+        set.colors = [CCDesign.Color.tintColor.color]
+        set.mode = .cubicBezier
+        //점 설정
+        set.drawCirclesEnabled = false
+        set.drawCircleHoleEnabled = false
+        let lineChartData = LineChartData(dataSet: set)
+        lineChartView.data = lineChartData
+    }
+    
+    // Chart entry 만들기
+    func entryData(values: [Double]) -> [ChartDataEntry] {
+        var lineDataEntries: [ChartDataEntry] = []
+        for i in 0 ..< values.count {
+            let lineDataEntry = ChartDataEntry(x: Double(i), y: values[i])
+            lineDataEntries.append(lineDataEntry)
+        }
+        return lineDataEntries
     }
 }
