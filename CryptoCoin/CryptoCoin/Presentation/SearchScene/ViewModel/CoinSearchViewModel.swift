@@ -21,6 +21,7 @@ final class CoinSearchViewModel: ViewModel {
     let outputFavorite = Observable<[Bool]?>(nil)
     let outputFavoriteIndex = Observable<Int?>(nil)
     let outputError = Observable<CCError?>(nil)
+    let outputToast = Observable<Toast?>(nil)
     
     init(coordinator: SearchCoordinator?) {
         self.coordinator = coordinator
@@ -79,15 +80,22 @@ final class CoinSearchViewModel: ViewModel {
         //삭제
         if favoriteID.contains(coin.id) {
             favoriteRepository.delete(favoriteRepository.fetchItem(id: coin.id))
+            outputToast.onNext(.deleteFavorite(coin: coin.id))
             return
         }
         
         //추가
         guard favorite.count < 10 else {
-//            outputError.onNext(.maxFavorite)
+            outputToast.onNext(.maxFavorite)
             return
         }
+        
         let item = UserFavorite(coinID: coin.id)
         favoriteRepository.create(item)
+        outputToast.onNext(.setFavorite(coin: item.coinID))
+    }
+    
+    func pop() {
+        coordinator?.pop()
     }
 }

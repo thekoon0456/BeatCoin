@@ -46,4 +46,9 @@ final class SearchCoordinator: Coordinator, DetailChartCoordinatorDelegate {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+    
+    func pop() {
+        removeChildCoordinator()
+        navigationController?.popViewController(animated: true)
+    }
 }

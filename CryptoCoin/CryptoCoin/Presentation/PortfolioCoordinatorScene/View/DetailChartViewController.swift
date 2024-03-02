@@ -126,7 +126,6 @@ final class DetailChartViewController: BaseViewController {
             }, okAction: { [weak self] in
                 guard let self else { return }
                 viewModel.pop()
-                dismiss(animated: true)
             })
         }
         
