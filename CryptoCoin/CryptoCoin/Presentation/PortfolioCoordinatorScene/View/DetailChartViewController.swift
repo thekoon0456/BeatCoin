@@ -84,6 +84,7 @@ final class DetailChartViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        viewModel.removeChildCoordinator()
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     

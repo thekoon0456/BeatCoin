@@ -224,10 +224,7 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let data = viewModel.outputCoinData.currentValue?[indexPath.row] else { return }
-//        let vc = DetailChartViewController()
-//        vc.viewModel.coinID = data.id
-//        navigationItem.title = .none
-//        navigationController?.pushViewController(vc, animated: true)
+        guard let data = viewModel.outputCoinData.currentValue?[indexPath.row] else { return }
+        viewModel.inputPushDetail.onNext(data.id)
     }
 }

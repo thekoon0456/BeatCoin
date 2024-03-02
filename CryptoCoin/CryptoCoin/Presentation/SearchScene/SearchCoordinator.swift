@@ -38,4 +38,11 @@ final class SearchCoordinator: Coordinator {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func pushToDetail(coinID: String?) {
+        let coordinator = DetailChartCoordinator(navigationController: navigationController)
+        coordinator.coinID = coinID
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
 }

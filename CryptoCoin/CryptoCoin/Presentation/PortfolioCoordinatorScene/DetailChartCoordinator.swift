@@ -31,7 +31,6 @@ final class DetailChartCoordinator: Coordinator {
     // MARK: - Helpers
     
     func start() {
-        print(#function)
         let vm = DetailChartViewModel(coordinator: self, coinID: coinID)
         let vc = DetailChartViewController(viewModel: vm)
         navigationController?.pushViewController(vc, animated: true)

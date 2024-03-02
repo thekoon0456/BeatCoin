@@ -40,7 +40,6 @@ final class TrendingViewModel: ViewModel {
         
         inputPushDetail.bind { [weak self] id in
             guard let self else { return }
-            print(#function)
             coordinator?.pushToDetail(coinID: id)
         }
     }

@@ -130,20 +130,9 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         case .favorite:
             let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
             viewModel.inputPushDetail.onNext(data.id)
-            print(#function)
-//            let vc = DetailChartViewController()
-//            vc.viewModel.coinID = data.id
-//            navigationItem.title = .none
-//            navigationController?.pushViewController(vc, animated: true)
-            break
         case .topCoin:
             guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }
             viewModel.inputPushDetail.onNext(data.id)
-//            let vc = DetailChartViewController()
-//            vc.viewModel.coinID = data.id
-//            navigationItem.title = .none
-//            navigationController?.pushViewController(vc, animated: true)
-            break
         default:
             break
         }

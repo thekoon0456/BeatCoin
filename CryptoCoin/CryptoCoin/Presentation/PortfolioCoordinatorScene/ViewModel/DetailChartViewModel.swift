@@ -84,4 +84,8 @@ final class DetailChartViewModel: ViewModel {
             outputFavorite.onNext(false)
         }
     }
+    
+    func removeChildCoordinator() {
+        coordinator?.removeChildCoordinator()
+    }
 }

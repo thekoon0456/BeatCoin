@@ -40,7 +40,6 @@ final class TrendingCoordinator: Coordinator {
     }
     
     func pushToDetail(coinID: String?) {
-        print(#function)
         let coordinator = DetailChartCoordinator(navigationController: navigationController)
         coordinator.coinID = coinID
         childCoordinators.append(coordinator)

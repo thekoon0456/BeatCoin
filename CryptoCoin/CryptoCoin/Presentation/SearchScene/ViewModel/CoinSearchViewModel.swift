@@ -14,6 +14,7 @@ final class CoinSearchViewModel: ViewModel {
     weak var coordinator: SearchCoordinator?
     let repository = SearchRepository()
     let favoriteRepository = UserFavoriteRepository()
+    let inputPushDetail = Observable<String?>(nil)
     let inputSearchText = Observable<String?>(nil)
     let inputFavoriteButtonTapped = Observable<Int?>(nil)
     let outputCoinData = Observable<[CoinEntity]?>(nil)
@@ -42,7 +43,10 @@ final class CoinSearchViewModel: ViewModel {
             outputFavoriteIndex.onNext(index)
         }
         
-        
+        inputPushDetail.bind { [weak self] id in
+            guard let self else { return }
+            coordinator?.pushToDetail(coinID: id)
+        }
     }
     
     private func callRequest(id: String?) {
