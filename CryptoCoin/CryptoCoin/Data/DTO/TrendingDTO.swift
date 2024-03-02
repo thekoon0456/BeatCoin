@@ -13,6 +13,8 @@ struct TrendingDTO: DTO {
     let nfts: [Nft]
     let categories: [Category]
     
+    // MARK: - ToEntity
+    
     var toEntity: TrendingEntity {
         let coins = self.coins.map { $0.toEntity }
         let nfts = self.nfts.map { $0.toEntity }
@@ -58,15 +60,15 @@ struct CategoryData: DTO {
 struct Coin: DTO {
     let item: Item
     
+    // MARK: - ToEntity
+    
     var toEntity: CoinEntity {
         return CoinEntity(id: item.id,
                           name: item.name,
                           symbol: item.symbol,
                           image: item.thumb,
                           currentPrice: item.data.price,
-                          priceChangePercentage24H:
-                            String(format: "%.2f", item.data.priceChangePercentage24H["krw"] ?? 0) + "%"
-                          ,
+                          priceChangePercentage24H: String(format: "%.2f", item.data.priceChangePercentage24H["krw"] ?? 0) + "%",
                           isUp: item.data.priceChangePercentage24H["krw"] ?? 0 >= 0 ? true : false,
                           high24h: "",
                           low24h: "",
@@ -145,6 +147,8 @@ struct Nft: DTO {
         case floorPrice24HPercentageChange = "floor_price_24h_percentage_change"
         case data
     }
+    
+    // MARK: - ToEntity
     
     var toEntity: NFTEntity {
         return NFTEntity(id: id,

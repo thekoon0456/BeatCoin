@@ -35,6 +35,8 @@ struct SearchCoin: DTO {
         case marketCapRank = "market_cap_rank"
         case thumb, large
     }
+    
+    // MARK: - ToEntity
 
     var toEntity: CoinEntity {
         return CoinEntity(id: id,

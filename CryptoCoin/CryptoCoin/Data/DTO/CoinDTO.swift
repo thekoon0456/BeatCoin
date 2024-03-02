@@ -27,6 +27,8 @@ struct CoinDTO: DTO {
     let atlDate: String
     let lastUpdated: String
     let sparklineIn7D: SparklineIn7D?
+    
+    // MARK: - ToEntity
 
     var toEntity: CoinEntity {
         return CoinEntity(id: id,
