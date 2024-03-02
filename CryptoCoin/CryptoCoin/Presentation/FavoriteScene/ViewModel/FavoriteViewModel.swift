@@ -10,6 +10,8 @@ import Foundation
 final class FavoriteViewModel: ViewModel {
     
     // MARK: - Properties
+    
+    weak var coordinator: FavoriteCoordinator?
     let repository = CoinRepository()
     let favoriteRepository = UserFavoriteRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
@@ -17,7 +19,10 @@ final class FavoriteViewModel: ViewModel {
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputError = Observable<CCError?>(nil)
     
-    init() { transform() }
+    init(coordinator: FavoriteCoordinator?) {
+        self.coordinator = coordinator
+        transform()
+    }
     
     private func transform() {
         inputViewWillAppear.bind { [weak self] tap in

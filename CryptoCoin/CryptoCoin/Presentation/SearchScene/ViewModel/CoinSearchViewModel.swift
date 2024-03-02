@@ -11,6 +11,7 @@ final class CoinSearchViewModel: ViewModel {
     
     // MARK: - Properties
     
+    weak var coordinator: SearchCoordinator?
     let repository = SearchRepository()
     let favoriteRepository = UserFavoriteRepository()
     let inputSearchText = Observable<String?>(nil)
@@ -20,7 +21,10 @@ final class CoinSearchViewModel: ViewModel {
     let outputFavoriteIndex = Observable<Int?>(nil)
     let outputError = Observable<CCError?>(nil)
     
-    init() { transform() }
+    init(coordinator: SearchCoordinator?) {
+        self.coordinator = coordinator
+        transform()
+    }
     
     private func transform() {
         inputSearchText.bind { [weak self] id in

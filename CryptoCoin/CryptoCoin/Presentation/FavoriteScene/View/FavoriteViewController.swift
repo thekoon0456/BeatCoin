@@ -13,7 +13,7 @@ final class FavoriteViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let viewModel = FavoriteViewModel()
+    let viewModel: FavoriteViewModel
     private var updateTimer: Timer?
     
     private lazy var collectionView = {
@@ -40,6 +40,11 @@ final class FavoriteViewController: BaseViewController {
     
     // MARK: - Lifecycles
     
+    init(viewModel: FavoriteViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +66,6 @@ final class FavoriteViewController: BaseViewController {
     // MARK: - Selectors
     
     @objc func refreshData() {
-        print(#function)
         viewModel.inputViewWillAppear.onNext(())
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
@@ -147,11 +151,11 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = viewModel.outputCoinData.currentValue[indexPath.item]
-        let vc = ChartViewController()
-        vc.viewModel.coinID = data.id
-        navigationItem.title = .none
-        navigationController?.pushViewController(vc, animated: true)
+//        let data = viewModel.outputCoinData.currentValue[indexPath.item]
+//        let vc = DetailChartViewController()
+//        vc.viewModel.coinID = data.id
+//        navigationItem.title = .none
+//        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

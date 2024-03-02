@@ -1,5 +1,5 @@
 //
-//  ChartViewController.swift
+//  DetailChartViewController.swift
 //  CryptoCoin
 //
 //  Created by Deokhun KIM on 2/27/24.
@@ -11,10 +11,10 @@ import DGCharts
 import Kingfisher
 import SnapKit
 
-final class ChartViewController: BaseViewController {
+final class DetailChartViewController: BaseViewController {
     
     // MARK: - Properties
-    let viewModel = ChartViewModel()
+    private let viewModel: DetailChartViewModel
     private lazy var chartView = LineChartView().then {
         $0.rightAxis.enabled = false
         $0.leftAxis.enabled = false
@@ -23,6 +23,7 @@ final class ChartViewController: BaseViewController {
         $0.legend.enabled = false
         $0.setVisibleXRangeMinimum(1)
     }
+    
     private lazy var iconImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 20
@@ -68,6 +69,11 @@ final class ChartViewController: BaseViewController {
                                                  color: CCDesign.Color.lowPrice.color)
     
     // MARK: - Lifecycles
+    
+    init(viewModel: DetailChartViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,6 +11,7 @@ final class TrendingViewModel: ViewModel {
     
     // MARK: - Properties
     
+    weak var coordinator: TrendingCoordinator?
     let trendingRepository = TrendingRepository()
     let coinRepository = CoinRepository()
     let favoriteRepository = UserFavoriteRepository()
@@ -23,7 +24,10 @@ final class TrendingViewModel: ViewModel {
     
     // MARK: - Lifecycles
     
-    init() { transform() }
+    init(coordinator: TrendingCoordinator?) {
+        self.coordinator = coordinator
+        transform()
+    }
     
     // MARK: - Helpers
     
@@ -54,7 +58,6 @@ final class TrendingViewModel: ViewModel {
             case .success(let success):
                 outputTrendingCoin.onNext(success.coins)
                 outputTrendingNFT.onNext(success.nfts)
-                print(success)
             case .failure(let failure):
                 outputError.onNext(checkError(error: failure))
             }

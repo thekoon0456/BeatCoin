@@ -13,7 +13,7 @@ final class CoinSearchViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private let viewModel = CoinSearchViewModel()
+    private let viewModel: CoinSearchViewModel
     private var updateTimer: Timer?
     
     private lazy var searchController = UISearchController().then {
@@ -32,6 +32,11 @@ final class CoinSearchViewController: BaseViewController {
     }
     
     // MARK: - Lifecycles
+    
+    init(viewModel: CoinSearchViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,10 +224,10 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let data = viewModel.outputCoinData.currentValue?[indexPath.row] else { return }
-        let vc = ChartViewController()
-        vc.viewModel.coinID = data.id
-        navigationItem.title = .none
-        navigationController?.pushViewController(vc, animated: true)
+//        guard let data = viewModel.outputCoinData.currentValue?[indexPath.row] else { return }
+//        let vc = DetailChartViewController()
+//        vc.viewModel.coinID = data.id
+//        navigationItem.title = .none
+//        navigationController?.pushViewController(vc, animated: true)
     }
 }

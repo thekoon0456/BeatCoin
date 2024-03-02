@@ -1,5 +1,5 @@
 //
-//  ChartViewModel.swift
+//  PortfolioViewModel.swift
 //  CryptoCoin
 //
 //  Created by Deokhun KIM on 2/27/24.
@@ -7,10 +7,11 @@
 
 import Foundation
 
-final class ChartViewModel: ViewModel {
+final class DetailChartViewModel: ViewModel {
     
     // MARK: - Properties
     
+    weak var coordinator: DetailChartCoordinator?
     private let repository = CoinRepository()
     private let favoriteRepository = UserFavoriteRepository()
     var coinID: String?
@@ -21,7 +22,10 @@ final class ChartViewModel: ViewModel {
     let outputFavorite = Observable<Bool?>(nil)
     let outputError = Observable<CCError?>(nil)
     
-    init() { transform() }
+    init(coordinator: DetailChartCoordinator?) {
+        self.coordinator = coordinator
+        transform()
+    }
 
     private func transform() {
         inputViewDidLoad.bind { [weak self] _ in

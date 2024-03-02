@@ -94,14 +94,14 @@ enum CCDesign {
     }
     
     enum TabIcon: CaseIterable {
-        case trend
+        case trending
         case search
         case portfolio
         case user
         
         var name: String {
             switch self {
-            case .trend:
+            case .trending:
                 "tab_trend"
             case .search:
                 "tab_search"

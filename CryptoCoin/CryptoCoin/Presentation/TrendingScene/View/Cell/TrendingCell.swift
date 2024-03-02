@@ -82,9 +82,10 @@ final class TrendingCell: BaseCollectionViewCell {
     
     override func configureLayout() {
         rankLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(12)
             make.centerY.equalToSuperview()
+            make.bottom.lessThanOrEqualToSuperview().offset(-12)
         }
         
         iconImageView.snp.makeConstraints { make in

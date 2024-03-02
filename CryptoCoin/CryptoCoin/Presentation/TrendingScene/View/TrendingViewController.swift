@@ -12,7 +12,7 @@ import SnapKit
 final class TrendingViewController: BaseViewController {
     
     // MARK: - Properties
-    private let viewModel = TrendingViewModel()
+    private let viewModel: TrendingViewModel
     
     private lazy var collectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: setLayout())
@@ -29,6 +29,11 @@ final class TrendingViewController: BaseViewController {
     }()
     
     // MARK: - Lifecycles
+    
+    init(viewModel: TrendingViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,17 +128,19 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch Section(rawValue: indexPath.section) {
         case .favorite:
-            let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
-            let vc = ChartViewController()
-            vc.viewModel.coinID = data.id
-            navigationItem.title = .none
-            navigationController?.pushViewController(vc, animated: true)
+//            let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
+//            let vc = DetailChartViewController()
+//            vc.viewModel.coinID = data.id
+//            navigationItem.title = .none
+//            navigationController?.pushViewController(vc, animated: true)
+            break
         case .topCoin:
-            guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }
-            let vc = ChartViewController()
-            vc.viewModel.coinID = data.id
-            navigationItem.title = .none
-            navigationController?.pushViewController(vc, animated: true)
+//            guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }
+//            let vc = DetailChartViewController()
+//            vc.viewModel.coinID = data.id
+//            navigationItem.title = .none
+//            navigationController?.pushViewController(vc, animated: true)
+            break
         default:
             break
         }
@@ -211,7 +218,7 @@ extension TrendingViewController {
                 group.contentInsets = NSDirectionalEdgeInsets(top: 12,
                                                               leading: 12,
                                                               bottom: 12,
-                                                              trailing: 12)
+                                                              trailing: 0)
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                               heightDimension: .absolute(50)),

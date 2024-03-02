@@ -16,9 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
         window?.tintColor = CCDesign.Color.tintColor.color
-        
-        let tabVc = TabBarViewController()
-        window?.rootViewController = tabVc
+        let nav = UINavigationController()
+        nav.isNavigationBarHidden = true
+        let coordinator = AppCoordinator(navigationController: nav)
+        coordinator.start()
+        window?.rootViewController = nav
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }
