@@ -67,6 +67,7 @@
 		7C75BDF12B8F2D26004D5DA5 /* ChartPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */; };
 		7C75BDF32B8F33B9004D5DA5 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF22B8F33B9004D5DA5 /* DateFormatterService.swift */; };
 		7C75BDFB2B8F58F4004D5DA5 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */; };
+		7CB09F652B944C5D0045FD0A /* RealmRepository+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB09F642B944C5D0045FD0A /* RealmRepository+.swift */; };
 		7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */; };
 		7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BDA2B90AF8300493767 /* TrendingCell.swift */; };
 		7CCC5E3F2B91BC5E0089334F /* CCDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */; };
@@ -130,6 +131,7 @@
 		7C75BDF02B8F2D26004D5DA5 /* ChartPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPriceView.swift; sourceTree = "<group>"; };
 		7C75BDF22B8F33B9004D5DA5 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		7CB09F642B944C5D0045FD0A /* RealmRepository+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmRepository+.swift"; sourceTree = "<group>"; };
 		7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingFavoriteCell.swift; sourceTree = "<group>"; };
 		7CC87BDA2B90AF8300493767 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCDesign.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				7C51CD2E2B8DB28000E39CB0 /* UIView+.swift */,
 				7C51CD562B8DBC0D00E39CB0 /* UIColor+.swift */,
 				7C27191D2B906ED20036F3FA /* Coordinator+.swift */,
+				7CB09F642B944C5D0045FD0A /* RealmRepository+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CB09F652B944C5D0045FD0A /* RealmRepository+.swift in Sources */,
 				7C75BDF12B8F2D26004D5DA5 /* ChartPriceView.swift in Sources */,
 				7C51CD7B2B8DE3B700E39CB0 /* Data.swift in Sources */,
 				7C5D5A252B93602D0087FC2B /* AppCoordinator.swift in Sources */,

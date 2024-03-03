@@ -118,8 +118,8 @@ final class DetailChartViewController: BaseViewController {
                   let error
             else { return }
             viewModel.coordinator?.showAlert(message: error.description,
-                                             primaryButtonTitle: "재시도하기",
                                              okButtonTitle: "되돌아가기",
+                                             primaryButtonTitle: "재시도하기",
                                              okAction: { [weak self] in
                 guard let self else { return }
                 viewModel.pop()

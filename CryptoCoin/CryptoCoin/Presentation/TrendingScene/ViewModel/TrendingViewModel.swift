@@ -96,3 +96,10 @@ final class TrendingViewModel: ViewModel {
         }
     }
 }
+
+extension TrendingViewModel {
+    
+    func dismiss() {
+        coordinator?.dismiss()
+    }
+}

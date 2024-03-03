@@ -28,6 +28,16 @@ final class TrendingViewController: BaseViewController {
         return cv
     }()
     
+    private lazy var profileButton = UIButton().then {
+        $0.setImage(UIImage(named: CCDesign.TabIcon.user.name), for: .normal)
+        $0.contentMode = .scaleAspectFill
+        $0.layer.borderColor = CCDesign.Color.tintColor.color.cgColor
+        $0.layer.borderWidth = 3
+        $0.layer.cornerRadius = 20
+        $0.clipsToBounds = true
+        $0.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
+    }
+    
     // MARK: - Lifecycles
     
     init(viewModel: TrendingViewModel) {
@@ -43,8 +53,16 @@ final class TrendingViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         viewModel.inputViewWillAppear.onNext(())
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func imageButtonTapped() {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        viewModel.coordinator?.present(vc: vc)
     }
     
     // MARK: - Helpers
@@ -65,6 +83,9 @@ final class TrendingViewController: BaseViewController {
     }
     
     override func configureLayout() {
+        profileButton.snp.makeConstraints { make in
+            make.size.equalTo(40)
+        }
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -75,6 +96,23 @@ final class TrendingViewController: BaseViewController {
         navigationItem.title = CCConst.NaviTitle.trending.name
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+    }
+}
+
+// MARK: - ImagePicker
+
+extension TrendingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        viewModel.dismiss()
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileButton.setImage(pickedImage, for: .normal)
+        }
+        viewModel.dismiss()
     }
 }
 
@@ -202,7 +240,7 @@ extension TrendingViewController {
             switch Section(rawValue: section) {
             case .favorite:
                 guard self.viewModel.outputFavoriteCoinData.currentValue.count >= 2 else { return nil }
-                           
+                
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)

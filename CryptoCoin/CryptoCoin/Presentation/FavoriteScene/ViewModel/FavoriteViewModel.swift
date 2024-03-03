@@ -66,4 +66,8 @@ final class FavoriteViewModel: ViewModel {
             }
         }
     }
+    
+    func dismiss() {
+        coordinator?.dismiss()
+    }
 }

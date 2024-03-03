@@ -46,4 +46,12 @@ final class FavoriteCoordinator: Coordinator, DetailChartCoordinatorDelegate {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+    
+    func present(vc: UIImagePickerController) {
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func dismiss() {
+        navigationController?.dismiss(animated: true)
+    }
 }

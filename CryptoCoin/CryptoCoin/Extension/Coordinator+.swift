@@ -11,8 +11,8 @@ extension Coordinator {
     
     func showAlert(title: String = "오류가 발생했어요",
                    message: String,
-                   primaryButtonTitle: String,
                    okButtonTitle: String = "확인",
+                   primaryButtonTitle: String,
                    okAction: (() -> Void)? = nil,
                    primaryAction: (() -> Void)?) {
         let alert = UIAlertController(title: title,
@@ -56,3 +56,18 @@ extension Coordinator {
         }
     }
 }
+
+//extension BaseViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//    
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        dismiss(animated: true)
+//    }
+//    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+////            self.viewModel.inputProfireImage.onNext(pickedImage)
+//            print(pickedImage)
+//        }
+//        dismiss(animated: true)
+//    }
+//}

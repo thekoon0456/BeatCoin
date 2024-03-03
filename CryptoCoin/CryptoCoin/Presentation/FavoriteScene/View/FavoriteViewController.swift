@@ -38,6 +38,16 @@ final class FavoriteViewController: BaseViewController {
         return cv
     }()
     
+    private lazy var profileButton = UIButton().then {
+        $0.setImage(UIImage(named: CCDesign.TabIcon.user.name), for: .normal)
+        $0.contentMode = .scaleAspectFill
+        $0.layer.borderColor = CCDesign.Color.tintColor.color.cgColor
+        $0.layer.borderWidth = 3
+        $0.layer.cornerRadius = 20
+        $0.clipsToBounds = true
+        $0.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
+    }
+    
     // MARK: - Lifecycles
     
     init(viewModel: FavoriteViewModel) {
@@ -63,6 +73,12 @@ final class FavoriteViewController: BaseViewController {
     }
     
     // MARK: - Selectors
+    
+    @objc func imageButtonTapped() {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        viewModel.coordinator?.present(vc: vc)
+    }
     
     @objc func refreshData() {
         viewModel.inputViewWillAppear.onNext(())
@@ -104,8 +120,8 @@ final class FavoriteViewController: BaseViewController {
                               let error
                         else { return }
             viewModel.coordinator?.showAlert(message: error.description,
-                                             primaryButtonTitle: "재시도하기",
-                                             okButtonTitle: "되돌아가기") { [weak self] in
+                                             okButtonTitle: "되돌아가기",
+                                             primaryButtonTitle: "재시도하기") { [weak self] in
                 guard let self else { return }
                 viewModel.inputViewWillAppear.onNext(())
             }
@@ -127,6 +143,10 @@ final class FavoriteViewController: BaseViewController {
     }
     
     override func configureLayout() {
+        profileButton.snp.makeConstraints { make in
+            make.size.equalTo(40)
+        }
+        
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -137,6 +157,23 @@ final class FavoriteViewController: BaseViewController {
         navigationItem.title = CCConst.NaviTitle.favorite.name
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+    }
+}
+
+// MARK: - ImagePicker
+
+extension FavoriteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        viewModel.dismiss()
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileButton.setImage(pickedImage, for: .normal)
+        }
+        viewModel.dismiss()
     }
 }
 

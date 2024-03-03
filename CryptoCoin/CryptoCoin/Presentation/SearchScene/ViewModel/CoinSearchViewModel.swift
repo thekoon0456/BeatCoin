@@ -97,4 +97,8 @@ final class CoinSearchViewModel: ViewModel {
     func pop() {
         coordinator?.pop()
     }
+    
+    func dismiss() {
+        coordinator?.dismiss()
+    }
 }

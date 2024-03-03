@@ -31,6 +31,16 @@ final class CoinSearchViewController: BaseViewController {
         $0.register(SearchCell.self, forCellReuseIdentifier: SearchCell.identifier)
     }
     
+    private lazy var profileButton = UIButton().then {
+        $0.setImage(UIImage(named: CCDesign.TabIcon.user.name), for: .normal)
+        $0.contentMode = .scaleAspectFill
+        $0.layer.borderColor = CCDesign.Color.tintColor.color.cgColor
+        $0.layer.borderWidth = 3
+        $0.layer.cornerRadius = 20
+        $0.clipsToBounds = true
+        $0.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
+    }
+    
     // MARK: - Lifecycles
     
     init(viewModel: CoinSearchViewModel) {
@@ -58,6 +68,12 @@ final class CoinSearchViewController: BaseViewController {
     }
     
     // MARK: - Selectors
+    
+    @objc func imageButtonTapped() {
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        viewModel.coordinator?.present(vc: vc)
+    }
     
     @objc private func favoriteButtonTapped(sender: UIButton) {
         viewModel.inputFavoriteButtonTapped.onNext(sender.tag)
@@ -92,8 +108,8 @@ final class CoinSearchViewController: BaseViewController {
                   let error
             else { return }
             viewModel.coordinator?.showAlert(message: error.description,
-                                             primaryButtonTitle: "재시도하기",
-                                             okButtonTitle: "되돌아가기") {[weak self] in
+                                             okButtonTitle: "되돌아가기",
+                                             primaryButtonTitle: "재시도하기") { [weak self] in
                 guard let self else { return }
                 //재시도
                 viewModel.inputSearchText.onNext((searchController.searchBar.text))
@@ -123,6 +139,10 @@ final class CoinSearchViewController: BaseViewController {
     }
     
     override func configureLayout() {
+        profileButton.snp.makeConstraints { make in
+            make.size.equalTo(40)
+        }
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -135,6 +155,23 @@ final class CoinSearchViewController: BaseViewController {
         navigationItem.backButtonDisplayMode = .minimal
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+    }
+}
+
+// MARK: - ImagePicker
+
+extension CoinSearchViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        viewModel.dismiss()
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileButton.setImage(pickedImage, for: .normal)
+        }
+        viewModel.dismiss()
     }
 }
 

@@ -51,4 +51,12 @@ final class SearchCoordinator: Coordinator, DetailChartCoordinatorDelegate {
         removeChildCoordinator()
         navigationController?.popViewController(animated: true)
     }
+    
+    func present(vc: UIImagePickerController) {
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func dismiss() {
+        navigationController?.dismiss(animated: true)
+    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TrendingCoordinator: Coordinator, DetailChartCoordinatorDelegate {
+final class TrendingCoordinator: NSObject, Coordinator, DetailChartCoordinatorDelegate {
 
     // MARK: - Properties
     
@@ -45,5 +45,13 @@ final class TrendingCoordinator: Coordinator, DetailChartCoordinatorDelegate {
         coordinator.coinID = coinID
         childCoordinators.append(coordinator)
         coordinator.start()
+    }
+    
+    func present(vc: UIImagePickerController) {
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func dismiss() {
+        navigationController?.dismiss(animated: true)
     }
 }
