@@ -48,6 +48,13 @@ final class FavoriteViewController: BaseViewController {
         $0.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
     }
     
+    private let backgroundView = UIImageView().then {
+        $0.image = UIImage(systemName: CCDesign.Icon.coin.name)
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = CCDesign.Color.tintColor.color
+        $0.alpha = 0.3
+    }
+    
     // MARK: - Lifecycles
     
     init(viewModel: FavoriteViewModel) {
@@ -97,6 +104,7 @@ final class FavoriteViewController: BaseViewController {
     func bind() {
         viewModel.output.coinData.bind { [weak self] coins in
             guard let self else { return }
+            collectionView.backgroundView = coins.isEmpty ? backgroundView : nil
             collectionView.reloadData()
         }
         

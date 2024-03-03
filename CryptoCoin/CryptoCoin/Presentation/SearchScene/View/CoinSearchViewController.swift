@@ -17,7 +17,7 @@ final class CoinSearchViewController: BaseViewController {
     private var updateTimer: Timer?
     
     private lazy var searchController = UISearchController().then {
-        $0.searchBar.placeholder = "Search Coin"
+        $0.searchBar.placeholder = CCConst.Ments.searchPlaceHolder.text
         $0.searchBar.backgroundColor = .clear
         $0.searchBar.searchBarStyle = .minimal
         $0.searchBar.tintColor = CCDesign.Color.tintColor.color
@@ -32,7 +32,7 @@ final class CoinSearchViewController: BaseViewController {
     }
     
     private let backgroundView = UIImageView().then {
-        $0.image = UIImage(systemName: "bitcoinsign.circle")
+        $0.image = UIImage(systemName: CCDesign.Icon.coin.name)
         $0.contentMode = .scaleAspectFit
         $0.tintColor = CCDesign.Color.tintColor.color
         $0.alpha = 0.3
@@ -125,7 +125,6 @@ final class CoinSearchViewController: BaseViewController {
             guard let self,
                   let error else { return }
             viewModel.showAlert(error: error)
-
         }
         
         viewModel.output.toast.bind { [weak self] toast in

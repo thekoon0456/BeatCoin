@@ -15,7 +15,7 @@ final class MoreSeeCell: BaseCollectionViewCell {
     
     private let titleLabel = UILabel().then {
         $0.font = CCDesign.Font.titleBold.font
-        $0.text = "더 보기"
+        $0.text = CCConst.Ments.moreSee.text
     }
 
     // MARK: - Configure

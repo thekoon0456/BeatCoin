@@ -82,6 +82,7 @@ enum CCDesign {
     enum Icon {
         case star
         case starFill
+        case coin
         
         var name: String {
             switch self {
@@ -89,6 +90,8 @@ enum CCDesign {
                 "btn_star"
             case .starFill:
                 "btn_star_fill"
+            case .coin:
+                "bitcoinsign.circle"
             }
         }
     }

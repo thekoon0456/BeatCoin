@@ -45,6 +45,26 @@ enum CCConst {
             }
         }
     }
+    
+    enum Ments {
+        case searchPlaceHolder
+        case moreSee
+        case dismiss
+        case retry
+        
+        var text: String {
+            switch self {
+            case .searchPlaceHolder:
+                "Search Coin"
+            case .moreSee:
+                "더 보기"
+            case .dismiss:
+                "되돌아가기"
+            case .retry:
+                "다시 시도하기"
+            }
+        }
+    }
 }
 
 enum CCLayout {

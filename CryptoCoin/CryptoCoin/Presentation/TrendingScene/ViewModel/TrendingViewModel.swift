@@ -128,8 +128,8 @@ final class TrendingViewModel: ViewModel {
     
     func showAlert(error: CCError) {
         coordinator?.showAlert(message: error.description,
-                               okButtonTitle: "되돌아가기",
-                               primaryButtonTitle: "재시도하기") { [weak self] in
+                               okButtonTitle: CCConst.Ments.dismiss.text,
+                               primaryButtonTitle: CCConst.Ments.retry.text) { [weak self] in
             guard let self else { return }
             input.viewWillAppear.onNext(())
         }

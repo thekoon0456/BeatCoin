@@ -104,8 +104,8 @@ final class DetailChartViewModel: ViewModel {
     
     func showAlert(error: CCError) {
         coordinator?.showAlert(message: error.description,
-                               okButtonTitle: "되돌아가기",
-                               primaryButtonTitle: "재시도하기",
+                               okButtonTitle: CCConst.Ments.dismiss.text,
+                               primaryButtonTitle: CCConst.Ments.retry.text,
                                okAction: { [weak self] in
             guard let self else { return }
             pop()
