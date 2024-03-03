@@ -18,6 +18,7 @@ final class TrendingViewModel: ViewModel {
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
     let inputProfileImage = Observable<Data?>(nil)
+    let inputDismiss = Observable<Void?>(nil)
     let outputProfileImageData = Observable<Data?>(nil)
     let outputFavoriteCoinData = Observable<[CoinEntity]>([])
     let outputTrendingCoin = Observable<[CoinEntity]?>(nil)
@@ -55,6 +56,11 @@ final class TrendingViewModel: ViewModel {
             guard let self else { return }
             userRepository.updateprofileImage(data)
             outputProfileImageData.onNext(data)
+        }
+        
+        inputDismiss.bind { [weak self] _ in
+            guard let self else { return }
+            dismiss()
         }
     }
     

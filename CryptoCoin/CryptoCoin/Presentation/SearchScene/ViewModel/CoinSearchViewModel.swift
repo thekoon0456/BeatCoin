@@ -17,6 +17,9 @@ final class CoinSearchViewModel: ViewModel {
     let inputPushDetail = Observable<String?>(nil)
     let inputSearchText = Observable<String?>(nil)
     let inputFavoriteButtonTapped = Observable<Int?>(nil)
+    let inputProfileImage = Observable<Data?>(nil)
+    let inputDismiss = Observable<Void?>(nil)
+    let outputProfileImageData = Observable<Data?>(nil)
     let outputCoinData = Observable<[CoinEntity]?>(nil)
     let outputFavorite = Observable<[Bool]?>(nil)
     let outputFavoriteIndex = Observable<Int?>(nil)
@@ -32,6 +35,7 @@ final class CoinSearchViewModel: ViewModel {
         inputSearchText.bind { [weak self] id in
             guard let self else { return }
             callRequest(id: id)
+            setImageData()
         }
         
         inputFavoriteButtonTapped.bind { [weak self] index in
@@ -47,6 +51,17 @@ final class CoinSearchViewModel: ViewModel {
         inputPushDetail.bind { [weak self] id in
             guard let self else { return }
             coordinator?.pushToDetail(coinID: id)
+        }
+        
+        inputProfileImage.bind { [weak self] data in
+            guard let self else { return }
+            userRepository.updateprofileImage(data)
+            outputProfileImageData.onNext(data)
+        }
+        
+        inputDismiss.bind { [weak self] _ in
+            guard let self else { return }
+            dismiss()
         }
     }
     
@@ -92,6 +107,11 @@ final class CoinSearchViewModel: ViewModel {
         
         userRepository.createFav(coin.id)
         outputToast.onNext(.setFavorite(coin: coin.id))
+    }
+    
+    private func setImageData() {
+        guard let data = userRepository.fetchImageData() else { return }
+        outputProfileImageData.onNext(data)
     }
     
     func pop() {

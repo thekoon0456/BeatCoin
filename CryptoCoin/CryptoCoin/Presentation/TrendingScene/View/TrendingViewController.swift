@@ -77,7 +77,7 @@ final class TrendingViewController: BaseViewController {
         
         viewModel.outputProfileImageData.bind { [weak self] data in
             guard let self,
-            let data
+                  let data
             else { return }
             profileButton.setImage(UIImage(data: data), for: .normal)
         }
@@ -112,15 +112,14 @@ final class TrendingViewController: BaseViewController {
 extension TrendingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        viewModel.dismiss()
+        viewModel.inputDismiss.onNext(())
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.profileButton.setImage(pickedImage, for: .normal)
             viewModel.inputProfileImage.onNext(pickedImage.pngData())
         }
-        viewModel.dismiss()
+        viewModel.inputDismiss.onNext(())
     }
 }
 

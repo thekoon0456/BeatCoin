@@ -17,6 +17,9 @@ final class FavoriteViewModel: ViewModel {
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
     let inputUpdateFavorite = Observable<[CoinEntity]?>(nil)
+    let inputProfileImage = Observable<Data?>(nil)
+    let inputDismiss = Observable<Void?>(nil)
+    let outputProfileImageData = Observable<Data?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputError = Observable<CCError?>(nil)
     
@@ -31,6 +34,7 @@ final class FavoriteViewModel: ViewModel {
             guard let user = userRepository.fetch() else { return }
             let favoriteID = Array(user.favoriteID)
             callRequest(ids: favoriteID)
+            setImageData()
         }
         
         inputPushDetail.bind { [weak self] id in
@@ -46,6 +50,17 @@ final class FavoriteViewModel: ViewModel {
             let favoriteID = Array(user.favoriteID)
             userRepository.updatefav(item: favoriteID)
             outputCoinData.onNext(coin)
+        }
+        
+        inputProfileImage.bind { [weak self] data in
+            guard let self else { return }
+            userRepository.updateprofileImage(data)
+            outputProfileImageData.onNext(data)
+        }
+        
+        inputDismiss.bind { [weak self] _ in
+            guard let self else { return }
+            dismiss()
         }
     }
     
@@ -65,6 +80,11 @@ final class FavoriteViewModel: ViewModel {
                 outputError.onNext(checkError(error: failure))
             }
         }
+    }
+    
+    private func setImageData() {
+        guard let data = userRepository.fetchImageData() else { return }
+        outputProfileImageData.onNext(data)
     }
     
     func dismiss() {

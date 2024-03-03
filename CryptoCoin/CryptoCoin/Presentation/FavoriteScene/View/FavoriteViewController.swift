@@ -97,24 +97,6 @@ final class FavoriteViewController: BaseViewController {
             collectionView.reloadData()
         }
         
-//        viewModel.outputError.bind { [weak self] error in
-//            guard let self,
-//                  let error
-//            else { return }
-//            DispatchQueue.main.async { [weak self] in
-//                guard let self else { return }
-//                showAlert(message: error.description,
-//                          primaryButtonTitle: "재시도하기",
-//                          okButtonTitle: "취소") { [weak self] _ in
-//                    guard let self else { return }
-//                    viewModel.inputViewWillAppear.onNext(())
-//                    dismiss(animated: true)
-//                } okAction: { [weak self] _ in
-//                    guard let self else { return }
-//                    dismiss(animated: true)
-//                }
-//            }
-//        }
         viewModel.outputError.bind { [weak self] error in
                         guard let self,
                               let error
@@ -125,6 +107,13 @@ final class FavoriteViewController: BaseViewController {
                 guard let self else { return }
                 viewModel.inputViewWillAppear.onNext(())
             }
+        }
+        
+        viewModel.outputProfileImageData.bind { [weak self] data in
+            guard let self,
+                  let data
+            else { return }
+            profileButton.setImage(UIImage(data: data), for: .normal)
         }
     }
     
@@ -166,14 +155,14 @@ final class FavoriteViewController: BaseViewController {
 extension FavoriteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        viewModel.dismiss()
+        viewModel.inputDismiss.onNext(())
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.profileButton.setImage(pickedImage, for: .normal)
+            viewModel.inputProfileImage.onNext(pickedImage.pngData())
         }
-        viewModel.dismiss()
+        viewModel.inputDismiss.onNext(())
     }
 }
 
