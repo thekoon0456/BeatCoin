@@ -7,7 +7,7 @@
 
 import Foundation
  
-struct TrendingEntity: Entity {
+struct TrendingEntity: Entity { //api 요청 한번만 하기 위해 묶음
     let coins: [CoinEntity]
     let nfts: [NFTEntity]
 }

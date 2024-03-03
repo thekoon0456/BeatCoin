@@ -80,6 +80,7 @@ final class SearchCell: BaseTableViewCell {
         }
         
         favoriteButton.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-8)
         }
