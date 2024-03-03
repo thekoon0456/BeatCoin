@@ -17,6 +17,7 @@ final class TrendingViewModel: ViewModel {
     let userRepository = UserRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
+    let inputMoveFav = Observable<Void?>(nil)
     let inputProfileImage = Observable<Data?>(nil)
     let inputDismiss = Observable<Void?>(nil)
     let outputProfileImageData = Observable<Data?>(nil)
@@ -60,7 +61,12 @@ final class TrendingViewModel: ViewModel {
         
         inputDismiss.bind { [weak self] _ in
             guard let self else { return }
-            dismiss()
+            coordinator?.dismiss()
+        }
+        
+        inputMoveFav.bind { [weak self] _ in
+            guard let self else { return }
+            coordinator?.moveToFav()
         }
     }
     
@@ -114,12 +120,5 @@ final class TrendingViewModel: ViewModel {
     private func setImageData() {
         guard let data = userRepository.fetchImageData() else { return }
         outputProfileImageData.onNext(data)
-    }
-}
-
-extension TrendingViewModel {
-    
-    func dismiss() {
-        coordinator?.dismiss()
     }
 }

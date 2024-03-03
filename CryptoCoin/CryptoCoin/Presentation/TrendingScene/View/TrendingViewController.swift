@@ -20,6 +20,8 @@ final class TrendingViewController: BaseViewController {
         cv.dataSource = self
         cv.register(TrendingFavoriteCell.self,
                     forCellWithReuseIdentifier: TrendingFavoriteCell.identifier)
+        cv.register(MoreSeeCell.self,
+                    forCellWithReuseIdentifier: MoreSeeCell.identifier)
         cv.register(TrendingCell.self,
                     forCellWithReuseIdentifier: TrendingCell.identifier)
         cv.register(TrendingHeaderView.self,
@@ -135,7 +137,14 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         guard let section = Section(rawValue: section) else { return 0 }
         switch section {
         case .favorite:
-            return viewModel.outputFavoriteCoinData.currentValue.count >= 2 ? viewModel.outputFavoriteCoinData.currentValue.count : 0
+            let count = viewModel.outputFavoriteCoinData.currentValue.count
+            if count < 2 { //cell이 2개보다 적을때는 안보여줌
+                return 0
+            }
+            if count > 3 { //cell이 3개보다 많으면 3개까지 보여주고 더보기셀
+                return 4
+            }
+            return count
         case .topCoin:
             return viewModel.outputTrendingCoin.currentValue?.count ?? 0
         case .topNFT:
@@ -147,6 +156,13 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
         switch section {
         case .favorite:
+            if indexPath.row == 3 { //cell이 3개보다 많으면 3개까지 보여주고 더보기셀
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoreSeeCell.identifier, for: indexPath) as? MoreSeeCell else {
+                    return UICollectionViewCell()
+                }
+                return cell
+            }
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingFavoriteCell.identifier, for: indexPath) as? TrendingFavoriteCell else {
                 return UICollectionViewCell()
             }
@@ -176,7 +192,11 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         switch Section(rawValue: indexPath.section) {
         case .favorite:
             let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
-            viewModel.inputPushDetail.onNext(data.id)
+            if (0...2).contains(indexPath.row) {
+                viewModel.inputPushDetail.onNext(data.id)
+            } else {
+                viewModel.inputMoveFav.onNext(())
+            }
         case .topCoin:
             guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }
             viewModel.inputPushDetail.onNext(data.id)

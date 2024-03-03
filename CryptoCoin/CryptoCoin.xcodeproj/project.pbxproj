@@ -68,6 +68,7 @@
 		7C75BDF32B8F33B9004D5DA5 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDF22B8F33B9004D5DA5 /* DateFormatterService.swift */; };
 		7C75BDFB2B8F58F4004D5DA5 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */; };
 		7CB09F652B944C5D0045FD0A /* RealmRepository+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB09F642B944C5D0045FD0A /* RealmRepository+.swift */; };
+		7CB09F672B946B6E0045FD0A /* MoreSeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB09F662B946B6E0045FD0A /* MoreSeeCell.swift */; };
 		7CC87BD92B90AF7600493767 /* TrendingFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */; };
 		7CC87BDB2B90AF8300493767 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC87BDA2B90AF8300493767 /* TrendingCell.swift */; };
 		7CCC5E3F2B91BC5E0089334F /* CCDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */; };
@@ -132,6 +133,7 @@
 		7C75BDF22B8F33B9004D5DA5 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		7C75BDFA2B8F58F4004D5DA5 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		7CB09F642B944C5D0045FD0A /* RealmRepository+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmRepository+.swift"; sourceTree = "<group>"; };
+		7CB09F662B946B6E0045FD0A /* MoreSeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreSeeCell.swift; sourceTree = "<group>"; };
 		7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingFavoriteCell.swift; sourceTree = "<group>"; };
 		7CC87BDA2B90AF8300493767 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		7CCC5E3E2B91BC5E0089334F /* CCDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCDesign.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				7CC87BD82B90AF7600493767 /* TrendingFavoriteCell.swift */,
+				7CB09F662B946B6E0045FD0A /* MoreSeeCell.swift */,
 				7CC87BDA2B90AF8300493767 /* TrendingCell.swift */,
 				7CCC5E402B91C48A0089334F /* TrendingHeaderView.swift */,
 			);
@@ -625,6 +628,7 @@
 				7C51CD372B8DB2C400E39CB0 /* BaseTableViewCell.swift in Sources */,
 				7C51CD8E2B8DFB6500E39CB0 /* CoinSearchViewModel.swift in Sources */,
 				7C51CD392B8DB2D400E39CB0 /* BaseCollectionViewCell.swift in Sources */,
+				7CB09F672B946B6E0045FD0A /* MoreSeeCell.swift in Sources */,
 				7C75BDEA2B8F04B1004D5DA5 /* NFTEntity.swift in Sources */,
 				7C51CD332B8DB2A700E39CB0 /* BaseView.swift in Sources */,
 				7C51CD752B8DE31100E39CB0 /* TrendingEntity.swift in Sources */,

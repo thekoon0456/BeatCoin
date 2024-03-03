@@ -47,6 +47,10 @@ final class TrendingCoordinator: NSObject, Coordinator, DetailChartCoordinatorDe
         coordinator.start()
     }
     
+    func moveToFav() {
+        navigationController?.tabBarController?.selectedIndex = 2
+    }
+    
     func present(vc: UIImagePickerController) {
         navigationController?.present(vc, animated: true)
     }
