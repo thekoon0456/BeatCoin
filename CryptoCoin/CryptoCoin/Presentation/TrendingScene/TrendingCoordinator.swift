@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TrendingCoordinator: NSObject, Coordinator, DetailChartCoordinatorDelegate {
+final class TrendingCoordinator: Coordinator, DetailChartCoordinatorDelegate {
 
     // MARK: - Properties
     

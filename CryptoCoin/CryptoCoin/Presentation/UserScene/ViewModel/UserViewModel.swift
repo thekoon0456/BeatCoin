@@ -18,5 +18,4 @@ final class UserViewModel: ViewModel {
     init(coordinator: UserCoordinator?) {
         self.coordinator = coordinator
     }
-    
 }

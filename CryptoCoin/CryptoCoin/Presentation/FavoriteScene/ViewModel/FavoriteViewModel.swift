@@ -14,11 +14,13 @@ final class FavoriteViewModel: ViewModel {
     weak var coordinator: FavoriteCoordinator?
     let repository = CoinRepository()
     let userRepository = UserRepository()
+    
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
     let inputUpdateFavorite = Observable<[CoinEntity]?>(nil)
     let inputProfileImage = Observable<Data?>(nil)
     let inputDismiss = Observable<Void?>(nil)
+    
     let outputProfileImageData = Observable<Data?>(nil)
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputError = Observable<CCError?>(nil)

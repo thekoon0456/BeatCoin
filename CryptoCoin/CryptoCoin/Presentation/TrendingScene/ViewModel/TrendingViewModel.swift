@@ -15,11 +15,13 @@ final class TrendingViewModel: ViewModel {
     let trendingRepository = TrendingRepository()
     let coinRepository = CoinRepository()
     let userRepository = UserRepository()
+    
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
     let inputMoveFav = Observable<Void?>(nil)
     let inputProfileImage = Observable<Data?>(nil)
     let inputDismiss = Observable<Void?>(nil)
+    
     let outputProfileImageData = Observable<Data?>(nil)
     let outputFavoriteCoinData = Observable<[CoinEntity]>([])
     let outputTrendingCoin = Observable<[CoinEntity]?>(nil)
@@ -50,6 +52,7 @@ final class TrendingViewModel: ViewModel {
         
         inputPushDetail.bind { [weak self] id in
             guard let self else { return }
+            
             coordinator?.pushToDetail(coinID: id)
         }
         
@@ -72,17 +75,16 @@ final class TrendingViewModel: ViewModel {
     
     private func setAllUpdate() {
         let group = DispatchGroup()
-        group.enter()
         callRequest(group: group)
-        group.enter()
         callFavRequest(group: group)
-        
-        group.notify(queue: .main) {
-            self.outputUpdateComplete.onNext(true)
+        group.notify(queue: .main) { [weak self] in
+            guard let self else { return }
+            outputUpdateComplete.onNext(true)
         }
     }
     
     private func callRequest(group: DispatchGroup) {
+        group.enter()
         trendingRepository.fetch(router: .trending) { [weak self] trending in
             guard let self else { return }
             defer { group.leave() }
@@ -99,7 +101,7 @@ final class TrendingViewModel: ViewModel {
     private func callFavRequest(group: DispatchGroup) {
         guard let user = userRepository.fetch() else { return }
         let favoriteID = Array(user.favoriteID)
-        
+        group.enter()
         coinRepository.fetch(router: .coin(ids: favoriteID)) { [weak self] coin in
             guard let self,
                   !favoriteID.isEmpty

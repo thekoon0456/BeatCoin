@@ -64,7 +64,9 @@ final class CoinSearchViewController: BaseViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        updateTimer?.invalidate()
+        super.viewWillDisappear(animated)
+        
+        removeTimer()
     }
     
     // MARK: - Selectors
@@ -131,14 +133,6 @@ final class CoinSearchViewController: BaseViewController {
         }
     }
     
-    func setAutoUpdate() {
-        updateTimer = Timer.scheduledTimer(timeInterval: 10.0,
-                                           target: self,
-                                           selector: #selector(refreshData),
-                                           userInfo: nil,
-                                           repeats: true)
-    }
-    
     // MARK: - Configure
     
     override func configureHierarchy() {
@@ -163,6 +157,24 @@ final class CoinSearchViewController: BaseViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+    }
+}
+
+// MARK: - Timer
+
+extension CoinSearchViewController {
+    
+    private func setAutoUpdate() {
+        updateTimer = Timer.scheduledTimer(timeInterval: 10.0,
+                                           target: self,
+                                           selector: #selector(refreshData),
+                                           userInfo: nil,
+                                           repeats: true)
+    }
+    
+    private func removeTimer() {
+        updateTimer?.invalidate()
+        updateTimer = nil
     }
 }
 

@@ -12,8 +12,8 @@ import SnapKit
 final class TrendingViewController: BaseViewController {
     
     // MARK: - Properties
-    private let viewModel: TrendingViewModel
     
+    private let viewModel: TrendingViewModel
     private lazy var collectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: setLayout())
         cv.delegate = self
@@ -141,7 +141,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             if count < 2 { //cell이 2개보다 적을때는 안보여줌
                 return 0
             }
-            if count > 3 { //cell이 3개보다 많으면 3개까지 보여주고 더보기셀
+            if count > 3 { //cell이 3개보다 많으면 3개까지 보여주고 더보기 셀
                 return 4
             }
             return count
@@ -156,7 +156,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
         switch section {
         case .favorite:
-            if indexPath.row == 3 { //cell이 3개보다 많으면 3개까지 보여주고 더보기셀
+            if indexPath.row == 3 { //더보기 셀
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoreSeeCell.identifier, for: indexPath) as? MoreSeeCell else {
                     return UICollectionViewCell()
                 }
@@ -195,7 +195,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             if (0...2).contains(indexPath.row) {
                 viewModel.inputPushDetail.onNext(data.id)
             } else {
-                viewModel.inputMoveFav.onNext(())
+                viewModel.inputMoveFav.onNext(()) //더보기 셀은 탭 이동
             }
         case .topCoin:
             guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }

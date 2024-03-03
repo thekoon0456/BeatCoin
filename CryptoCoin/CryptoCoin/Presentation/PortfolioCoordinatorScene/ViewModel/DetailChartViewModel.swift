@@ -15,9 +15,11 @@ final class DetailChartViewModel: ViewModel {
     private let repository = CoinRepository()
     private let userRepository = UserRepository()
     private var coinID: String?
+    
     let inputViewDidLoad = Observable<Void?>(nil)
     let inputCoinName = Observable<String?>(nil)
     let inputFavorite = Observable<String?>(nil)
+    
     let outputCoinData = Observable<[CoinEntity]>([])
     let outputFavorite = Observable<Bool?>(nil)
     let outputError = Observable<CCError?>(nil)

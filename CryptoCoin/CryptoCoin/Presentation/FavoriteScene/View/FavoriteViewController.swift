@@ -65,11 +65,14 @@ final class FavoriteViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         viewModel.inputViewWillAppear.onNext(())
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        updateTimer?.invalidate()
+        super.viewWillDisappear(animated)
+        
+        removeTimer()
     }
     
     // MARK: - Selectors
@@ -116,14 +119,6 @@ final class FavoriteViewController: BaseViewController {
             profileButton.setImage(UIImage(data: data), for: .normal)
         }
     }
-    
-    func setAutoUpdate() {
-        updateTimer = Timer.scheduledTimer(timeInterval: 10.0,
-                             target: self,
-                             selector: #selector(refreshData),
-                             userInfo: nil,
-                             repeats: true)
-    }
 
     // MARK: - Configure
     
@@ -150,6 +145,24 @@ final class FavoriteViewController: BaseViewController {
     }
 }
 
+// MARK: - Timer
+
+extension FavoriteViewController {
+    
+    private func setAutoUpdate() {
+        updateTimer = Timer.scheduledTimer(timeInterval: 10.0,
+                                           target: self,
+                                           selector: #selector(refreshData),
+                                           userInfo: nil,
+                                           repeats: true)
+    }
+    
+    private func removeTimer() {
+        updateTimer?.invalidate()
+        updateTimer = nil
+    }
+}
+
 // MARK: - ImagePicker
 
 extension FavoriteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -173,7 +186,6 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

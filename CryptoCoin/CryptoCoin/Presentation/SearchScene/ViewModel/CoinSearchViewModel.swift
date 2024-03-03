@@ -14,11 +14,13 @@ final class CoinSearchViewModel: ViewModel {
     weak var coordinator: SearchCoordinator?
     let repository = SearchRepository()
     let userRepository = UserRepository()
+    
     let inputPushDetail = Observable<String?>(nil)
     let inputSearchText = Observable<String?>(nil)
     let inputFavoriteButtonTapped = Observable<Int?>(nil)
     let inputProfileImage = Observable<Data?>(nil)
     let inputDismiss = Observable<Void?>(nil)
+    
     let outputProfileImageData = Observable<Data?>(nil)
     let outputCoinData = Observable<[CoinEntity]?>(nil)
     let outputFavorite = Observable<[Bool]?>(nil)
