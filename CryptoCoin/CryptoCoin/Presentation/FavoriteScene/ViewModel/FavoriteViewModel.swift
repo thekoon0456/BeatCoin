@@ -9,29 +9,35 @@ import Foundation
 
 final class FavoriteViewModel: ViewModel {
     
+    struct Input {
+        let viewWillAppear = Observable<Void?>(nil)
+        let pushDetail = Observable<String?>(nil)
+        let updateFavorite = Observable<[CoinEntity]?>(nil)
+        let profileImage = Observable<Data?>(nil)
+        let dismiss = Observable<Void?>(nil)
+    }
+    
+    struct Output {
+        let profileImageData = Observable<Data?>(nil)
+        let coinData = Observable<[CoinEntity]>([])
+        let error = Observable<CCError?>(nil)
+    }
+    
     // MARK: - Properties
     
     weak var coordinator: FavoriteCoordinator?
-    let repository = CoinRepository()
-    let userRepository = UserRepository()
-    
-    let inputViewWillAppear = Observable<Void?>(nil)
-    let inputPushDetail = Observable<String?>(nil)
-    let inputUpdateFavorite = Observable<[CoinEntity]?>(nil)
-    let inputProfileImage = Observable<Data?>(nil)
-    let inputDismiss = Observable<Void?>(nil)
-    
-    let outputProfileImageData = Observable<Data?>(nil)
-    let outputCoinData = Observable<[CoinEntity]>([])
-    let outputError = Observable<CCError?>(nil)
-    
+    private let repository = CoinRepository()
+    private let userRepository = UserRepository()
+    let input = Input()
+    let output = Output()
+
     init(coordinator: FavoriteCoordinator?) {
         self.coordinator = coordinator
         transform()
     }
     
     private func transform() {
-        inputViewWillAppear.bind { [weak self] tap in
+        input.viewWillAppear.bind { [weak self] tap in
             guard let self,
                   let user = userRepository.fetch() else { return }
             let favoriteID = Array(user.favoriteID)
@@ -39,27 +45,27 @@ final class FavoriteViewModel: ViewModel {
             setImageData()
         }
         
-        inputUpdateFavorite.bind { [weak self] coin in
+        input.updateFavorite.bind { [weak self] coin in
             guard let self,
                   let coin,
                   let user = userRepository.fetch()  else { return }
             let favoriteID = Array(user.favoriteID)
             userRepository.updatefav(item: favoriteID)
-            outputCoinData.onNext(coin)
+            output.coinData.onNext(coin)
         }
         
-        inputProfileImage.bind { [weak self] data in
+        input.profileImage.bind { [weak self] data in
             guard let self else { return }
             userRepository.updateProfileImage(data)
-            outputProfileImageData.onNext(data)
+            output.profileImageData.onNext(data)
         }
         
-        inputPushDetail.bind { [weak self] id in
+        input.pushDetail.bind { [weak self] id in
             guard let self else { return }
             coordinator?.pushToDetail(coinID: id)
         }
         
-        inputDismiss.bind { [weak self] _ in
+        input.dismiss.bind { [weak self] _ in
             guard let self else { return }
             dismiss()
         }
@@ -68,7 +74,7 @@ final class FavoriteViewModel: ViewModel {
     private func callRequest(ids: [String]?) {
         guard let ids,
               !ids.isEmpty else {
-            outputCoinData.onNext([])
+            output.coinData.onNext([])
             return
         }
         
@@ -76,16 +82,16 @@ final class FavoriteViewModel: ViewModel {
             guard let self else { return }
             switch coin {
             case .success(let success):
-                outputCoinData.onNext(success)
+                output.coinData.onNext(success)
             case .failure(let failure):
-                outputError.onNext(checkError(error: failure))
+                output.error.onNext(checkError(error: failure))
             }
         }
     }
     
     private func setImageData() {
         guard let data = userRepository.fetchImageData() else { return }
-        outputProfileImageData.onNext(data)
+        output.profileImageData.onNext(data)
     }
     
     func showAlert(error: CCError) {
@@ -93,7 +99,7 @@ final class FavoriteViewModel: ViewModel {
                                okButtonTitle: "되돌아가기",
                                primaryButtonTitle: "재시도하기") { [weak self] in
             guard let self else { return }
-            inputViewWillAppear.onNext(())
+            input.viewWillAppear.onNext(())
         }
     }
     

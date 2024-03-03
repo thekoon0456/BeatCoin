@@ -9,25 +9,31 @@ import Foundation
 
 final class TrendingViewModel: ViewModel {
     
+    struct Input {
+        let viewWillAppear = Observable<Void?>(nil)
+        let pushDetail = Observable<String?>(nil)
+        let moveToFavoriteTab = Observable<Void?>(nil)
+        let profileImage = Observable<Data?>(nil)
+        let dismiss = Observable<Void?>(nil)
+    }
+    
+    struct Output {
+        let profileImageData = Observable<Data?>(nil)
+        let favoriteData = Observable<[CoinEntity]>([])
+        let trendingCoinData = Observable<[CoinEntity]?>(nil)
+        let trendingNFTData = Observable<[NFTEntity]?>(nil)
+        let updateDone = Observable<Bool>(false)
+        let error = Observable<CCError?>(nil)
+    }
+    
     // MARK: - Properties
     
     weak var coordinator: TrendingCoordinator?
-    let trendingRepository = TrendingRepository()
-    let coinRepository = CoinRepository()
-    let userRepository = UserRepository()
-    
-    let inputViewWillAppear = Observable<Void?>(nil)
-    let inputPushDetail = Observable<String?>(nil)
-    let inputMoveFav = Observable<Void?>(nil)
-    let inputProfileImage = Observable<Data?>(nil)
-    let inputDismiss = Observable<Void?>(nil)
-    
-    let outputProfileImageData = Observable<Data?>(nil)
-    let outputFavoriteCoinData = Observable<[CoinEntity]>([])
-    let outputTrendingCoin = Observable<[CoinEntity]?>(nil)
-    let outputTrendingNFT = Observable<[NFTEntity]?>(nil)
-    let outputUpdateComplete = Observable<Bool>(false)
-    let outputError = Observable<CCError?>(nil)
+    private let trendingRepository = TrendingRepository()
+    private let coinRepository = CoinRepository()
+    private let userRepository = UserRepository()
+    let input = Input()
+    let output = Output()
     
     // MARK: - Lifecycles
     
@@ -39,7 +45,7 @@ final class TrendingViewModel: ViewModel {
     // MARK: - Helpers
     
     private func transform() {
-        inputViewWillAppear.bind { [weak self] _ in
+        input.viewWillAppear.bind { [weak self] _ in
             guard let self else { return }
             //유저 없으면 생성
             if userRepository.fetch() == nil {
@@ -50,23 +56,23 @@ final class TrendingViewModel: ViewModel {
             setImageData()
         }
         
-        inputPushDetail.bind { [weak self] id in
+        input.pushDetail.bind { [weak self] id in
             guard let self else { return }
             coordinator?.pushToDetail(coinID: id)
         }
         
-        inputMoveFav.bind { [weak self] _ in
+        input.moveToFavoriteTab.bind { [weak self] _ in
             guard let self else { return }
             coordinator?.moveToFav()
         }
         
-        inputProfileImage.bind { [weak self] data in
+        input.profileImage.bind { [weak self] data in
             guard let self else { return }
             userRepository.updateProfileImage(data)
-            outputProfileImageData.onNext(data)
+            output.profileImageData.onNext(data)
         }
         
-        inputDismiss.bind { [weak self] _ in
+        input.dismiss.bind { [weak self] _ in
             guard let self else { return }
             coordinator?.dismiss()
         }
@@ -78,21 +84,22 @@ final class TrendingViewModel: ViewModel {
         callFavRequest(group: group)
         group.notify(queue: .main) { [weak self] in
             guard let self else { return }
-            outputUpdateComplete.onNext(true)
+            output.updateDone.onNext(true)
         }
     }
     
     private func callRequest(group: DispatchGroup) {
         group.enter()
         trendingRepository.fetch(router: .trending) { [weak self] trending in
-            guard let self else { return }
             defer { group.leave() }
+            guard let self else { return }
             switch trending {
             case .success(let success):
-                outputTrendingCoin.onNext(success.coins)
-                outputTrendingNFT.onNext(success.nfts)
+                output.trendingCoinData.onNext(success.coins)
+                output.trendingNFTData.onNext(success.nfts)
+                print(success.coins, success.nfts)
             case .failure(let failure):
-                outputError.onNext(checkError(error: failure))
+                output.error.onNext(checkError(error: failure))
             }
         }
     }
@@ -102,21 +109,21 @@ final class TrendingViewModel: ViewModel {
         let favoriteID = Array(user.favoriteID)
         group.enter()
         coinRepository.fetch(router: .coin(ids: favoriteID)) { [weak self] coin in
+            defer { group.leave() }
             guard let self,
                   !favoriteID.isEmpty else { return }
-            defer { group.leave() }
             switch coin {
             case .success(let success):
-                outputFavoriteCoinData.onNext(success)
+                output.favoriteData.onNext(success)
             case .failure(let failure):
-                outputError.onNext(checkError(error: failure))
+                output.error.onNext(checkError(error: failure))
             }
         }
     }
     
     private func setImageData() {
         guard let data = userRepository.fetchImageData() else { return }
-        outputProfileImageData.onNext(data)
+        output.profileImageData.onNext(data)
     }
     
     func showAlert(error: CCError) {
@@ -124,7 +131,7 @@ final class TrendingViewModel: ViewModel {
                                okButtonTitle: "되돌아가기",
                                primaryButtonTitle: "재시도하기") { [weak self] in
             guard let self else { return }
-            inputViewWillAppear.onNext(())
+            input.viewWillAppear.onNext(())
         }
     }
 }

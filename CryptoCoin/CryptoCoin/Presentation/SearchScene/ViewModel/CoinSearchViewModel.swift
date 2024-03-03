@@ -9,58 +9,64 @@ import Foundation
 
 final class CoinSearchViewModel: ViewModel {
     
+    struct Input {
+        let pushDetail = Observable<String?>(nil)
+        let searchText = Observable<String?>(nil)
+        let favorite = Observable<Int?>(nil)
+        let profileImage = Observable<Data?>(nil)
+        let dismiss = Observable<Void?>(nil)
+    }
+    
+    struct Output {
+        let coinData = Observable<[CoinEntity]?>(nil)
+        let favoriteData = Observable<[Bool]?>(nil)
+        let favoriteIndex = Observable<Int?>(nil)
+        let profileImageData = Observable<Data?>(nil)
+        let toast = Observable<Toast?>(nil)
+        let error = Observable<CCError?>(nil)
+    }
+    
     // MARK: - Properties
     
     weak var coordinator: SearchCoordinator?
-    let repository = SearchRepository()
-    let userRepository = UserRepository()
-    
-    let inputPushDetail = Observable<String?>(nil)
-    let inputSearchText = Observable<String?>(nil)
-    let inputFavoriteButtonTapped = Observable<Int?>(nil)
-    let inputProfileImage = Observable<Data?>(nil)
-    let inputDismiss = Observable<Void?>(nil)
-    
-    let outputCoinData = Observable<[CoinEntity]?>(nil)
-    let outputFavorite = Observable<[Bool]?>(nil)
-    let outputFavoriteIndex = Observable<Int?>(nil)
-    let outputToast = Observable<Toast?>(nil)
-    let outputError = Observable<CCError?>(nil)
-    let outputProfileImageData = Observable<Data?>(nil)
-    
+    private let repository = SearchRepository()
+    private let userRepository = UserRepository()
+    let input = Input()
+    let output = Output()
+
     init(coordinator: SearchCoordinator?) {
         self.coordinator = coordinator
         transform()
     }
     
     private func transform() {
-        inputSearchText.bind { [weak self] id in
+        input.searchText.bind { [weak self] id in
             guard let self else { return }
             callRequest(id: id)
             setImageData()
         }
         
-        inputFavoriteButtonTapped.bind { [weak self] index in
+        input.favorite.bind { [weak self] index in
             guard let self,
                   let index,
-                  let coinData = outputCoinData.currentValue else { return }
+                  let coinData = output.coinData.currentValue else { return }
             favoriteToggle(coin: coinData[index])
             setFavorite(coinData)
-            outputFavoriteIndex.onNext(index)
+            output.favoriteIndex.onNext(index)
         }
         
-        inputPushDetail.bind { [weak self] id in
+        input.pushDetail.bind { [weak self] id in
             guard let self else { return }
             coordinator?.pushToDetail(coinID: id)
         }
         
-        inputProfileImage.bind { [weak self] data in
+        input.profileImage.bind { [weak self] data in
             guard let self else { return }
             userRepository.updateProfileImage(data)
-            outputProfileImageData.onNext(data)
+            output.profileImageData.onNext(data)
         }
         
-        inputDismiss.bind { [weak self] _ in
+        input.dismiss.bind { [weak self] _ in
             guard let self else { return }
             dismiss()
         }
@@ -73,9 +79,9 @@ final class CoinSearchViewModel: ViewModel {
             switch coin {
             case .success(let success):
                 setFavorite(success)
-                outputCoinData.onNext(success)
+                output.coinData.onNext(success)
             case .failure(let failure):
-                outputError.onNext(checkError(error: failure))
+                output.error.onNext(checkError(error: failure))
             }
         }
     }
@@ -87,7 +93,7 @@ final class CoinSearchViewModel: ViewModel {
             favoriteID.contains($0.id) ? true : false
         }
         
-        outputFavorite.onNext(isFavorite)
+        output.favoriteData.onNext(isFavorite)
     }
     
     private func favoriteToggle(coin: CoinEntity) {
@@ -96,23 +102,23 @@ final class CoinSearchViewModel: ViewModel {
         //삭제
         if favoriteID.contains(coin.id) {
             userRepository.deleteFav(coin.id)
-            outputToast.onNext(.deleteFavorite(coin: coin.id))
+            output.toast.onNext(.deleteFavorite(coin: coin.id))
             return
         }
         
         //추가
         guard favoriteID.count < 10 else {
-            outputToast.onNext(.maxFavorite)
+            output.toast.onNext(.maxFavorite)
             return
         }
         
         userRepository.createFav(coin.id)
-        outputToast.onNext(.setFavorite(coin: coin.id))
+        output.toast.onNext(.setFavorite(coin: coin.id))
     }
     
     private func setImageData() {
         guard let data = userRepository.fetchImageData() else { return }
-        outputProfileImageData.onNext(data)
+        output.profileImageData.onNext(data)
     }
     
     func showAlert(error: CCError) {
@@ -124,7 +130,7 @@ final class CoinSearchViewModel: ViewModel {
             pop()
         }, primaryAction: { [weak self] in
             guard let self else { return }
-            inputSearchText.onNext(inputSearchText.currentValue)
+            input.searchText.onNext(input.searchText.currentValue)
         })
     }
     

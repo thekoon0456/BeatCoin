@@ -9,21 +9,29 @@ import Foundation
 
 final class DetailChartViewModel: ViewModel {
     
+    struct Input {
+        let viewDidLoad = Observable<Void?>(nil)
+        let coinName = Observable<String?>(nil)
+        let favorite = Observable<String?>(nil)
+    }
+    
+    struct Output {
+        let coinData = Observable<[CoinEntity]>([])
+        let favoriteData = Observable<Bool?>(nil)
+        let error = Observable<CCError?>(nil)
+        let toast = Observable<Toast?>(nil)
+    }
+    
     // MARK: - Properties
     
     weak var coordinator: DetailChartCoordinator?
     private let repository = CoinRepository()
     private let userRepository = UserRepository()
     private var coinID: String?
-    
-    let inputViewDidLoad = Observable<Void?>(nil)
-    let inputCoinName = Observable<String?>(nil)
-    let inputFavorite = Observable<String?>(nil)
-    
-    let outputCoinData = Observable<[CoinEntity]>([])
-    let outputFavorite = Observable<Bool?>(nil)
-    let outputError = Observable<CCError?>(nil)
-    let outputToast = Observable<Toast?>(nil)
+    let input = Input()
+    let output = Output()
+
+    // MARK: - Lifecycles
     
     init(coordinator: DetailChartCoordinator?, coinID: String?) {
         self.coordinator = coordinator
@@ -31,14 +39,16 @@ final class DetailChartViewModel: ViewModel {
         transform()
     }
     
+    // MARK: - Helpers
+    
     private func transform() {
-        inputViewDidLoad.bind { [weak self] _ in
+        input.viewDidLoad.bind { [weak self] _ in
             guard let self else { return }
             callRequest(id: coinID)
             checkFavorite(id: coinID)
         }
         
-        inputFavorite.bind { [weak self] id in
+        input.favorite.bind { [weak self] id in
             guard let self,
                   let id else { return }
             setFavorite(id: id)
@@ -51,9 +61,9 @@ final class DetailChartViewModel: ViewModel {
             guard let self else { return }
             switch coin {
             case .success(let success):
-                outputCoinData.onNext(success)
+                output.coinData.onNext(success)
             case .failure(let failure):
-                outputError.onNext(checkError(error: failure))
+                output.error.onNext(checkError(error: failure))
             }
         }
     }
@@ -64,20 +74,20 @@ final class DetailChartViewModel: ViewModel {
         
         if favoriteID.contains(id) {
             userRepository.deleteFav(id)
-            outputFavorite.onNext(false)
-            outputToast.onNext(.deleteFavorite(coin: id))
+            output.favoriteData.onNext(false)
+            output.toast.onNext(.deleteFavorite(coin: id))
             return
         }
         
         //추가
         guard favoriteID.count < 10 else {
-            outputToast.onNext(.maxFavorite)
+            output.toast.onNext(.maxFavorite)
             return
         }
         
         userRepository.createFav(id)
-        outputFavorite.onNext(true)
-        outputToast.onNext(.setFavorite(coin: id))
+        output.favoriteData.onNext(true)
+        output.toast.onNext(.setFavorite(coin: id))
     }
     
     private func checkFavorite(id: String?) {
@@ -86,9 +96,9 @@ final class DetailChartViewModel: ViewModel {
         let favoriteID = Array(user.favoriteID)
         
         if favoriteID.contains(id) {
-            outputFavorite.onNext(true)
+            output.favoriteData.onNext(true)
         } else {
-            outputFavorite.onNext(false)
+            output.favoriteData.onNext(false)
         }
     }
     
@@ -101,7 +111,7 @@ final class DetailChartViewModel: ViewModel {
             pop()
         }, primaryAction: { [weak self] in
             guard let self else { return }
-            inputViewDidLoad.onNext(())
+            input.viewDidLoad.onNext(())
         })
     }
     

@@ -66,7 +66,7 @@ final class FavoriteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.inputViewWillAppear.onNext(())
+        viewModel.input.viewWillAppear.onNext(())
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,7 +84,7 @@ final class FavoriteViewController: BaseViewController {
     }
     
     @objc func refreshData() {
-        viewModel.inputViewWillAppear.onNext(())
+        viewModel.input.viewWillAppear.onNext(())
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self else { return }
@@ -95,19 +95,19 @@ final class FavoriteViewController: BaseViewController {
     // MARK: - Helpers
     
     func bind() {
-        viewModel.outputCoinData.bind { [weak self] coins in
+        viewModel.output.coinData.bind { [weak self] coins in
             guard let self else { return }
             collectionView.reloadData()
         }
         
-        viewModel.outputProfileImageData.bind { [weak self] data in
+        viewModel.output.profileImageData.bind { [weak self] data in
             guard let self,
                   let data
             else { return }
             profileButton.setImage(UIImage(data: data), for: .normal)
         }
         
-        viewModel.outputError.bind { [weak self] error in
+        viewModel.output.error.bind { [weak self] error in
             guard let self,
                   let error else { return }
             viewModel.showAlert(error: error)
@@ -163,14 +163,14 @@ extension FavoriteViewController {
 extension FavoriteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        viewModel.inputDismiss.onNext(())
+        viewModel.input.dismiss.onNext(())
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            viewModel.inputProfileImage.onNext(pickedImage.pngData())
+            viewModel.input.profileImage.onNext(pickedImage.pngData())
         }
-        viewModel.inputDismiss.onNext(())
+        viewModel.input.dismiss.onNext(())
     }
 }
 
@@ -184,19 +184,19 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.outputCoinData.currentValue.count
+        viewModel.output.coinData.currentValue.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.identifier, for: indexPath) as? FavoriteCell
         else { return UICollectionViewCell() }
-        cell.configureCell(viewModel.outputCoinData.currentValue[indexPath.item])
+        cell.configureCell(viewModel.output.coinData.currentValue[indexPath.item])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = viewModel.outputCoinData.currentValue[indexPath.item]
-        viewModel.inputPushDetail.onNext(data.id)
+        let data = viewModel.output.coinData.currentValue[indexPath.item]
+        viewModel.input.pushDetail.onNext(data.id)
     }
 }
 
@@ -217,7 +217,7 @@ extension FavoriteViewController: UICollectionViewDragDelegate, UICollectionView
     
     //드래그 아이템 업데이트
     private func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath: IndexPath, collectionView: UICollectionView) {
-        var data = viewModel.outputCoinData.currentValue
+        var data = viewModel.output.coinData.currentValue
         if let item = coordinator.items.first,
            let sourceIndexPath = item.sourceIndexPath {
             collectionView.performBatchUpdates({
@@ -226,7 +226,7 @@ extension FavoriteViewController: UICollectionViewDragDelegate, UICollectionView
                 data.insert(temp, at: destinationIndexPath.item)
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
-                viewModel.inputUpdateFavorite.onNext(data)
+                viewModel.input.updateFavorite.onNext(data)
             }) { done in
                 
             }

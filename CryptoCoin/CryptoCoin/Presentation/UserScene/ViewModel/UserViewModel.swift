@@ -9,9 +9,15 @@ import Foundation
 
 final class UserViewModel: ViewModel {
     
+    struct Input { }
+    
+    struct Output { }
+    
     // MARK: - Properties
     
     weak var coordinator: UserCoordinator?
+    let input = Input()
+    let output = Output()
     
     // MARK: - Lifecycles
     

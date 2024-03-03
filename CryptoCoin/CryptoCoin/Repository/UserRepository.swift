@@ -14,7 +14,7 @@ final class UserRepository: RealmRepository {
     private let realm = try! Realm()
     
     func printURL() {
-        print(realm.configuration.fileURL ?? "")
+        print("DEBUG: realmURL: ", realm.configuration.fileURL ?? "")
     }
     
     // MARK: - Create
@@ -82,7 +82,7 @@ final class UserRepository: RealmRepository {
                 removeImageFromDocument(fileName: user.id.stringValue)
                 saveImageToDocument(data, fileName: user.id.stringValue)
                 user.profileImageURL = user.id.stringValue
-                print("DEBUG: realmUpdateImage \(String(describing: user.profileImageURL))")
+                print("DEBUG: realmUpdateImage \(user.profileImageURL ?? "")")
             }
         } catch {
             print(error.localizedDescription)
@@ -120,8 +120,8 @@ final class UserRepository: RealmRepository {
         guard let id else { return }
         do {
             try realm.write {
-                guard var fav = realm.objects(User.self).first?.favoriteID,
-                    var idx = Array(fav).firstIndex(of: id) else { return }
+                guard let fav = realm.objects(User.self).first?.favoriteID,
+                      let idx = Array(fav).firstIndex(of: id) else { return }
                 fav.remove(at: idx)
                 realm.objects(User.self).first?.favoriteID = fav
             }

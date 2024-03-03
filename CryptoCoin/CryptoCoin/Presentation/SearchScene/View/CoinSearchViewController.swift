@@ -60,7 +60,7 @@ final class CoinSearchViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.inputSearchText.onNext(searchController.searchBar.text)
+        viewModel.input.searchText.onNext(searchController.searchBar.text)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,11 +78,11 @@ final class CoinSearchViewController: BaseViewController {
     }
     
     @objc private func favoriteButtonTapped(sender: UIButton) {
-        viewModel.inputFavoriteButtonTapped.onNext(sender.tag)
+        viewModel.input.favorite.onNext(sender.tag)
     }
     
     @objc func refreshData() {
-        viewModel.inputSearchText.onNext(searchController.searchBar.text)
+        viewModel.input.searchText.onNext(searchController.searchBar.text)
     }
     
     // MARK: - Helpers
@@ -90,36 +90,36 @@ final class CoinSearchViewController: BaseViewController {
     //TODO: -OUTPUT 리로드 1번으로 줄이기
     
     private func bind() {
-        viewModel.outputCoinData.bind { [weak self] coin in
+        viewModel.output.coinData.bind { [weak self] coin in
             guard let self else { return }
             tableView.reloadData()
         }
         
-        viewModel.outputFavorite.bind { [weak self] _ in
+        viewModel.output.favoriteData.bind { [weak self] _ in
             guard let self else { return }
             tableView.reloadData()
         }
         
-        viewModel.outputFavoriteIndex.bind { [weak self] index in
+        viewModel.output.favoriteIndex.bind { [weak self] index in
             guard let self,
                   let index else { return }
             tableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
         }
         
-        viewModel.outputProfileImageData.bind { [weak self] data in
+        viewModel.output.profileImageData.bind { [weak self] data in
             guard let self,
                   let data else { return }
             profileButton.setImage(UIImage(data: data), for: .normal)
         }
         
-        viewModel.outputError.bind { [weak self] error in
+        viewModel.output.error.bind { [weak self] error in
             guard let self,
                   let error else { return }
             viewModel.showAlert(error: error)
 
         }
         
-        viewModel.outputToast.bind { [weak self] toast in
+        viewModel.output.toast.bind { [weak self] toast in
             guard let self,
                   let toast else { return }
             viewModel.showToast(toast)
@@ -176,14 +176,14 @@ extension CoinSearchViewController {
 extension CoinSearchViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        viewModel.inputDismiss.onNext(())
+        viewModel.input.dismiss.onNext(())
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            viewModel.inputProfileImage.onNext(pickedImage.pngData())
+            viewModel.input.profileImage.onNext(pickedImage.pngData())
         }
-        viewModel.inputDismiss.onNext(())
+        viewModel.input.dismiss.onNext(())
     }
 }
 
@@ -192,7 +192,7 @@ extension CoinSearchViewController: UIImagePickerControllerDelegate, UINavigatio
 extension CoinSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.inputSearchText.onNext(searchBar.text)
+        viewModel.input.searchText.onNext(searchBar.text)
         view.endEditing(true)
     }
     
@@ -212,13 +212,13 @@ extension CoinSearchViewController: UISearchBarDelegate {
 extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.outputCoinData.currentValue?.count ?? 0
+        viewModel.output.coinData.currentValue?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell,
-              let data = viewModel.outputCoinData.currentValue?[indexPath.row],
-              let isFavorite = viewModel.outputFavorite.currentValue?[indexPath.row]
+              let data = viewModel.output.coinData.currentValue?[indexPath.row],
+              let isFavorite = viewModel.output.favoriteData.currentValue?[indexPath.row]
         else { return UITableViewCell() }
         
         cell.configureCell(data, keyword: searchController.searchBar.text, isFavorite: isFavorite, tag: indexPath.row)
@@ -229,7 +229,7 @@ extension CoinSearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let data = viewModel.outputCoinData.currentValue?[indexPath.row] else { return }
-        viewModel.inputPushDetail.onNext(data.id)
+        guard let data = viewModel.output.coinData.currentValue?[indexPath.row] else { return }
+        viewModel.input.pushDetail.onNext(data.id)
     }
 }

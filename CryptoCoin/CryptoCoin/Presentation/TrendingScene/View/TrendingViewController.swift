@@ -56,8 +56,7 @@ final class TrendingViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.inputViewWillAppear.onNext(())
-        print(#function)
+        viewModel.input.viewWillAppear.onNext(())
     }
     
     // MARK: - Selectors
@@ -71,20 +70,19 @@ final class TrendingViewController: BaseViewController {
     // MARK: - Helpers
     
     private func bind() {
-        viewModel.outputUpdateComplete.bind { [weak self] isComplete in
+        viewModel.output.updateDone.bind { [weak self] isComplete in
             guard let self,
-                  viewModel.outputError.currentValue == nil,
                   isComplete == true else { return }
             collectionView.reloadData()
         }
         
-        viewModel.outputProfileImageData.bind { [weak self] data in
+        viewModel.output.profileImageData.bind { [weak self] data in
             guard let self,
                   let data else { return }
             profileButton.setImage(UIImage(data: data), for: .normal)
         }
         
-        viewModel.outputError.bind { [weak self] error in
+        viewModel.output.error.bind { [weak self] error in
             guard let self,
                   let error else { return }
             viewModel.showAlert(error: error)
@@ -120,14 +118,14 @@ final class TrendingViewController: BaseViewController {
 extension TrendingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        viewModel.inputDismiss.onNext(())
+        viewModel.input.dismiss.onNext(())
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            viewModel.inputProfileImage.onNext(pickedImage.pngData())
+            viewModel.input.profileImage.onNext(pickedImage.pngData())
         }
-        viewModel.inputDismiss.onNext(())
+        viewModel.input.dismiss.onNext(())
     }
 }
 
@@ -143,7 +141,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         guard let section = Section(rawValue: section) else { return 0 }
         switch section {
         case .favorite:
-            let count = viewModel.outputFavoriteCoinData.currentValue.count
+            let count = viewModel.output.favoriteData.currentValue.count
             if count < 2 { //cell이 2개보다 적을때는 안보여줌
                 return 0
             }
@@ -152,9 +150,9 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             }
             return count
         case .topCoin:
-            return viewModel.outputTrendingCoin.currentValue?.count ?? 0
+            return viewModel.output.trendingCoinData.currentValue?.count ?? 0
         case .topNFT:
-            return viewModel.outputTrendingNFT.currentValue?.count ?? 0
+            return viewModel.output.trendingNFTData.currentValue?.count ?? 0
         }
     }
     
@@ -172,12 +170,12 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingFavoriteCell.identifier, for: indexPath) as? TrendingFavoriteCell else {
                 return UICollectionViewCell()
             }
-            let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
+            let data = viewModel.output.favoriteData.currentValue[indexPath.item]
             cell.configureCell(data)
             return cell
         case .topCoin:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell,
-                  let data =  viewModel.outputTrendingCoin.currentValue?[indexPath.item]
+                  let data =  viewModel.output.trendingCoinData.currentValue?[indexPath.item]
             else {
                 return UICollectionViewCell()
             }
@@ -185,7 +183,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             return cell
         case .topNFT:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell,
-                  let data =  viewModel.outputTrendingNFT.currentValue?[indexPath.item]
+                  let data =  viewModel.output.trendingNFTData.currentValue?[indexPath.item]
             else {
                 return UICollectionViewCell()
             }
@@ -197,15 +195,15 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch Section(rawValue: indexPath.section) {
         case .favorite:
-            let data = viewModel.outputFavoriteCoinData.currentValue[indexPath.item]
+            let data = viewModel.output.favoriteData.currentValue[indexPath.item]
             if (0...2).contains(indexPath.row) {
-                viewModel.inputPushDetail.onNext(data.id)
+                viewModel.input.pushDetail.onNext(data.id)
             } else {
-                viewModel.inputMoveFav.onNext(()) //더보기 셀은 탭 이동
+                viewModel.input.moveToFavoriteTab.onNext(()) //더보기 셀은 탭 이동
             }
         case .topCoin:
-            guard let data = viewModel.outputTrendingCoin.currentValue?[indexPath.item] else { return }
-            viewModel.inputPushDetail.onNext(data.id)
+            guard let data = viewModel.output.trendingCoinData.currentValue?[indexPath.item] else { return }
+            viewModel.input.pushDetail.onNext(data.id)
         default:
             break
         }
@@ -272,7 +270,7 @@ extension TrendingViewController {
         let layout = UICollectionViewCompositionalLayout { (section, env) -> NSCollectionLayoutSection? in
             switch Section(rawValue: section) {
             case .favorite:
-                guard self.viewModel.outputFavoriteCoinData.currentValue.count >= 2 else { return nil }
+                guard self.viewModel.output.favoriteData.currentValue.count >= 2 else { return nil }
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1))

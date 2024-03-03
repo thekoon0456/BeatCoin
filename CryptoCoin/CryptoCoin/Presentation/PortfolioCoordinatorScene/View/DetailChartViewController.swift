@@ -80,7 +80,7 @@ final class DetailChartViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        viewModel.inputViewDidLoad.onNext(())
+        viewModel.input.viewDidLoad.onNext(())
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,35 +91,32 @@ final class DetailChartViewController: BaseViewController {
     // MARK: - Selectors
     
     @objc private func favoriteButtonTapped() {
-        guard let id = viewModel.outputCoinData.currentValue.first?.id else { return }
-        viewModel.inputFavorite.onNext(id)
+        guard let id = viewModel.output.coinData.currentValue.first?.id else { return }
+        viewModel.input.favorite.onNext(id)
     }
     
     // MARK: - Helpers
     
     private func bind() {
-        viewModel.outputCoinData.bind { [weak self] coin in
+        viewModel.output.coinData.bind { [weak self] coin in
             guard let self,
                   let coin = coin.first else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
                 setData(coin)
-            }
         }
         
-        viewModel.outputFavorite.bind { [weak self] bool in
+        viewModel.output.favoriteData.bind { [weak self] bool in
             guard let self,
                   let bool else { return }
             favoriteButton.isSelected = bool
         }
         
-        viewModel.outputError.bind { [weak self] error in
+        viewModel.output.error.bind { [weak self] error in
             guard let self,
                   let error else { return }
             viewModel.showAlert(error: error)
         }
         
-        viewModel.outputToast.bind { [weak self] toast in
+        viewModel.output.toast.bind { [weak self] toast in
             guard let self,
                   let toast else { return }
             viewModel.showToast(toast)

@@ -9,6 +9,9 @@ import UIKit
 
 final class UserViewController: BaseViewController {
     
+    struct Input { }
+    struct Output { }
+    
     // MARK: - Properties
     
     private let viewModel: UserViewModel
