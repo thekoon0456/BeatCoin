@@ -24,7 +24,7 @@ final class FavoriteCoordinator: Coordinator, DetailChartCoordinatorDelegate {
     }
     
     deinit {
-        print("FavoriteCoordinator 해제")
+        print("DEBUG: FavoriteCoordinator 해제")
     }
     
     // MARK: - Helpers

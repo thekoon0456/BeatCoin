@@ -85,7 +85,7 @@ final class DetailChartViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.pop()
+        viewModel.removeChildCoordinator()
     }
     
     // MARK: - Selectors

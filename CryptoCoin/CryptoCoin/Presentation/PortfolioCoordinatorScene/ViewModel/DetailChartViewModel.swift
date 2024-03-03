@@ -122,4 +122,8 @@ final class DetailChartViewModel: ViewModel {
     func pop() {
         coordinator?.pop()
     }
+    
+    func removeChildCoordinator() {
+        coordinator?.delegate?.removeChildCoordinator()
+    }
 }
