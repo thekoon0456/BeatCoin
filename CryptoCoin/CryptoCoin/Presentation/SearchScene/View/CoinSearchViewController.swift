@@ -31,6 +31,13 @@ final class CoinSearchViewController: BaseViewController {
         $0.register(SearchCell.self, forCellReuseIdentifier: SearchCell.identifier)
     }
     
+    private let backgroundView = UIImageView().then {
+        $0.image = UIImage(systemName: "bitcoinsign.circle")
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = CCDesign.Color.tintColor.color
+        $0.alpha = 0.3
+    }
+    
     private lazy var profileButton = UIButton().then {
         $0.setImage(UIImage(named: CCDesign.TabIcon.user.name), for: .normal)
         $0.contentMode = .scaleAspectFill
@@ -91,7 +98,9 @@ final class CoinSearchViewController: BaseViewController {
     
     private func bind() {
         viewModel.output.coinData.bind { [weak self] coin in
-            guard let self else { return }
+            guard let self,
+                  let coin else { return }
+            tableView.backgroundView = coin.isEmpty ? backgroundView : nil
             tableView.reloadData()
         }
         
