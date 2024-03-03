@@ -17,6 +17,8 @@ final class TrendingViewModel: ViewModel {
     let userRepository = UserRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
+    let inputProfileImage = Observable<Data?>(nil)
+    let outputProfileImageData = Observable<Data?>(nil)
     let outputFavoriteCoinData = Observable<[CoinEntity]>([])
     let outputTrendingCoin = Observable<[CoinEntity]?>(nil)
     let outputTrendingNFT = Observable<[NFTEntity]?>(nil)
@@ -41,11 +43,18 @@ final class TrendingViewModel: ViewModel {
             }
             
             setAllUpdate()
+            setImageData()
         }
         
         inputPushDetail.bind { [weak self] id in
             guard let self else { return }
             coordinator?.pushToDetail(coinID: id)
+        }
+        
+        inputProfileImage.bind { [weak self] data in
+            guard let self else { return }
+            userRepository.updateprofileImage(data)
+            outputProfileImageData.onNext(data)
         }
     }
     
@@ -94,6 +103,11 @@ final class TrendingViewModel: ViewModel {
                 outputError.onNext(checkError(error: failure))
             }
         }
+    }
+    
+    private func setImageData() {
+        guard let data = userRepository.fetchImageData() else { return }
+        outputProfileImageData.onNext(data)
     }
 }
 

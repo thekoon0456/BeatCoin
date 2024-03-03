@@ -55,12 +55,34 @@ final class UserRepository: RealmRepository {
         return user?.favoriteID.where { $0 == id }.first
     }
     
+    func fetchImageData() -> Data? {
+        guard let user = realm.objects(User.self).first,
+              let data = loadImageToDocument(fileName: user.id.stringValue)?.pngData() else { return nil }
+        return data
+    }
+    
     // MARK: - Update
     
     func update(_ item: User) {
         do {
             try realm.write {
                 realm.add(item, update: .modified)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func updateprofileImage(_ data: Data?) {
+        do {
+            try realm.write {
+                guard let user = realm.objects(User.self).first,
+                      let data
+                else { return }
+                removeImageFromDocument(fileName: user.id.stringValue)
+                saveImageToDocument(data, fileName: user.id.stringValue)
+                user.profileImageURL = user.id.stringValue
+                print("DEBUG: realmUpdateImage \(String(describing: user.profileImageURL))")
             }
         } catch {
             print(error.localizedDescription)

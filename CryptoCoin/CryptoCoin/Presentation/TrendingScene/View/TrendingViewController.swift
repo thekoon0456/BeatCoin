@@ -74,6 +74,13 @@ final class TrendingViewController: BaseViewController {
             else { return }
             collectionView.reloadData()
         }
+        
+        viewModel.outputProfileImageData.bind { [weak self] data in
+            guard let self,
+            let data
+            else { return }
+            profileButton.setImage(UIImage(data: data), for: .normal)
+        }
     }
     
     // MARK: - Configure
@@ -111,6 +118,7 @@ extension TrendingViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.profileButton.setImage(pickedImage, for: .normal)
+            viewModel.inputProfileImage.onNext(pickedImage.pngData())
         }
         viewModel.dismiss()
     }

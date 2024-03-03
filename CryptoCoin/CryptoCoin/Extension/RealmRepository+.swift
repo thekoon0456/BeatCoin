@@ -42,13 +42,13 @@ extension RealmRepository {
     }
     
     //document 폴더에 저장하기
-    func saveImageToDocument(image: UIImage, fileName: String) {
+    func saveImageToDocument(_ imageData: Data, fileName: String) {
         //앱 도큐먼트 위치 ex) desktop/sesac/week9
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory,
                                                                in: .userDomainMask).first else { return }
         let fileURL = documentDirectory.appendingPathComponent("\(fileName).jpg")
         
-        guard let data = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let data = UIImage(data: imageData)?.jpegData(compressionQuality: 0.5) else { return }
         
         do {
             try data.write(to: fileURL)
