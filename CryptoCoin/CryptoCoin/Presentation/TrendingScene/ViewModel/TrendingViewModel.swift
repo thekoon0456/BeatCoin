@@ -14,7 +14,7 @@ final class TrendingViewModel: ViewModel {
     weak var coordinator: TrendingCoordinator?
     let trendingRepository = TrendingRepository()
     let coinRepository = CoinRepository()
-    let favoriteRepository = UserRepository()
+    let userRepository = UserRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
     let outputFavoriteCoinData = Observable<[CoinEntity]>([])
@@ -36,8 +36,8 @@ final class TrendingViewModel: ViewModel {
         inputViewWillAppear.bind { [weak self] _ in
             guard let self else { return }
             
-            if favoriteRepository.fetch() == nil {
-                favoriteRepository.create(User())
+            if userRepository.fetch() == nil {
+                userRepository.create(User())
             }
             
             setAllUpdate()
@@ -76,7 +76,7 @@ final class TrendingViewModel: ViewModel {
     }
     
     private func callFavRequest(group: DispatchGroup) {
-        guard let user = favoriteRepository.fetch() else { return }
+        guard let user = userRepository.fetch() else { return }
         let favoriteID = Array(user.favoriteID)
         
         coinRepository.fetch(router: .coin(ids: favoriteID)) { [weak self] coin in

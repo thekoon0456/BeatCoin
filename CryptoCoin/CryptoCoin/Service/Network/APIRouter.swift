@@ -15,18 +15,18 @@ enum APIRouter: URLRequestConvertible {
     case searchCoin(query: String)
     case coin(ids: [String])
     
-    var baseURL: String {
-        "https://api.coingecko.com/api/v3"
+    var baseURL: URL {
+        URL(string: "https://api.coingecko.com/api/v3")!
     }
     
-    var endPoint: String {
+    var endPoint: URL {
         switch self {
         case .trending:
-            "/search/trending"
+            baseURL.appendingPathComponent("/search/trending")
         case .searchCoin:
-            "/search"
+            baseURL.appendingPathComponent( "/search")
         case .coin:
-            "/coins/markets"
+            baseURL.appendingPathComponent("/coins/markets")
         }
     }
     
@@ -48,7 +48,7 @@ enum APIRouter: URLRequestConvertible {
     }
     
     func asURLRequest() throws -> URLRequest {
-        let url = try baseURL.asURL().appendingPathComponent(endPoint)
+        let url = try endPoint.asURL()
         var request = URLRequest(url: url)
         request.method = method
         

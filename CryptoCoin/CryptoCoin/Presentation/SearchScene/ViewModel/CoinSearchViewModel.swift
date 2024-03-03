@@ -13,7 +13,7 @@ final class CoinSearchViewModel: ViewModel {
     
     weak var coordinator: SearchCoordinator?
     let repository = SearchRepository()
-    let favoriteRepository = UserRepository()
+    let userRepository = UserRepository()
     let inputPushDetail = Observable<String?>(nil)
     let inputSearchText = Observable<String?>(nil)
     let inputFavoriteButtonTapped = Observable<Int?>(nil)
@@ -65,7 +65,7 @@ final class CoinSearchViewModel: ViewModel {
     }
     
     private func setFavorite(_ coin: [CoinEntity]) {
-        guard let user = favoriteRepository.fetch() else { return }
+        guard let user = userRepository.fetch() else { return }
         let favoriteID = Array(user.favoriteID)
         let isFavorite = coin.map {
             favoriteID.contains($0.id) ? true : false
@@ -75,11 +75,11 @@ final class CoinSearchViewModel: ViewModel {
     }
     
     private func favoriteToggle(coin: CoinEntity) {
-        guard let user = favoriteRepository.fetch() else { return }
+        guard let user = userRepository.fetch() else { return }
         let favoriteID = Array(user.favoriteID)
         //삭제
         if favoriteID.contains(coin.id) {
-            favoriteRepository.deleteFav(coin.id)
+            userRepository.deleteFav(coin.id)
             outputToast.onNext(.deleteFavorite(coin: coin.id))
             return
         }
@@ -90,7 +90,7 @@ final class CoinSearchViewModel: ViewModel {
             return
         }
         
-        favoriteRepository.createFav(coin.id)
+        userRepository.createFav(coin.id)
         outputToast.onNext(.setFavorite(coin: coin.id))
     }
     

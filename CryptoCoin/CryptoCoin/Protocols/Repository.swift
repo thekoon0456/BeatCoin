@@ -22,5 +22,4 @@ protocol RealmRepository {
     func fetch() -> T?
     func update(_: T)
     func delete(_: T?)
-    func deleteAll()
 }

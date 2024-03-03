@@ -13,7 +13,7 @@ final class DetailChartViewModel: ViewModel {
     
     weak var coordinator: DetailChartCoordinator?
     private let repository = CoinRepository()
-    private let favoriteRepository = UserRepository()
+    private let userRepository = UserRepository()
     private var coinID: String?
     let inputViewDidLoad = Observable<Void?>(nil)
     let inputCoinName = Observable<String?>(nil)
@@ -57,11 +57,11 @@ final class DetailChartViewModel: ViewModel {
     }
     
     private func setFavorite(id: String) {
-        guard let user = favoriteRepository.fetch() else { return }
+        guard let user = userRepository.fetch() else { return }
         let favoriteID = Array(user.favoriteID)
         
         if favoriteID.contains(id) {
-            favoriteRepository.deleteFav(id)
+            userRepository.deleteFav(id)
             outputFavorite.onNext(false)
             outputToast.onNext(.deleteFavorite(coin: id))
             return
@@ -73,14 +73,14 @@ final class DetailChartViewModel: ViewModel {
             return
         }
         
-        favoriteRepository.createFav(id)
+        userRepository.createFav(id)
         outputFavorite.onNext(true)
         outputToast.onNext(.setFavorite(coin: id))
     }
     
     private func checkFavorite(id: String?) {
         guard let id else { return }
-        guard let user = favoriteRepository.fetch() else { return }
+        guard let user = userRepository.fetch() else { return }
         let favoriteID = Array(user.favoriteID)
         
         if favoriteID.contains(id) {

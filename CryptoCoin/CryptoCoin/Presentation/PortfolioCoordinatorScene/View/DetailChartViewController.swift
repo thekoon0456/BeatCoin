@@ -114,24 +114,24 @@ final class DetailChartViewController: BaseViewController {
         }
         
         viewModel.outputError.bind { [weak self] error in
-                        guard let self,
-                              let error
-                        else { return }
+            guard let self,
+                  let error
+            else { return }
             viewModel.coordinator?.showAlert(message: error.description,
                                              primaryButtonTitle: "재시도하기",
                                              okButtonTitle: "되돌아가기",
-                                             primaryAction: {[weak self] in
-                guard let self else { return }
-                viewModel.inputViewDidLoad.onNext(())
-            }, okAction: { [weak self] in
+                                             okAction: { [weak self] in
                 guard let self else { return }
                 viewModel.pop()
+            }, primaryAction: { [weak self] in
+                guard let self else { return }
+                viewModel.inputViewDidLoad.onNext(())
             })
         }
         
         viewModel.outputToast.bind { [weak self] toast in
             guard let self,
-            let toast
+                  let toast
             else { return }
             viewModel.coordinator?.showToast(toast)
         }

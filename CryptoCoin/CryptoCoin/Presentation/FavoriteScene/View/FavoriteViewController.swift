@@ -99,6 +99,17 @@ final class FavoriteViewController: BaseViewController {
 //                }
 //            }
 //        }
+        viewModel.outputError.bind { [weak self] error in
+                        guard let self,
+                              let error
+                        else { return }
+            viewModel.coordinator?.showAlert(message: error.description,
+                                             primaryButtonTitle: "재시도하기",
+                                             okButtonTitle: "되돌아가기") { [weak self] in
+                guard let self else { return }
+                viewModel.inputViewWillAppear.onNext(())
+            }
+        }
     }
     
     func setAutoUpdate() {

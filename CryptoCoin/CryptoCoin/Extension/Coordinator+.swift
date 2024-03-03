@@ -13,9 +13,8 @@ extension Coordinator {
                    message: String,
                    primaryButtonTitle: String,
                    okButtonTitle: String = "확인",
-                   primaryAction: (() -> Void)?,
-                   okAction: (() -> Void)?) {
-        
+                   okAction: (() -> Void)? = nil,
+                   primaryAction: (() -> Void)?) {
         let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
@@ -34,6 +33,16 @@ extension Coordinator {
         alert.addAction(primaryButton)
         
         navigationController?.present(alert, animated: true)
+        
+        // MARK: - 통신 안됐을때 흰색으로 배경 가림
+        
+        let bgView = UIView().then {
+            $0.backgroundColor = .white
+        }
+        navigationController?.topViewController?.view.addSubview(bgView)
+        bgView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     func showToast(_ type: Toast) {

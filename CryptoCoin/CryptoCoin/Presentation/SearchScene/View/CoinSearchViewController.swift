@@ -43,8 +43,8 @@ final class CoinSearchViewController: BaseViewController {
         
         bind()
         // MARK: - 10초마다 요청
-//        setAutoUpdate()
-
+        //        setAutoUpdate()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,24 +88,21 @@ final class CoinSearchViewController: BaseViewController {
         }
         
         viewModel.outputError.bind { [weak self] error in
-                        guard let self,
-                              let error
-                        else { return }
+            guard let self,
+                  let error
+            else { return }
             viewModel.coordinator?.showAlert(message: error.description,
                                              primaryButtonTitle: "재시도하기",
-                                             okButtonTitle: "되돌아가기",
-                                             primaryAction: {[weak self] in
+                                             okButtonTitle: "되돌아가기") {[weak self] in
                 guard let self else { return }
+                //재시도
                 viewModel.inputSearchText.onNext((searchController.searchBar.text))
-            }, okAction: { [weak self] in
-                guard let self else { return }
-                viewModel.pop()
-            })
+            }
         }
         
         viewModel.outputToast.bind { [weak self] toast in
             guard let self,
-            let toast
+                  let toast
             else { return }
             viewModel.coordinator?.showToast(toast)
         }
@@ -113,10 +110,10 @@ final class CoinSearchViewController: BaseViewController {
     
     func setAutoUpdate() {
         updateTimer = Timer.scheduledTimer(timeInterval: 10.0,
-                             target: self,
-                             selector: #selector(refreshData),
-                             userInfo: nil,
-                             repeats: true)
+                                           target: self,
+                                           selector: #selector(refreshData),
+                                           userInfo: nil,
+                                           repeats: true)
     }
     
     // MARK: - Configure

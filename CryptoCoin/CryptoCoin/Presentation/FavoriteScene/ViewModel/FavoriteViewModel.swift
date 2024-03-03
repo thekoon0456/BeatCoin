@@ -13,7 +13,7 @@ final class FavoriteViewModel: ViewModel {
     
     weak var coordinator: FavoriteCoordinator?
     let repository = CoinRepository()
-    let favoriteRepository = UserRepository()
+    let userRepository = UserRepository()
     let inputViewWillAppear = Observable<Void?>(nil)
     let inputPushDetail = Observable<String?>(nil)
     let inputUpdateFavorite = Observable<[CoinEntity]?>(nil)
@@ -28,7 +28,7 @@ final class FavoriteViewModel: ViewModel {
     private func transform() {
         inputViewWillAppear.bind { [weak self] tap in
             guard let self else { return }
-            guard let user = favoriteRepository.fetch() else { return }
+            guard let user = userRepository.fetch() else { return }
             let favoriteID = Array(user.favoriteID)
             callRequest(ids: favoriteID)
         }
@@ -42,9 +42,9 @@ final class FavoriteViewModel: ViewModel {
             guard let self,
             let coin
             else { return }
-            guard let user = favoriteRepository.fetch() else { return }
+            guard let user = userRepository.fetch() else { return }
             let favoriteID = Array(user.favoriteID)
-            favoriteRepository.updatefav(item: favoriteID)
+            userRepository.updatefav(item: favoriteID)
             outputCoinData.onNext(coin)
         }
     }
@@ -66,6 +66,4 @@ final class FavoriteViewModel: ViewModel {
             }
         }
     }
-    
-    
 }

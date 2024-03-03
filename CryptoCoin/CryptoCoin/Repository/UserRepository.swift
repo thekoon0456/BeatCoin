@@ -67,18 +67,6 @@ final class UserRepository: RealmRepository {
         }
     }
     
-    func updateAll(item: [User]) {
-        do {
-            try realm.write {
-                realm.deleteAll()
-                realm.add(item)
-                print("DEBUG: realmUpdate \(item)")
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
     func updatefav(item: [String]) {
         do {
             try realm.write {
@@ -100,16 +88,6 @@ final class UserRepository: RealmRepository {
             try realm.write {
                 realm.delete(item)
                 print("DEBUG: realm Delete")
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func deleteAll() {
-        do {
-            try realm.write {
-                realm.deleteAll()
             }
         } catch {
             print(error.localizedDescription)
