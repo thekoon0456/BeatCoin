@@ -30,7 +30,7 @@ final class DetailChartCoordinator: Coordinator {
     }
     
     deinit {
-        print("DetailChartCoordinator 해제")
+        print("DEBUG: DetailChartCoordinator 해제")
     }
     
     // MARK: - Helpers
@@ -42,7 +42,6 @@ final class DetailChartCoordinator: Coordinator {
     }
     
     func pop() {
-        delegate?.removeChildCoordinator()
         navigationController?.popViewController(animated: true)
     }
 }

@@ -24,7 +24,7 @@ final class TrendingCoordinator: Coordinator, DetailChartCoordinatorDelegate {
     }
     
     deinit {
-        print("TrendingCoordinator 해제")
+        print("DEBUG: TrendingCoordinator 해제")
     }
     
     // MARK: - Helpers

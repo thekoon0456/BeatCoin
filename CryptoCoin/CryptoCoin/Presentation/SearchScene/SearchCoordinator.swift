@@ -24,7 +24,7 @@ final class SearchCoordinator: Coordinator, DetailChartCoordinatorDelegate {
     }
     
     deinit {
-        print("SearchCoordinator 해제")
+        print("DEBUG: SearchCoordinator 해제")
     }
     
     // MARK: - Helpers

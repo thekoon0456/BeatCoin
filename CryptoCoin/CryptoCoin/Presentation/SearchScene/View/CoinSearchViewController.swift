@@ -7,8 +7,6 @@
 
 import UIKit
 
-import Alamofire
-
 final class CoinSearchViewController: BaseViewController {
     
     // MARK: - Properties
@@ -94,18 +92,11 @@ final class CoinSearchViewController: BaseViewController {
     
     // MARK: - Helpers
     
-    //TODO: -OUTPUT 리로드 1번으로 줄이기
-    
     private func bind() {
         viewModel.output.coinData.bind { [weak self] coin in
             guard let self,
                   let coin else { return }
             tableView.backgroundView = coin.isEmpty ? backgroundView : nil
-            tableView.reloadData()
-        }
-        
-        viewModel.output.favoriteData.bind { [weak self] _ in
-            guard let self else { return }
             tableView.reloadData()
         }
         

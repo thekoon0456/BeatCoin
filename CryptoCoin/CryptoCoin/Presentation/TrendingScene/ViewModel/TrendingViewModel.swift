@@ -97,7 +97,6 @@ final class TrendingViewModel: ViewModel {
             case .success(let success):
                 output.trendingCoinData.onNext(success.coins)
                 output.trendingNFTData.onNext(success.nfts)
-                print(success.coins, success.nfts)
             case .failure(let failure):
                 output.error.onNext(checkError(error: failure))
             }

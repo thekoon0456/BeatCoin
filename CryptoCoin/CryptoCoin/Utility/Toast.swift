@@ -28,8 +28,7 @@ final class ToastViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let inputMessage: String
-    
+    private let inputMessage: String
     private let messageLabel = PaddingLabel().then {
         $0.font = .boldSystemFont(ofSize: 20)
         $0.textColor = .white

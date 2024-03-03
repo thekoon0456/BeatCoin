@@ -22,7 +22,7 @@ final class UserCoordinator: Coordinator {
     }
     
     deinit {
-        print("UserCoordinator 해제")
+        print("DEBUG: UserCoordinator 해제")
     }
     
     // MARK: - Helpers
