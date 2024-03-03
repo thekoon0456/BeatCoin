@@ -73,7 +73,7 @@ final class UserRepository: RealmRepository {
         }
     }
     
-    func updateprofileImage(_ data: Data?) {
+    func updateProfileImage(_ data: Data?) {
         do {
             try realm.write {
                 guard let user = realm.objects(User.self).first,

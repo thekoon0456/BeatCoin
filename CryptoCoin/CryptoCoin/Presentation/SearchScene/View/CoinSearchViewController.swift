@@ -87,6 +87,8 @@ final class CoinSearchViewController: BaseViewController {
     
     // MARK: - Helpers
     
+    //TODO: -OUTPUT 리로드 1번으로 줄이기
+    
     private func bind() {
         viewModel.outputCoinData.bind { [weak self] coin in
             guard let self else { return }
@@ -100,36 +102,27 @@ final class CoinSearchViewController: BaseViewController {
         
         viewModel.outputFavoriteIndex.bind { [weak self] index in
             guard let self,
-                  let index
-            else { return }
+                  let index else { return }
             tableView.reloadRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
-        }
-        
-        viewModel.outputError.bind { [weak self] error in
-            guard let self,
-                  let error
-            else { return }
-            viewModel.coordinator?.showAlert(message: error.description,
-                                             okButtonTitle: "되돌아가기",
-                                             primaryButtonTitle: "재시도하기") { [weak self] in
-                guard let self else { return }
-                //재시도
-                viewModel.inputSearchText.onNext((searchController.searchBar.text))
-            }
-        }
-        
-        viewModel.outputToast.bind { [weak self] toast in
-            guard let self,
-                  let toast
-            else { return }
-            viewModel.coordinator?.showToast(toast)
         }
         
         viewModel.outputProfileImageData.bind { [weak self] data in
             guard let self,
-                  let data
-            else { return }
+                  let data else { return }
             profileButton.setImage(UIImage(data: data), for: .normal)
+        }
+        
+        viewModel.outputError.bind { [weak self] error in
+            guard let self,
+                  let error else { return }
+            viewModel.showAlert(error: error)
+
+        }
+        
+        viewModel.outputToast.bind { [weak self] toast in
+            guard let self,
+                  let toast else { return }
+            viewModel.showToast(toast)
         }
     }
     

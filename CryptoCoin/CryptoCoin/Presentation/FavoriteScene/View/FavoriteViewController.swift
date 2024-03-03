@@ -100,23 +100,18 @@ final class FavoriteViewController: BaseViewController {
             collectionView.reloadData()
         }
         
-        viewModel.outputError.bind { [weak self] error in
-                        guard let self,
-                              let error
-                        else { return }
-            viewModel.coordinator?.showAlert(message: error.description,
-                                             okButtonTitle: "되돌아가기",
-                                             primaryButtonTitle: "재시도하기") { [weak self] in
-                guard let self else { return }
-                viewModel.inputViewWillAppear.onNext(())
-            }
-        }
-        
         viewModel.outputProfileImageData.bind { [weak self] data in
             guard let self,
                   let data
             else { return }
             profileButton.setImage(UIImage(data: data), for: .normal)
+        }
+        
+        viewModel.outputError.bind { [weak self] error in
+            guard let self,
+                  let error else { return }
+            viewModel.showAlert(error: error)
+
         }
     }
 

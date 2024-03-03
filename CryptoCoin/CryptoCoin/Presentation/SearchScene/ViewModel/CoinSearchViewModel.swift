@@ -21,12 +21,12 @@ final class CoinSearchViewModel: ViewModel {
     let inputProfileImage = Observable<Data?>(nil)
     let inputDismiss = Observable<Void?>(nil)
     
-    let outputProfileImageData = Observable<Data?>(nil)
     let outputCoinData = Observable<[CoinEntity]?>(nil)
     let outputFavorite = Observable<[Bool]?>(nil)
     let outputFavoriteIndex = Observable<Int?>(nil)
-    let outputError = Observable<CCError?>(nil)
     let outputToast = Observable<Toast?>(nil)
+    let outputError = Observable<CCError?>(nil)
+    let outputProfileImageData = Observable<Data?>(nil)
     
     init(coordinator: SearchCoordinator?) {
         self.coordinator = coordinator
@@ -43,8 +43,7 @@ final class CoinSearchViewModel: ViewModel {
         inputFavoriteButtonTapped.bind { [weak self] index in
             guard let self,
                   let index,
-                  let coinData = outputCoinData.currentValue
-            else { return }
+                  let coinData = outputCoinData.currentValue else { return }
             favoriteToggle(coin: coinData[index])
             setFavorite(coinData)
             outputFavoriteIndex.onNext(index)
@@ -57,7 +56,7 @@ final class CoinSearchViewModel: ViewModel {
         
         inputProfileImage.bind { [weak self] data in
             guard let self else { return }
-            userRepository.updateprofileImage(data)
+            userRepository.updateProfileImage(data)
             outputProfileImageData.onNext(data)
         }
         
@@ -114,6 +113,23 @@ final class CoinSearchViewModel: ViewModel {
     private func setImageData() {
         guard let data = userRepository.fetchImageData() else { return }
         outputProfileImageData.onNext(data)
+    }
+    
+    func showAlert(error: CCError) {
+        coordinator?.showAlert(message: error.description,
+                               okButtonTitle: "되돌아가기",
+                               primaryButtonTitle: "재시도하기",
+                               okAction: { [weak self] in
+            guard let self else { return }
+            pop()
+        }, primaryAction: { [weak self] in
+            guard let self else { return }
+            inputSearchText.onNext(inputSearchText.currentValue)
+        })
+    }
+    
+    func showToast(_ type: Toast) {
+        coordinator?.showToast(type)
     }
     
     func pop() {

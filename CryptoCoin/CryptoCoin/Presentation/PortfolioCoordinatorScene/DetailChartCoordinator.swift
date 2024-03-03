@@ -18,8 +18,8 @@ final class DetailChartCoordinator: Coordinator {
     var navigationController: UINavigationController?
     var childCoordinators: [Coordinator]
     var type: CoordinatorType
-    var coinID: String?
     weak var delegate: DetailChartCoordinatorDelegate?
+    var coinID: String?
     
     // MARK: - Lifecycles
     

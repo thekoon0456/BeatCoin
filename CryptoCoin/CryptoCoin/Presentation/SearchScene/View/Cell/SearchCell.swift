@@ -41,7 +41,6 @@ final class SearchCell: BaseTableViewCell {
         favoriteButton.isSelected = isFavorite
     }
     
-    
     func setAttributedText(_ inputText: String, pointText: String?) -> NSAttributedString {
         let lowercasedInputText = inputText.lowercased()
         let lowercasedPointText = pointText?.lowercased() ?? ""

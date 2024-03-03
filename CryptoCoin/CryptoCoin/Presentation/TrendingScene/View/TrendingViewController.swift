@@ -57,6 +57,7 @@ final class TrendingViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         viewModel.inputViewWillAppear.onNext(())
+        print(#function)
     }
     
     // MARK: - Selectors
@@ -72,16 +73,21 @@ final class TrendingViewController: BaseViewController {
     private func bind() {
         viewModel.outputUpdateComplete.bind { [weak self] isComplete in
             guard let self,
-                  isComplete == true
-            else { return }
+                  viewModel.outputError.currentValue == nil,
+                  isComplete == true else { return }
             collectionView.reloadData()
         }
         
         viewModel.outputProfileImageData.bind { [weak self] data in
             guard let self,
-                  let data
-            else { return }
+                  let data else { return }
             profileButton.setImage(UIImage(data: data), for: .normal)
+        }
+        
+        viewModel.outputError.bind { [weak self] error in
+            guard let self,
+                  let error else { return }
+            viewModel.showAlert(error: error)
         }
     }
     

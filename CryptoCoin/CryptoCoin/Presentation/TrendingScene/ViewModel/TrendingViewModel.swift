@@ -41,7 +41,7 @@ final class TrendingViewModel: ViewModel {
     private func transform() {
         inputViewWillAppear.bind { [weak self] _ in
             guard let self else { return }
-            
+            //유저 없으면 생성
             if userRepository.fetch() == nil {
                 userRepository.create(User())
             }
@@ -52,24 +52,23 @@ final class TrendingViewModel: ViewModel {
         
         inputPushDetail.bind { [weak self] id in
             guard let self else { return }
-            
             coordinator?.pushToDetail(coinID: id)
+        }
+        
+        inputMoveFav.bind { [weak self] _ in
+            guard let self else { return }
+            coordinator?.moveToFav()
         }
         
         inputProfileImage.bind { [weak self] data in
             guard let self else { return }
-            userRepository.updateprofileImage(data)
+            userRepository.updateProfileImage(data)
             outputProfileImageData.onNext(data)
         }
         
         inputDismiss.bind { [weak self] _ in
             guard let self else { return }
             coordinator?.dismiss()
-        }
-        
-        inputMoveFav.bind { [weak self] _ in
-            guard let self else { return }
-            coordinator?.moveToFav()
         }
     }
     
@@ -104,11 +103,7 @@ final class TrendingViewModel: ViewModel {
         group.enter()
         coinRepository.fetch(router: .coin(ids: favoriteID)) { [weak self] coin in
             guard let self,
-                  !favoriteID.isEmpty
-            else { 
-                group.leave()
-                return
-            }
+                  !favoriteID.isEmpty else { return }
             defer { group.leave() }
             switch coin {
             case .success(let success):
@@ -122,5 +117,14 @@ final class TrendingViewModel: ViewModel {
     private func setImageData() {
         guard let data = userRepository.fetchImageData() else { return }
         outputProfileImageData.onNext(data)
+    }
+    
+    func showAlert(error: CCError) {
+        coordinator?.showAlert(message: error.description,
+                               okButtonTitle: "되돌아가기",
+                               primaryButtonTitle: "재시도하기") { [weak self] in
+            guard let self else { return }
+            inputViewWillAppear.onNext(())
+        }
     }
 }

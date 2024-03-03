@@ -14,6 +14,7 @@ import SnapKit
 final class DetailChartViewController: BaseViewController {
     
     // MARK: - Properties
+    
     private let viewModel: DetailChartViewModel
     private lazy var chartView = LineChartView().then {
         $0.rightAxis.enabled = false
@@ -99,8 +100,7 @@ final class DetailChartViewController: BaseViewController {
     private func bind() {
         viewModel.outputCoinData.bind { [weak self] coin in
             guard let self,
-                  let coin = coin.first
-            else { return }
+                  let coin = coin.first else { return }
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 setData(coin)
@@ -115,25 +115,14 @@ final class DetailChartViewController: BaseViewController {
         
         viewModel.outputError.bind { [weak self] error in
             guard let self,
-                  let error
-            else { return }
-            viewModel.coordinator?.showAlert(message: error.description,
-                                             okButtonTitle: "되돌아가기",
-                                             primaryButtonTitle: "재시도하기",
-                                             okAction: { [weak self] in
-                guard let self else { return }
-                viewModel.pop()
-            }, primaryAction: { [weak self] in
-                guard let self else { return }
-                viewModel.inputViewDidLoad.onNext(())
-            })
+                  let error else { return }
+            viewModel.showAlert(error: error)
         }
         
         viewModel.outputToast.bind { [weak self] toast in
             guard let self,
-                  let toast
-            else { return }
-            viewModel.coordinator?.showToast(toast)
+                  let toast else { return }
+            viewModel.showToast(toast)
         }
     }
     
@@ -150,7 +139,8 @@ final class DetailChartViewController: BaseViewController {
         lowPriceView.configureLabel(price: data.low24h)
         lowestPriceView.configureLabel(price: data.atl)
         updateLabel.text = data.lastUpdated
-        setLineData(lineChartView: chartView, lineChartDataEntries: entryData(values: data.sparklineIn7D))
+        setLineData(lineChartView: chartView,
+                    lineChartDataEntries: entryData(values: data.sparklineIn7D))
     }
     
     // MARK: - Configure

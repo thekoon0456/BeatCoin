@@ -13,7 +13,6 @@ final class NumberFormatterService {
     
     private init() { }
     
-    //가격에 콤마 넣기
     func toCurruncy(price: Int) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal

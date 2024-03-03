@@ -32,23 +32,17 @@ final class FavoriteViewModel: ViewModel {
     
     private func transform() {
         inputViewWillAppear.bind { [weak self] tap in
-            guard let self else { return }
-            guard let user = userRepository.fetch() else { return }
+            guard let self,
+                  let user = userRepository.fetch() else { return }
             let favoriteID = Array(user.favoriteID)
             callRequest(ids: favoriteID)
             setImageData()
         }
         
-        inputPushDetail.bind { [weak self] id in
-            guard let self else { return }
-            coordinator?.pushToDetail(coinID: id)
-        }
-        
         inputUpdateFavorite.bind { [weak self] coin in
             guard let self,
-            let coin
-            else { return }
-            guard let user = userRepository.fetch() else { return }
+                  let coin,
+                  let user = userRepository.fetch()  else { return }
             let favoriteID = Array(user.favoriteID)
             userRepository.updatefav(item: favoriteID)
             outputCoinData.onNext(coin)
@@ -56,8 +50,13 @@ final class FavoriteViewModel: ViewModel {
         
         inputProfileImage.bind { [weak self] data in
             guard let self else { return }
-            userRepository.updateprofileImage(data)
+            userRepository.updateProfileImage(data)
             outputProfileImageData.onNext(data)
+        }
+        
+        inputPushDetail.bind { [weak self] id in
+            guard let self else { return }
+            coordinator?.pushToDetail(coinID: id)
         }
         
         inputDismiss.bind { [weak self] _ in
@@ -68,7 +67,7 @@ final class FavoriteViewModel: ViewModel {
     
     private func callRequest(ids: [String]?) {
         guard let ids,
-              !ids.isEmpty else { 
+              !ids.isEmpty else {
             outputCoinData.onNext([])
             return
         }
@@ -87,6 +86,15 @@ final class FavoriteViewModel: ViewModel {
     private func setImageData() {
         guard let data = userRepository.fetchImageData() else { return }
         outputProfileImageData.onNext(data)
+    }
+    
+    func showAlert(error: CCError) {
+        coordinator?.showAlert(message: error.description,
+                               okButtonTitle: "되돌아가기",
+                               primaryButtonTitle: "재시도하기") { [weak self] in
+            guard let self else { return }
+            inputViewWillAppear.onNext(())
+        }
     }
     
     func dismiss() {

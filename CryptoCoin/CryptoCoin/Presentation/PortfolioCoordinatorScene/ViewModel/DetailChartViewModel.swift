@@ -30,7 +30,7 @@ final class DetailChartViewModel: ViewModel {
         self.coinID = coinID
         transform()
     }
-
+    
     private func transform() {
         inputViewDidLoad.bind { [weak self] _ in
             guard let self else { return }
@@ -90,6 +90,23 @@ final class DetailChartViewModel: ViewModel {
         } else {
             outputFavorite.onNext(false)
         }
+    }
+    
+    func showAlert(error: CCError) {
+        coordinator?.showAlert(message: error.description,
+                               okButtonTitle: "되돌아가기",
+                               primaryButtonTitle: "재시도하기",
+                               okAction: { [weak self] in
+            guard let self else { return }
+            pop()
+        }, primaryAction: { [weak self] in
+            guard let self else { return }
+            inputViewDidLoad.onNext(())
+        })
+    }
+    
+    func showToast(_ type: Toast) {
+        coordinator?.showToast(type)
     }
     
     func pop() {
