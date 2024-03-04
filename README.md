@@ -1,2 +1,2 @@
-# SeSAC_CryptoCoin
-2차 리캡 과제
+# CryptoCoin
+OpenAPI + MVVM-C
