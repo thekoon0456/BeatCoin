@@ -79,7 +79,7 @@
 		7C2719192B9054910036F3FA /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		7C27191B2B906AEF0036F3FA /* CCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCError.swift; sourceTree = "<group>"; };
 		7C27191D2B906ED20036F3FA /* Coordinator+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator+.swift"; sourceTree = "<group>"; };
-		7C51CCF92B8DB01D00E39CB0 /* CryptoCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C51CCF92B8DB01D00E39CB0 /* BeatCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C51CCFC2B8DB01D00E39CB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C51CCFE2B8DB01D00E39CB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7C51CD052B8DB01E00E39CB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		7C51CCF02B8DB01D00E39CB0 = {
 			isa = PBXGroup;
 			children = (
-				7C51CCFB2B8DB01D00E39CB0 /* CryptoCoin */,
+				7C51CCFB2B8DB01D00E39CB0 /* BeatCoin */,
 				7C51CCFA2B8DB01D00E39CB0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -168,12 +168,12 @@
 		7C51CCFA2B8DB01D00E39CB0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C51CCF92B8DB01D00E39CB0 /* CryptoCoin.app */,
+				7C51CCF92B8DB01D00E39CB0 /* BeatCoin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7C51CCFB2B8DB01D00E39CB0 /* CryptoCoin */ = {
+		7C51CCFB2B8DB01D00E39CB0 /* BeatCoin */ = {
 			isa = PBXGroup;
 			children = (
 				7C51CD1E2B8DB08000E39CB0 /* App */,
@@ -189,7 +189,7 @@
 				7C51CD1F2B8DB08600E39CB0 /* Resources */,
 				7C51CD0A2B8DB01E00E39CB0 /* Info.plist */,
 			);
-			path = CryptoCoin;
+			path = BeatCoin;
 			sourceTree = "<group>";
 		};
 		7C51CD1E2B8DB08000E39CB0 /* App */ = {
@@ -516,9 +516,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7C51CCF82B8DB01D00E39CB0 /* CryptoCoin */ = {
+		7C51CCF82B8DB01D00E39CB0 /* BeatCoin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C51CD0D2B8DB01E00E39CB0 /* Build configuration list for PBXNativeTarget "CryptoCoin" */;
+			buildConfigurationList = 7C51CD0D2B8DB01E00E39CB0 /* Build configuration list for PBXNativeTarget "BeatCoin" */;
 			buildPhases = (
 				7C51CCF52B8DB01D00E39CB0 /* Sources */,
 				7C51CCF62B8DB01D00E39CB0 /* Frameworks */,
@@ -528,7 +528,7 @@
 			);
 			dependencies = (
 			);
-			name = CryptoCoin;
+			name = BeatCoin;
 			packageProductDependencies = (
 				7C51CD112B8DB05200E39CB0 /* Alamofire */,
 				7C51CD142B8DB05E00E39CB0 /* SnapKit */,
@@ -538,7 +538,7 @@
 				7C51CD542B8DBBEA00E39CB0 /* DGCharts */,
 			);
 			productName = CryptoCoin;
-			productReference = 7C51CCF92B8DB01D00E39CB0 /* CryptoCoin.app */;
+			productReference = 7C51CCF92B8DB01D00E39CB0 /* BeatCoin.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -556,7 +556,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7C51CCF42B8DB01D00E39CB0 /* Build configuration list for PBXProject "CryptoCoin" */;
+			buildConfigurationList = 7C51CCF42B8DB01D00E39CB0 /* Build configuration list for PBXProject "BeatCoin" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -576,7 +576,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7C51CCF82B8DB01D00E39CB0 /* CryptoCoin */,
+				7C51CCF82B8DB01D00E39CB0 /* BeatCoin */,
 			);
 		};
 /* End PBXProject section */
@@ -801,8 +801,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W6X76DS4Z7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CryptoCoin/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "김덕훈";
+				INFOPLIST_FILE = BeatCoin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BeatCoin;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -814,7 +814,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thekoon.CryptoCoin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thekoon.BeatCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -835,8 +835,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W6X76DS4Z7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CryptoCoin/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "김덕훈";
+				INFOPLIST_FILE = BeatCoin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BeatCoin;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -848,7 +848,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thekoon.CryptoCoin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thekoon.BeatCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -863,7 +863,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7C51CCF42B8DB01D00E39CB0 /* Build configuration list for PBXProject "CryptoCoin" */ = {
+		7C51CCF42B8DB01D00E39CB0 /* Build configuration list for PBXProject "BeatCoin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C51CD0B2B8DB01E00E39CB0 /* Debug */,
@@ -872,7 +872,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C51CD0D2B8DB01E00E39CB0 /* Build configuration list for PBXNativeTarget "CryptoCoin" */ = {
+		7C51CD0D2B8DB01E00E39CB0 /* Build configuration list for PBXNativeTarget "BeatCoin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C51CD0E2B8DB01E00E39CB0 /* Debug */,
