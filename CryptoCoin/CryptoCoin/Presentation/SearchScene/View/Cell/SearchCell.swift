@@ -27,8 +27,9 @@ final class SearchCell: BaseTableViewCell {
     }
     
     lazy var favoriteButton = UIButton().then {
-        $0.setImage(UIImage(named: CCDesign.Icon.star.name), for: .normal)
-        $0.setImage(UIImage(named: CCDesign.Icon.starFill.name), for: .selected)
+        $0.setImage(UIImage(systemName: CCDesign.Icon.star.name), for: .normal)
+        $0.setImage(UIImage(systemName: CCDesign.Icon.starFill.name), for: .selected)
+        $0.tintColor = CCDesign.Color.tintColor.color
     }
     
     // MARK: - Helpers

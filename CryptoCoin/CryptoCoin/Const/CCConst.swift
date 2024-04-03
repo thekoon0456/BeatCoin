@@ -17,7 +17,7 @@ enum CCConst {
         var name: String {
             switch self {
             case .trending:
-                "Crypto Coin"
+                "Trending Coin"
             case .search:
                 "Search"
             case .favorite:

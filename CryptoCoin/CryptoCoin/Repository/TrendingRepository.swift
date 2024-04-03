@@ -14,8 +14,10 @@ final class TrendingRepository: Repository {
                                       type: TrendingDTO.self) { data in
             switch data {
             case .success(let success):
+                print(success)
                 completionHandler(.success(success.toEntity))
             case .failure(let failure):
+                print(failure.localizedDescription)
                 completionHandler(.failure(failure))
             }
         }

@@ -89,9 +89,9 @@ enum CCDesign {
         var name: String {
             switch self {
             case .star:
-                "btn_star"
+                "star"
             case .starFill:
-                "btn_star_fill"
+                "star.fill"
             case .coin:
                 "bitcoinsign.circle"
             case .icon:
