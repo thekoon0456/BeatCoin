@@ -55,6 +55,15 @@ final class FavoriteViewController: BaseViewController {
         $0.alpha = 0.3
     }
     
+    private let iconView = UIImageView().then {
+        $0.image = UIImage(systemName: CCDesign.Icon.icon.name)
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = CCDesign.Color.tintColor.color
+        $0.snp.makeConstraints { make in
+            make.size.equalTo(44)
+        }
+    }
+    
     // MARK: - Lifecycles
     
     init(viewModel: FavoriteViewModel) {
@@ -144,6 +153,7 @@ final class FavoriteViewController: BaseViewController {
         navigationItem.title = CCConst.NaviTitle.favorite.name
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iconView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
     }
 }

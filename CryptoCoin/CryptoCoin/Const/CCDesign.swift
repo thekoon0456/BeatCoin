@@ -56,7 +56,8 @@ enum CCDesign {
         var color: UIColor {
             switch self {
             case .tintColor:
-                UIColor(hex: "914CF5")
+//                UIColor(hex: "914CF5")
+                UIColor.systemBlue
             case .highPrice:
                 UIColor(hex: "F04452")
             case .highPriceBC:
@@ -83,6 +84,7 @@ enum CCDesign {
         case star
         case starFill
         case coin
+        case icon
         
         var name: String {
             switch self {
@@ -91,6 +93,8 @@ enum CCDesign {
             case .starFill:
                 "btn_star_fill"
             case .coin:
+                "bitcoinsign.circle"
+            case .icon:
                 "bitcoinsign.circle"
             }
         }

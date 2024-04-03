@@ -40,12 +40,12 @@ final class AppCoordinator: Coordinator {
         childCoordinators.append(favoriteCoordinator)
         favoriteCoordinator.start()
         
-        let userNav = UINavigationController()
-        let userCoordinator = UserCoordinator(navigationController: userNav)
-        childCoordinators.append(userCoordinator)
-        userCoordinator.start()
+//        let userNav = UINavigationController()
+//        let userCoordinator = UserCoordinator(navigationController: userNav)
+//        childCoordinators.append(userCoordinator)
+//        userCoordinator.start()
         
-        tabBarController.viewControllers = [trendingNav, searchNav, favoriteNav, userNav]
+        tabBarController.viewControllers = [trendingNav, searchNav, favoriteNav]
         navigationController?.pushViewController(tabBarController, animated: false)
     }
 }

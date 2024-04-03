@@ -40,6 +40,15 @@ final class TrendingViewController: BaseViewController {
         $0.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
     }
     
+    private let iconView = UIImageView().then {
+        $0.image = UIImage(systemName: CCDesign.Icon.icon.name)
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = CCDesign.Color.tintColor.color
+        $0.snp.makeConstraints { make in
+            make.size.equalTo(44)
+        }
+    }
+    
     // MARK: - Lifecycles
     
     init(viewModel: TrendingViewModel) {
@@ -109,6 +118,7 @@ final class TrendingViewController: BaseViewController {
         navigationItem.title = CCConst.NaviTitle.trending.name
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: iconView)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
     }
 }
