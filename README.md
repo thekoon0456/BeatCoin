@@ -15,6 +15,11 @@
 MVVM-C, Alamofire, CustomObservable, DGCharts, Realm, Kingfisher, SnapKit
 <br>
 
+## 개발 환경
+- 개발 인원 : 1인 개발
+- 개발 기간 : 2024.03 ~ 2024.03 (6일)
+- 최소버전 : iOS 15.0
+
 ## 구현 기술
 
 - MVVM의 Input-Output Pattern과 CustomObservableClass를 활용한 데이터 바인딩
