@@ -13,3 +13,18 @@
 
 ## 기술스택
 MVVM-C, Alamofire, CustomObservable, DGCharts, Realm, Kingfisher, SnapKit
+<br>
+
+## 구현 기술
+
+- MVVM의 Input-Output Pattern과 CustomObservableClass를 활용한 데이터 바인딩
+- Coordinator Pattern으로 ViewController의 화면 전환 코드 분리와 의존성 관리
+- CoinAPI의 다양한 DTO를 Entity로 변환하여 네트워크 계층과 뷰 계층 분리
+- Alamofire의 URLRequestConvertible를 활용한 RouterPattern으로 네트워크 추상화
+- API와 Realm을 Repository Pattern을 활용하여 구조화, 데이터 계층과 뷰 계층 분리
+- Compositional Layout을 활용해 한 화면에서 복잡한 구조의 Layout 구현
+- 접근제어자를 활용한 코드의 은닉화 및 컴파일 최적화를 통한 성능 개선
+- Data, Coordinator, Repository, ViewModel Protocol을 채택해 구조화된 코드 구현
+- CustomToast를 구현해 사용자에게 직관적이고 반응성 있는 피드백 제공
+- BaseUI 상속으로 일관된 UI구조 형성
+<br>
