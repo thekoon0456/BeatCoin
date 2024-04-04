@@ -31,5 +31,5 @@ MVVM-C, Alamofire, CustomObservable, DGCharts, Realm, Kingfisher, SnapKit
 - 접근제어자를 활용한 코드의 은닉화 및 컴파일 최적화를 통한 성능 개선
 - Data, Coordinator, Repository, ViewModel Protocol을 채택해 구조화된 코드 구현
 - CustomToast를 구현해 사용자에게 직관적이고 반응성 있는 피드백 제공
-- BaseUI 상속으로 일관된 UI구조 형성
+- BaseUI 상속으로 일관된 ViewController 구조 형성
 <br>
