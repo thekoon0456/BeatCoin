@@ -28,7 +28,9 @@ MVVM-C, Alamofire, CustomObservable, DGCharts, Realm, Kingfisher, SnapKit
 - Alamofire의 URLRequestConvertible를 활용한 RouterPattern으로 네트워크 추상화
 - API와 Realm을 Repository Pattern을 활용하여 구조화, 데이터 계층과 뷰 계층 분리
 - Compositional Layout을 활용해 한 화면에서 복잡한 구조의 Layout 구현
+- DGCharts 라이브러리를 활용해 코인 Chart 그래프 화면 구현
 - 접근제어자를 활용한 코드의 은닉화 및 컴파일 최적화를 통한 성능 개선
+- Network ErrorHandling과 Alert 구현
 - Data, Coordinator, Repository, ViewModel Protocol을 채택해 구조화된 코드 구현
 - CustomToast를 구현해 사용자에게 직관적이고 반응성 있는 피드백 제공
 - BaseUI 상속으로 일관된 ViewController 구조 형성
