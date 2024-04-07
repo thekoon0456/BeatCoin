@@ -12,13 +12,17 @@
 <br>
 
 ## 기술스택
-MVVM-C, Alamofire, CustomObservable, DGCharts, Realm, Kingfisher, SnapKit
+- UIKit, MVVM-C, Input-Output, Singleton, Repository
+- Alamofire, CustomObservable
+- DGCharts, Realm
+- Kingfisher, SnapKit
 <br>
 
 ## 개발 환경
 - 개발 인원 : 1인 개발
 - 개발 기간 : 2024.03 ~ 2024.03 (6일)
-- 최소버전 : iOS 15.0
+- 최소 버전 : iOS 15.0
+- iPhone SE3 ~ iPhone 15 Pro Max 전 기종 호환 가능
 
 ## 구현 기술
 
@@ -34,4 +38,38 @@ MVVM-C, Alamofire, CustomObservable, DGCharts, Realm, Kingfisher, SnapKit
 - Data, Coordinator, Repository, ViewModel Protocol을 채택해 구조화된 코드 구현
 - CustomToast를 구현해 사용자에게 직관적이고 반응성 있는 피드백 제공
 - BaseUI 상속으로 일관된 ViewController 구조 형성
+<br>
+
+## ✅ 트러블 슈팅
+### title1
+<div markdown="1">
+내용<br>
+<br>
+
+```swift
+
+```
+</div>
+<br>
+
+### title2
+<div markdown="1">
+내용<br>
+<br>
+
+```swift
+
+```
+</div>
+<br>
+
+### title3
+<div markdown="1">
+내용<br>
+<br>
+
+```swift
+
+```
+</div>
 <br>
