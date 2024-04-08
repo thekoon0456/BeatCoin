@@ -49,13 +49,13 @@
 <br>
 
 ## ✅ 트러블 슈팅
-### 다양한 Type의 Data를 앱 내에서 관리하기 위해 DTO와 Entity 사용
+### 다양한 Type의 Data를 앱 내에서 가공해서 사용하기 위해 DTO와 Entity 사용
 <div markdown="1">
-CoinAPI를 통해 가져온 Data를 앱 내에서 가공해서 사용해서 사용해야 했습니다.<br>
-ViewModel에서 데이터를 변환하려면 DTO를 ViewModel이 알고 있기 때문에 유지보수가 어려워지는 문제가 있었습니다.<br>
-DTO에서 toEntity 연산프로퍼티를 만들어 바로 Entity로 변환해주고,<br>
-CoinData를 가져오는 Repository를 활용해서 요청을 하면<br>
-ViewModel에서는 DTO는 모른채로 Entity만 가지고 활용하도록 구현했습니다.<br>
+CoinAPI를 통해 가져온 Data를 앱 내에서 가공해서 그려야하는 경우가 많았습니다.<br>
+가져온 Data를 ViewModel에서 데이터를 변환하면 Data가 바뀔때마다 연관된 코드들을 모두 바꿔줘야하는 단점이 있었습니다.<br>
+이를 해결하기 위해 DTO에서 toEntity 연산프로퍼티를 만들어 바로 Entity로 변환해주고,<br>
+CoinData를 가져오는 Repository를 활용해서 변환된 데이터를 리턴함으로서<br>
+ViewModel과 View에서는 Entity만 가지고 활용할 수 있도록 구현했습니다.<br>
 서버에서 내려주는 Data가 바뀌어도 유지보수하기 쉽도록 구현했습니다.<br>
 <br>
 
@@ -95,10 +95,10 @@ final class TrendingRepository: Repository {
 </div>
 <br>
 
-### 한정된 무료 API 콜수로 연결이 끊기는 문제가 빈번하게 발생
+### 한정된 무료 API 콜수로 연결이 끊기는 문제가 빈번하게 발생함.
 <div markdown="1">
-꼼꼼한 상황별 Error처리를 통해<br>
-사용자에게 현재 Server상황을 알려주고, 연결 재시도를 요청할 수 있도록 구현<br>
+무료 API를 사용했기 때문에 1분단 상한인 30번 이상 요청했을때 앱이 멈추는 현상이 있었습니다.<br>
+이를 해결하기 위해 각 Error별 Case를 만들어 해당 Error가 발생하면 Alert을 띄워 안내하고, 재시도 요청을 하도록 구현했습니다.<br>
 <br>
 
 ```swift
@@ -156,12 +156,12 @@ func checkError(error: Error) -> CCError {
 </div>
 <br>
 
-### Toast와 Alert을 다양한 Tab과 화면에서 사용하면서 발생하는 관리의 어려움과 중복코드 발생
+### Toast와 Alert을 다양한 Tab과 화면에서 사용하면서 관리의 어려움과 중복코드 발생
 <div markdown="1">
-Toast뷰와 Alert뷰는 다양한 Tab과 화면에서 나오게 되는데<br>
-그때마다 초기화하면 관리가 힘들고, 중복된 코드가 발생하게 되는 문제가 있었습니다.<br>
-Coordinator를 도입하고, Extension으로 alert과 toast 뷰를 추가해<br>
-어떤 Coordinator에서도 alert과 toast뷰를 바로 사용할 수 있도록 한 곳에서 관리했습니다.<br>
+Toast뷰와 Alert뷰는 다양한 Tab과 화면에서 사용하게 되었는데<br>
+그때마다 초기화하여 사용하면 관리가 힘들고, 중복된 코드가 발생하게 되는 문제가 있었습니다.<br>
+이를 보완하기 위해 Coordinator를 도입하고, Extension으로 alert과 toast 뷰를 추가해<br>
+어떤 Coordinator에서도 alert과 toast뷰를 바로 사용할 수 있도록 한 곳에서 코드를 관리했습니다.<br>
 <br>
 
 ```swift
